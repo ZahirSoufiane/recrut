@@ -1,0 +1,270 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../../bower_components/paper-toggle-button/paper-toggle-button.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-input/paper-textarea.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+  <link rel="import" href="../../bower_components/iron-image/iron-image.html">
+  <link rel="import" href="../../bower_components/iron-list/iron-list.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html"></link>
+  <link rel="import" href="../token-ajax.html">
+  <link rel="import" href="../../bower_components/neon-animation/animations/scale-up-animation.html">
+  <link rel="import" href="../../bower_components/neon-animation/animations/fade-out-animation.html">
+  
+	
+<dom-module id="ym-conversation" attributes="csrfHeader"> <template>
+<style is="custom-style" include="iron-flex iron-flex-alignment">
+    :host {
+      display: block;
+    }
+
+    iron-list {
+      height: 90vh; /* don't use % values unless the parent element is sized. */
+    }
+    h1 {
+      margin:0;
+    }
+    h2 {
+      margin:0;
+    }
+    .thumbnail {
+      height: 80px;
+      width: 80px;
+      margin:0 20px 0 0;
+      border-radius: 50%;
+    }
+    .card {
+      padding: 10px;
+      background-color: #fff;
+      border: 1px solid #DDDDDD;
+      border-radius: 4px;
+      margin: 10px 0;
+    }
+    .align-right {
+      text-align: right;
+    }
+	#messageZone{
+		min-width:600px;
+	}
+		#closeBtnZone {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+		#errorToast{
+	  	--paper-toast-background-color: red;
+	    --paper-toast-color: white;
+	    width:100%;
+	    text-align:center;
+	    font-weight:bold;
+	}
+	#successToast{
+	  	--paper-toast-background-color: green;
+	    --paper-toast-color: white;
+	    width:100%;
+	    text-align:center;
+	    font-weight:bold;
+	}
+	iron-list {
+	 --iron-list-items-container: {
+	    margin: auto;
+	  };
+	}
+	
+	/* COMMON CLASSES */
+.clear { clear:both; }
+
+/* REPORTER */
+.reporter { width:450px; float:right; background-color:#000018; color:#D8D8D8; font-style:italic; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+	background-image:url("/resources/html/include/images/glow.png"); background-position:top center; background-repeat:no-repeat; text-align: justify; }
+.reporter p { padding:10px; }
+.reporter-ico { clear:both; float:right; width:100px; background-image:url("/resources/html/include/images/reporter-balloon.png"); background-repeat:no-repeat; }
+.reporter-ico img { margin:5px; float:right; }
+
+.weddinguser { width:450px; float:left; background-color:#304860; color:#D8D8D8; font-style:italic; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;
+	background-image:url("/resources/html/include/images/glow.png"); background-position:top center; background-repeat:no-repeat; text-align: justify; }
+.weddinguser p { padding:10px; }
+.weddinguser-ico { clear:both; float:left; width:100px; background-image:url("/resources/html/include/images/interviewee-balloon.png"); background-repeat:no-repeat; }
+.weddinguser-ico img { margin:5px; float:left; }
+	
+	.titleDiv{
+		margin-bottom:20px;
+	}
+	#showReplyBtn{
+		background-color:#f5deb3;
+	}
+</style>
+
+	<paper-toast id="errorToast" text="Erreur/incomplet"></paper-toast>
+	<paper-toast id="successToast" text="Ajouté"></paper-toast>
+ <token-ajax autogo="false" id="messageEndpoint" url="/company/message?[[csrfHeader]]" headers="{{csrfHeader}}"
+	content-type="application/json;charset=utf-8" last-response="{{messages}}" on-response="_showConv"
+	method="GET" token="{{token}}" auto></token-ajax>
+	
+ <token-ajax autogo="false" id="saveReplyRequest" method="post" url="/message/reply" content-type="application/json;charset=utf-8" 
+ on-response="msgSavedResponse" on-error="msgSavedError" token="{{token}}" contentType="application/json;charset=utf-8" ></token-ajax>
+	
+	
+<paper-dialog id="messageDialog" entry-animation="scale-up-animation"
+	exit-animation="fade-out-animation" modal="true">
+	<div id="messageZone" class="">
+		<div id="closeBtnZone" class="layout horizontal">
+			<paper-button id="cancelbtn" on-tap="_closeDialogs">X</paper-button>
+		</div>
+		<div class="layout vertical center titleDiv">
+			<h1> {{localize('msg.title')}} </h1>
+		    <h3><paper-button id="showReplyBtn" on-tap="_showMessageBox">{{localize('msg.reply')}}</paper-button></h3>
+		</div>
+	<iron-list items="[[messages]]" as="reply">
+	  <template>
+	    <div>
+	    	<div class$="{{_getCustomerTypeClass(reply.toProvider)}}"> 
+	    		<p><b>{{localize('msg.date')}} </b>: [[reply.date]]</p>
+			    
+			     <p><b>{{localize('msg.message')}} </b>:</p>
+				<p>[[reply.message]]</p>
+			</div>
+			<div class$="{{_getCustomerTypeClassIco(reply.toProvider)}}">
+				
+     			 <template is="dom-if" if="[[reply.toProvider]]">
+				<img src="/resources/html/include/images/head-user.png" alt="Yes married - your wedding platform" />
+				</template>
+				
+    			  <template is="dom-if" if="[[!reply.toProvider]]">
+    			  	<img src="/resources/html/include/images/head-provider.png" alt="Yes married - your wedding platform" />
+    			  </template>
+			</div>
+			<br class="clear" />
+	    	
+	    </div>
+	    
+	  </template>
+	</iron-list>
+</div>
+</paper-dialog>
+
+<paper-dialog id="postReplyDialog">
+<div id="messageZone" class="">
+		<div id="closeBtnZone" class="layout horizontal">
+			<paper-button id="cancelbtn" dialog-dismiss>X</paper-button>
+		</div>
+		<hgroup>
+			<h1>{{localize('question')}}</h1>
+			<p>{{localize('msg.let.to')}} [[item.title]]</p>
+		</hgroup>
+		<form is="iron-form" id="sendReplyMessageForm">
+			<div class="group">
+				<paper-textarea label="Message" id="message" value="{{currentMessage}}"
+					name="message"></paper-textarea>
+				<input type="hidden" name="msgSourceId" value="[[currMsgId]]"/>
+			</div>
+			<paper-button raised class="button buttonBlue" on-tap="_sendMessage">{{localize('send')}}</paper-button>
+		</form>
+	 
+	</div>
+</paper-dialog>
+
+</template> <script>
+	Polymer({
+		is : 'ym-conversation',
+   	    attached: function() {
+	          this.loadResources(this.resolveUrl('/resources/data/locales_comp.json?v=1.2'));
+	        },
+	    behaviors: [Polymer.NeonAnimatableBehavior,Polymer.AppLocalizeBehavior],
+		properties : {
+			list : {
+				type: Array,
+			},
+			messages : Array,
+			currMsgId : Number,
+		},
+		ready : function(){
+			
+		},
+	    _filter : function(val) {
+		      return function(person) {
+		        if (!val) return true;
+		        if (!person) return false;
+		        return (person.name  && ~person.name.toLowerCase().indexOf(val.toLowerCase()))  ||
+		               (person.email && ~person.email.toLowerCase().indexOf(val.toLowerCase())) ||
+		               (person.phone && ~person.phone.toLowerCase().indexOf(val.toLowerCase()));
+		      };
+		    },
+		    _sort : function(val) {
+		      switch(val) {
+		        case 'name':
+		          return function(a, b) {
+		            if (a.name.toLowerCase() === b.name.toLowerCase()) return 0;
+		            return a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1;
+		          };
+		        case 'date':
+		          return function(a, b) {
+		            if (a.date.toLowerCase() === b.date.toLowerCase()) return 0;
+		            return a.date.toLowerCase() < b.date.toLowerCase() ? -1 : 1;
+		          };
+		        case 'subject':
+		          return function(a, b) {
+		            if (a.subject.toLowerCase() === b.subject.toLowerCase()) return 0;
+		            return a.subject.toLowerCase() < b.subject.toLowerCase() ? -1 : 1;
+		          };
+		      }
+		    },
+		    _sendMessage : function(){
+		    	  var msgEntry = this.$.sendReplyMessageForm.serialize();
+		    	  this.$.saveReplyRequest.body=JSON.stringify(msgEntry);
+		    	  this.$.saveReplyRequest.go();
+		      },
+
+		      open: function(convId){
+		    	  this.$.messageEndpoint.url="/company/message/"+convId;
+		    	  this.currMsgId = convId;
+		    	  this.$.messageEndpoint.go();  	  
+		      },
+		      _closeDialogs: function(){
+		    	if(this.$.postReplyDialog.opened){
+		    		this.$.postReplyDialog.close();
+		    	}  
+		    	this.$.messageDialog.close();
+		      },
+		      _showConv : function(data){
+		      	  this.$.messageDialog.toggle();
+		    	  
+	    	     if(this.$.messageDialog.opened) {
+	                this.async(function () {
+	                  this.$.messageDialog.notifyResize();
+	                });
+	             }  
+		      },
+		      _showMessageBox:function(){
+		    	  this.$.postReplyDialog.open();  
+		      },
+		      msgSavedResponse: function(){
+		    	  this.$.successToast.text=this.localize('msg.sent');
+				  this.$.successToast.show();
+		    	  this.$.messageDialog.close();  
+		      },
+		      msgSavedError: function(){
+		    	  this.$.errorToast.text=this.localize('msg.failed');
+				  this.$.errorToast.show();
+		    	  this.$.messageDialog.close();  
+		      },
+		      _getCustomerTypeClass : function(toProvider){
+		    	  var clazz = "weddinguser";
+		    	  if(toProvider){
+		    		  clazz="reporter";
+		    	  } 
+		    	  return clazz;
+		      }, 
+		      _getCustomerTypeClassIco : function(toProvider){
+		    	  var clazz = "weddinguser-ico";
+		    	  if(toProvider){
+		    		  clazz="reporter-ico";
+		    	  } 
+		    	  return clazz;
+		      }, 
+	});
+	
+</script> </dom-module>

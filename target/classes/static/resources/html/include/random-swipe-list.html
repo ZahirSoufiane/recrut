@@ -1,0 +1,280 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/iron-list/iron-list.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html"></link>
+<link rel="import" href="../../bower_components/iron-icons/communication-icons.html"></link>
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html"></link>
+
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html"></link>
+<link rel="import" href="../../bower_components/paper-swipe/paper-swipe.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+<!-- <link rel="import" href="../../bower_components/paper-item/paper-icon-item.html"> -->
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../token-ajax.html"></link>
+
+<dom-module id="random-swipe-list" >
+  <template strip-whitespace>
+    <style>
+      :host {
+        display: block;
+        box-sizing: border-box;
+        height: 100vh;
+      }
+
+      *, *:before, *:after {
+        box-sizing: inherit;
+      }
+
+      iron-list {
+        margin-top: 330px;
+         height: 100vh;
+             background: url(https://www.yesmarried.com/resources/images/bright_background.jpg) no-repeat center center fixed;
+/*          background-image:url('http://localhost:8182/resources/images/redyellowbg.jpg'); */
+        @apply(--layout-fit);
+      }
+      .swipe-item {
+/*         height: 64px; */
+        --paper-swipe-content: {
+          background-color: #fff;
+          border-bottom: 1px solid #ddd;
+/*           padding: 12px; */
+        };
+        --paper-swipe-underlay: {
+          @apply(--layout-horizontal);
+          @apply(--layout-center-center);
+        };
+        @apply(--layout-center-justified);
+      }
+/*       .swipe-avatar { */
+/*         border-radius: 50%; */
+/*         height: 40px; */
+/*         width: 40px; */
+/*         display: inline-block; */
+/*         overflow: hidden; */
+/*         background: #ccc; */
+/*       } */
+      .swipe-underlay {
+        color: #e0e0e0;
+      }
+      .a {
+        background-color: #1976D2;
+      }
+      .b {
+        background-color: #D32F2F;
+      }
+      .c {
+        background-color: #0097A7;
+      }
+      .d {
+        background-color: #388E3C;
+      }
+      .e {
+        background-color: #FBC02D;
+      }
+      .f {
+        background-color: #C2185B;
+      }
+      .g {
+        background-color: #7B1FA2;
+      }
+      .hidden {
+      	display:none;
+      }
+		paper-card {
+			text-align:center;
+		    margin-left: auto;
+		    margin-right: auto;
+		    left: 0;
+		    /* text-align: center; */
+		    right: 0;
+		    display: block;
+		    position: relative;
+		    max-width: 450px;
+		    border:1px solid black
+		}
+
+		
+		.swipetext {
+			text-align:center;
+			font-size:21px;
+/* 			color:#800001; */
+			color:#aa3e3e;
+		}
+		#addedToast{
+		  	--paper-toast-background-color: green;
+		    --paper-toast-color: white;
+		    width:100%;
+		    text-align:center;
+		    font-weight:bold;
+		}
+		.buttonbar{
+			@apply(--layout-horizontal);
+          	@apply(--layout-center-center);
+          	padding:5px;
+        }
+        .buttonbar paper-fab{
+        	margin-left:5px;
+        	margin-right:5px;
+        }
+         .buttonbar paper-fab:hover{
+        	background-color:pink;
+        }
+        .buttonbar .notlike{
+        	background-color:red;
+        }
+        .buttonbar .like{
+        	background-color:#e6e6e6;
+        	color:#c14e4e;
+        }
+        .blacktext{
+        	color: black;
+        }
+    </style>
+    
+ <token-ajax id="swipeListReq" url="/providers/random?lang={{language}}"  token="{{token}}" last-response="{{swipeList}}"></token-ajax>
+ <token-ajax autogo="false" id="addFav" token="{{token}}" on-error="_favoriteError"></token-ajax>
+ 
+    <iron-list id="swipeList" items="[[swipeList]]">
+      <template strip-whitespace>
+      	
+        <paper-swipe class$="swipe-item [[_visiblityClass(index)]]" peek-offset="0" fade on-edge="_onEdge">
+<!--           <paper-icon-item content> -->
+<!--             <div class$="swipe-avatar[[_randomColor(item.index)]]" item-icon></div> -->
+<!--             [[index]], [[item.name]] at [[item.id]] -->
+<!--           </paper-icon-item> -->
+          <div content>
+          		<div class="swipetext">
+			      	<p>{{localize('swipe.youhavenot')}} [[item.category]].</p>
+			      	<p>{{localize('swipe.youlike')}} ? </p>
+			      	<p class="blacktext">{{localize('swipe.explain')}}</p>
+		      	</div>
+<!--             <div class$="swipe-avatar[[_randomColor(item.index)]] item-icon"></div> -->
+				 
+            	 <paper-card image="[[item.image]]" alt="[[item.name]] on Yes Married !">
+				    <div class="card-content">
+				      <div class="cafe-header">[[item.name]]
+				        <div class="cafe-location cafe-light">
+				          <iron-icon icon="communication:location-on"></iron-icon>
+				          <span>[[item.distanceInKm]] km</span>
+				        </div>
+				      </div>
+				      <div class="cafe-rating">
+				        <iron-icon class="star" icon="iconss:star"></iron-icon>
+				        <iron-icon class="star" icon="iconss:star"></iron-icon>
+				        <iron-icon class="star" icon="iconss:star"></iron-icon>
+				        <iron-icon class="star" icon="iconss:star"></iron-icon>
+				        <iron-icon class="star" icon="iconss:star"></iron-icon>
+				      </div>
+				      <p>[[item.name]], [[item.category]]</p>
+				      <p class="cafe-light">[[item.description]]</p>
+				    </div>
+				    <!-- 
+				    <div class="card-actions">
+				      <p>Tonight's availability</p>
+				      <div class="horizontal justified">
+				        <paper-icon-button icon="iconss:event"></paper-icon-button>
+				        <paper-button>5:30PM</paper-button>
+				        <paper-button>7:30PM</paper-button>
+				        <paper-button>9:00PM</paper-button>
+				      </div>
+				      <paper-button class="cafe-reserve">Reserve</paper-button>
+				       -->
+					 <div class="buttonbar">
+						 <paper-fab providerid="[[item.id]]" class="notlike" icon="iconss:block" title="no" on-tap="_doNotLike"></paper-fab>
+						 <paper-fab providerid="[[item.id]]" class="like" icon="iconss:favorite" title="like" on-tap="_doLike"></paper-fab>
+					 </div>
+				    </div>
+				  </paper-card>
+          </div>
+          <div underlay class$="swipe-underlay[[_randomColor(item.index)]]">
+<!--             [[index]], [[item.title]] at [[item.id]] -->
+          </div>
+        </paper-swipe>
+      </template>
+    </iron-list>
+    
+		<paper-toast id="addedToast" text="Ajouté à vos favoris!"></paper-toast>
+  </template>
+  <script>
+    Polymer({
+      is: 'random-swipe-list',
+ 	    attached: function() {
+	          this.loadResources(this.resolveUrl('../../data/locales.json?v=1.2'));
+	        },
+	    behaviors: [Polymer.AppLocalizeBehavior],
+      properties: {
+          token: {
+              type: String,
+              notify: true
+            },
+            hasChangesDetected: {
+                type: Boolean,
+                notify: true,
+              },
+//         swipeList: {
+//           type: Array,
+//           value: function() {
+//             for (var i = 0, j = []; i < 100; i++) {
+//               j.push({
+//                 content: 'Lorem ipsum dolor sit amet.',
+//                 underlay: 'Lorem ipsum.',
+//                 index: i
+//               });
+//             }
+//             return j;
+//           }
+//         },
+
+      },
+      ready : function(){
+      },
+      _favoriteError: function(){
+    	  
+      },
+      _doLike : function(e){
+          var elem = this.swipeList[0];
+    	  this.splice('swipeList', 0, 1);
+    	  this._saveFavorite(elem.id,elem.name);
+          
+      },
+      _doNotLike : function(e){
+          this.splice('swipeList', 0, 1);  
+      },
+      _saveFavorite:function(ident,name){
+      	this.hasChangesDetected=true;
+  	    this.$.addFav.url="/admin/favorite/add/" + ident;
+	    this.$.addFav.go();
+		this.$.addedToast.text= name + this.localize("swipe.favoriteadded") + " !";
+		this.$.addedToast.show();  
+      },
+      _randomColor: function() {
+        var _colors = ['a', 'b', 'c', 'd', 'e', 'f', 'g', ''];
+        var _n = Math.floor(Math.random() * 8);
+        var _sc = ' ' + _colors[_n];
+        return _sc;
+      },
+      _visiblityClass: function(index){
+    	return index == 0 ? "":"hidden";  
+      },
+      _onEdge: function(ev) {
+        var _modelItem = ev.model.item;
+        var _target = ev.target;
+        // Remove swiped item from the list array.
+        this.splice('swipeList', ev.model.index, 1);
+        if(!ev.currentTarget._slideLeft){
+        	this._saveFavorite(_modelItem.id, _modelItem.name);
+    	}
+        this.async(function() {
+          // iron-list will retain the generated list item at the exact position and reuse the item.
+          // However, iron-list only replaces the content of the list item.
+          // Which means that resetPosition() is required when new content comes in.
+          _target.resetPosition();
+          // Then update the size for the item.
+          this.$.swipeList.updateSizeForItem(ev.model.index);
+        }, 1);
+      },
+
+    });
+  </script>
+</dom-module>

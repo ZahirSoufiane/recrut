@@ -1,0 +1,189 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<!-- <script src="../../../bower_components/jquery/dist/jquery.min.js"></script> -->
+<script src="../../../js/countdown/flipclock.js"></script>
+
+<!--
+Web Component wrapper for FullCalendar.
+All callbacks are intercepted and events are fired when they get called. The events
+are fired after the user-defined callbacks get called. Events are not fired for callbacks
+that are required to return something (pass the callbacks via the options).
+
+Example:
+
+    <fullcalendar-calendar></fullcalendar-calendar>
+
+Another example:
+
+    <fullcalendar-calendar
+      on-event-click="handleEventClick"
+      on-view-render="handleViewRender"
+    ></fullcalendar-calendar>
+
+### Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--fullcalendar` | Mixin applied to the FullCalendar element | `{}`
+
+@demo demo/index.html
+@hero hero.svg
+-->
+
+<dom-module id="ym-countdown">
+  <template>
+    <style include="countdown-theme">
+    	body .flip-clock-wrapper ul li a div div.inn, body .flip-clock-small-wrapper ul li a div div.inn { color: #CCCCCC; background-color: #333333; } body .flip-clock-dot, body .flip-clock-small-wrapper .flip-clock-dot { background: #323434; } body .flip-clock-wrapper .flip-clock-meridium a, body .flip-clock-small-wrapper .flip-clock-meridium a { color: #323434; }
+@import "lesshat";
+
+html{
+  .background-image(linear-gradient(135deg, #4ebdc0, #53c9b3));
+  height: 100%;
+}
+
+body{
+  min-height: 100%;
+  position: relative;
+  text-align: center;
+  padding-top: 100px;
+  color: #E7F7F5;
+  font-family: 'Helvetica Neue', 'Arial';
+  font-weight: 100;
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+a{
+  display: block;
+  margin-bottom: 1em;
+  color: #E7F7F5;
+  text-decoration: none;
+  &:last-of-type{
+    font-size: 0.9em;
+  }
+  &:hover{
+    text-decoration: underline;
+  }
+}
+
+ul{
+  margin-bottom: 4em;
+}
+
+.chart{
+  display: inline-block;
+  width: 95px;
+  height: 95px;
+  margin: 0 10px;
+  vertical-align: top;
+  position: relative;
+ .box-sizing(border-box);
+  padding-top: 22px;
+
+  span{
+    display: block;
+    font-size: 2em;
+    font-weight: normal;
+  }
+
+  canvas{
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+    </style>
+<ul>
+  <li class="chart" data-percent="75"><span>26</span>Jours</li>
+  <li class="chart" data-percent="15"><span>15</span>Heures</li>
+  <li class="chart" data-percent="83"><span>50</span>Minutes</li>
+</ul>
+    <div class="clock-builder-output"></div>
+  </template>
+
+  <script>
+  /**!
+   * easyPieChart
+   * Lightweight plugin to render simple, animated and retina optimized pie charts
+   *
+   * @license Dual licensed under the MIT (http://www.opensource.org/licen
+   ses/mit-license.php) and GPL (http://www.opensource.org/licenses/gpl-license.php) licenses.
+   * @author Robert Fleischmann <rendro87@gmail.com> (http://robert-fleischmann.de)
+   * @version 2.0.1
+   **/
+  !function(){var a=function(a,b){var c=document.createElement("canvas");"undefined"!=typeof G_vmlCanvasManager&&G_vmlCanvasManager.initElement(c);var d=c.getContext("2d");if(c.width=c.height=b.size,a.appendChild(c),window.devicePixelRatio>1){var e=window.devicePixelRatio;c.style.width=c.style.height=[b.size,"px"].join(""),c.width=c.height=b.size*e,d.scale(e,e)}d.translate(b.size/2,b.size/2),d.rotate((-0.5+b.rotate/180)*Math.PI);var f=(b.size-b.lineWidth)/2;b.scaleColor&&b.scaleLength&&(f-=b.scaleLength+2);var g=function(a,b,c){c=Math.min(Math.max(0,c||1),1),d.beginPath(),d.arc(0,0,f,0,2*Math.PI*c,!1),d.strokeStyle=a,d.lineWidth=b,d.stroke()},h=function(){var a,c,e=24;d.lineWidth=1,d.fillStyle=b.scaleColor,d.save();for(var e=24;e>=0;--e)0===e%6?(c=b.scaleLength,a=0):(c=.6*b.scaleLength,a=b.scaleLength-c),d.fillRect(-b.size/2+a,0,c,1),d.rotate(Math.PI/12);d.restore()};Date.now=Date.now||function(){return+new Date};var i=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||function(a){window.setTimeout(a,1e3/60)}}();this.clear=function(){d.clearRect(b.size/-2,b.size/-2,b.size,b.size)},this.draw=function(a){this.clear(),b.scaleColor&&h(),b.trackColor&&g(b.trackColor,b.lineWidth),d.lineCap=b.lineCap;var c;c="function"==typeof b.barColor?b.barColor(a):b.barColor,a>0&&g(c,b.lineWidth,a/100)}.bind(this),this.animate=function(a,c){var d=Date.now();b.onStart(a,c);var e=function(){var f=Math.min(Date.now()-d,b.animate),g=b.easing(this,f,a,c-a,b.animate);this.draw(g),b.onStep(a,c,g),f>=b.animate?b.onStop(a,c):i(e)}.bind(this);i(e)}.bind(this)},b=function(b,c){var d,e={barColor:"#ef1e25",trackColor:"#f9f9f9",scaleColor:"#dfe0e0",scaleLength:5,lineCap:"round",lineWidth:3,size:110,rotate:0,animate:1e3,renderer:a,easing:function(a,b,c,d,e){return(b/=e/2)<1?d/2*b*b+c:-d/2*(--b*(b-2)-1)+c},onStart:function(){},onStep:function(){},onStop:function(){}},f={},g=0,h=function(){this.el=b,this.options=f;for(var a in e)e.hasOwnProperty(a)&&(f[a]=c&&"undefined"!=typeof c[a]?c[a]:e[a],"function"==typeof f[a]&&(f[a]=f[a].bind(this)));f.easing="string"==typeof f.easing&&"undefined"!=typeof jQuery&&jQuery.isFunction(jQuery.easing[f.easing])?jQuery.easing[f.easing]:e.easing,d=new f.renderer(b,f),d.draw(g),b.dataset&&b.dataset.percent&&this.update(parseInt(b.dataset.percent,10))}.bind(this);this.update=function(a){return a=parseInt(a,10),f.animate?d.animate(g,a):d.draw(a),g=a,this}.bind(this),h()};window.EasyPieChart=b}();
+
+  var options = {
+    scaleColor: false,
+    trackColor: 'rgba(255,255,255,0.3)',
+    barColor: '#E7F7F5',
+    lineWidth: 6,
+    lineCap: 'butt',
+    size: 95
+  };
+
+  window.addEventListener('DOMContentLoaded', function() {
+    var charts = [];
+    [].forEach.call(document.querySelectorAll('.chart'),  function(el) {
+      charts.push(new EasyPieChart(el, options));
+    });
+  });
+  $(document).ready(function(){
+	  var a=function(a,b){var c=document.createElement("canvas");"undefined"!=typeof G_vmlCanvasManager&&G_vmlCanvasManager.initElement(c);var d=c.getContext("2d");if(c.width=c.height=b.size,a.appendChild(c),window.devicePixelRatio>1){var e=window.devicePixelRatio;c.style.width=c.style.height=[b.size,"px"].join(""),c.width=c.height=b.size*e,d.scale(e,e)}d.translate(b.size/2,b.size/2),d.rotate((-0.5+b.rotate/180)*Math.PI);var f=(b.size-b.lineWidth)/2;b.scaleColor&&b.scaleLength&&(f-=b.scaleLength+2);var g=function(a,b,c){c=Math.min(Math.max(0,c||1),1),d.beginPath(),d.arc(0,0,f,0,2*Math.PI*c,!1),d.strokeStyle=a,d.lineWidth=b,d.stroke()},h=function(){var a,c,e=24;d.lineWidth=1,d.fillStyle=b.scaleColor,d.save();for(var e=24;e>=0;--e)0===e%6?(c=b.scaleLength,a=0):(c=.6*b.scaleLength,a=b.scaleLength-c),d.fillRect(-b.size/2+a,0,c,1),d.rotate(Math.PI/12);d.restore()};Date.now=Date.now||function(){return+new Date};var i=function(){return window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||function(a){window.setTimeout(a,1e3/60)}}();this.clear=function(){d.clearRect(b.size/-2,b.size/-2,b.size,b.size)},this.draw=function(a){this.clear(),b.scaleColor&&h(),b.trackColor&&g(b.trackColor,b.lineWidth),d.lineCap=b.lineCap;var c;c="function"==typeof b.barColor?b.barColor(a):b.barColor,a>0&&g(c,b.lineWidth,a/100)}.bind(this),this.animate=function(a,c){var d=Date.now();b.onStart(a,c);var e=function(){var f=Math.min(Date.now()-d,b.animate),g=b.easing(this,f,a,c-a,b.animate);this.draw(g),b.onStep(a,c,g),f>=b.animate?b.onStop(a,c):i(e)}.bind(this);i(e)}.bind(this)},b=function(b,c){var d,e={barColor:"#ef1e25",trackColor:"#f9f9f9",scaleColor:"#dfe0e0",scaleLength:5,lineCap:"round",lineWidth:3,size:110,rotate:0,animate:1e3,renderer:a,easing:function(a,b,c,d,e){return(b/=e/2)<1?d/2*b*b+c:-d/2*(--b*(b-2)-1)+c},onStart:function(){},onStep:function(){},onStop:function(){}},f={},g=0,h=function(){this.el=b,this.options=f;for(var a in e)e.hasOwnProperty(a)&&(f[a]=c&&"undefined"!=typeof c[a]?c[a]:e[a],"function"==typeof f[a]&&(f[a]=f[a].bind(this)));f.easing="string"==typeof f.easing&&"undefined"!=typeof jQuery&&jQuery.isFunction(jQuery.easing[f.easing])?jQuery.easing[f.easing]:e.easing,d=new f.renderer(b,f),d.draw(g),b.dataset&&b.dataset.percent&&this.update(parseInt(b.dataset.percent,10))}.bind(this);this.update=function(a){return a=parseInt(a,10),f.animate?d.animate(g,a):d.draw(a),g=a,this}.bind(this),h()};window.EasyPieChart=b;
+
+		FlipClock.Lang.Custom = { days:'Days', hours:'Hours', minutes:'Minutes', seconds:'Seconds' };
+		var opts = {
+			clockFace: 'DailyCounter',
+			countdown: true,
+			language: 'Custom'
+		};  
+		var countdown = 14922792000 - ((new Date().getTime())/1000); // from: 04/15/2017 08:00 pm +0200
+		countdown = Math.max(1, countdown);
+		$('.clock-builder-output').FlipClock(countdown, opts);
+	});
+  
+    Polymer({
+      is: 'ym-countdown',
+	  properties:{
+		  options : {
+				    scaleColor: false,
+				    trackColor: 'rgba(255,255,255,0.3)',
+				    barColor: '#E7F7F5',
+				    lineWidth: 6,
+				    lineCap: 'butt',
+				    size: 95 
+		  }
+	  },
+      behaviors: [
+      ],
+      ready: function(){
+    	  var charts = [];
+    	    [].forEach.call(document.querySelectorAll('.chart'),  function(el) {
+    	      charts.push(new EasyPieChart(el, options));
+    	    });
+    	  FlipClock.Lang.Custom = { days:'Days', hours:'Hours', minutes:'Minutes', seconds:'Seconds' };
+  		var opts = {
+  			clockFace: 'DailyCounter',
+  			countdown: true,
+  			language: 'Custom'
+  		};  
+  		var countdown = 1492279200 - ((new Date().getTime())/1000); // from: 04/15/2017 08:00 pm +0200
+  		countdown = Math.max(1, countdown);
+  		$('.clock-builder-output').FlipClock(countdown, opts);  
+      },
+    });
+  </script>
+</dom-module>

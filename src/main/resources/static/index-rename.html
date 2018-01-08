@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<link rel="icon" type="image/png" href="/resources/images/favicon.ico" />
+
+<title>Yes married</title>
+
+<style>
+    body, html {
+		height: 99%;
+    }
+
+    /* styling for render while resources are loading */
+    ym-home-dispatcher[unresolved] {
+		height: 100vh;
+		width: 100vw;
+		background: #37474F;
+    }
+
+    /* mobile */
+    @media (max-width: 767px) {
+      body {
+        background-image: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.25) 15%, rgba(0,0,0,0.25) 30%, rgba(0,0,0,0.7) 48%, rgba(0,0,0,1) 60%);
+        background-repeat: no-repeat;
+        background-size: 100% 100vh;
+      }
+
+      body.fixed-viewport-height {
+        background-size: 100% 600px;
+      }
+
+      ym-home-dispatcher[unresolved] {
+        height: 22px;
+        padding-top: 21px;
+        font-size: 20px;
+        color: #FFF; /* --app-cover-text-color */
+      }
+    }
+</style>
+</head>
+<body class="loading" fullbleed>
+
+ <ym-home-dispatcher unresolved app-title="Yes Married"></ym-home-dispatcher>
+
+<script src="/resources/bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <script src="/resources/js/analytics.js" async></script>
+
+<link rel="import" href="/resources/html/ym-home-dispatcher.html"></link>
+</body>
+</html>

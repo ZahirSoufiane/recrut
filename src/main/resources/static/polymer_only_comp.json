@@ -1,0 +1,32 @@
+{
+  "entrypoint": "comp.html",
+  "builds": [{
+	  "bundle": true,
+	  "js": {"compile": true, "minify": true},
+	  "css": {"minify": true},
+	  "html": {"minify": true},
+	  "addServiceWorker": true 
+	}],
+  "shell": "resources/elements-company.html",
+  "fragments": [
+  	"resources/html/ym-comp-profile.html",
+    "resources/html/ym-comp-dashboard.html",
+    "resources/html/ym-agenda.html",
+    "resources/html/ym-messages.html"
+  ],
+  "sources": [
+   "resources/src/**/*",
+   "resources/css/**/*",
+   "resources/data/**/*",
+   "resources/images/**/*",
+   "resources/img/**/*",
+   "resources/js/*",
+   "resources/js/cal/*",
+   "resources/js/countdown/*",
+   "resources/html/include/**/*",
+   "resources/bower.json"
+  ],
+  "extraDependencies": [
+    "resources/bower_components/webcomponentsjs/webcomponents-lite.min.js"
+  ]
+}

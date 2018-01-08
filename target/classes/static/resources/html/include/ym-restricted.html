@@ -1,0 +1,163 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html"></link>
+<!-- <link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html"> -->
+
+<link rel="import" href="shared-styles/ym-restrictedcss.html">
+<dom-module id="ym-restricted"> <template>
+<style include="restricted-styles"></style>
+<style>
+	.red {
+	color : red;
+	}
+	.center {
+		text-align:center;
+		margin-top:15px;
+	}
+	#container_demo{
+		margin-top:20px;
+	}
+.showImg{
+	margin-top:10px;
+	margin-bttom:10px;
+	max-width:50%;
+}
+#restrictedMsg{
+	margin-bottom:8px;
+}
+#errorToast{
+  	--paper-toast-background-color: red;
+    --paper-toast-color: white;
+    width:100%;
+    text-align:center;
+    font-weight:bold;
+}
+paper-button{
+    background-color: #790b00;
+    color: white;
+}
+
+.group { 
+	position: relative; 
+	margin-bottom: 20px; 
+}
+
+input {
+	font-size: 18px;
+	padding: 10px 10px 10px 5px;
+	-webkit-appearance: none;
+	display: block;
+	background: #fafafa;
+	color: #636363;
+	width: 100%;
+	border: none;
+	border-radius: 0;
+	border-bottom: 1px solid #757575;
+}
+
+input:focus { outline: none; }
+
+</style>
+<!-- <iron-localstorage name="token" value="{{token}}"></iron-localstorage> -->
+
+  <section>				
+                <div id="container_demo" >
+                    <a class="hiddenanchor" id="toregister"></a>
+                    <a class="hiddenanchor" id="tologin"></a>
+                    <div id="wrapper">
+                        <div id="login" class="animate form">
+                        	<div>
+                        	<div id="restrictedMsg">
+                        	  <h1>{{localize('restricted.title')}}</h1>
+							  <p>{{localize('restricted.descr')}}</p>
+							</div>
+							  <content></content>
+							 <div class="layout horizontal center">
+							  <img class="showImg" src="/resources/images/restricted/[[customImage]]" alt="[[altImage]]" />
+							</div>
+							         <div class="center"><span class="red">{{localize('hundred.free')}}</span> </div>
+						  </div>
+						   	<form is="iron-form" id="cred" method="post" action="/auth/login">
+						   		 <h1>Log in</h1> 
+								<div class="group">
+<!-- 								    <label for="username" class="uname"> Votre email </label> -->
+									<paper-input label="{{localize('label.email')}}" value="{{username}}" name="username"></paper-input>
+								</div>
+								<div class="group">
+<!-- 								    <label for="password" class="youpasswd"> Votre mot de passe </label> -->
+									<paper-input label="{{localize('label.pwd')}}" type="password" value="{{password}}" name="password"></paper-input>
+								</div>
+								<paper-button raised class="button buttonBlue" on-click="login">{{localize('label.connection')}}</paper-button>
+						        <button hidden="true"></button>
+                                <p class="change_link">
+									{{localize('notyetmember')}}
+									<a href="#toregister" onclick="goToRegister()" class="to_register">{{localize('joinus')}}</a>
+								</p>
+							</form>
+                        </div>
+
+                        <div id="register" class="animate form">
+                        </div>
+						
+                    </div>
+                </div>  
+            </section>
+            <paper-toast id="errorToast" text="Login error!"></paper-toast>
+            
+</template>
+<script>
+function goToRegister(){
+	document.location.href="/subscribe";
+}
+
+Polymer({
+	is : 'ym-restricted',
+	behaviors: [
+	            Polymer.AppLocalizeBehavior
+	          ],
+	   	    attached: function() {
+	 	          this.loadResources(this.resolveUrl('../../data/locales.json?v=1.2'));
+	 	        },
+	properties : {
+        token: {
+            type: String,
+            notify: true
+          },
+          language: {
+              value: 'en'
+            },
+         	token: {
+                type: String,
+                notify: true
+              },
+	},
+    listeners: {
+        'iron-form-response': '_handleLoginSuccess',
+        'iron-form-error': '_handleLoginError'
+      },
+	ready : function() {
+	},
+	login: function(){
+		this.$.cred.submit();
+	},
+	_handleLoginSuccess: function(evt){
+		this.token = evt.detail.xhr.getResponseHeader('x-auth-token');
+		var userType = evt.detail.xhr.getResponseHeader('x-auth-usertype');
+		if( userType == "SUPERADMIN"){
+			document.location.href="/admin";
+		} else if(userType=="MARRIED"){
+			document.location.href="/dashboard";
+		} else if(userType == "USER"){
+			document.location.href="/company";
+		}
+	},
+	_handleLoginError: function(){
+		this.$.errorToast.text= this.localize('login.failed');
+		this.$.errorToast.show();
+	}
+});
+</script>
+</dom-module>

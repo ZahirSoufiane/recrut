@@ -1,0 +1,443 @@
+{
+  "en": { 
+ 			"footer.provider":"You are a provider ?",
+  			"footer.join":"Join us !",
+  			"footer.soonmarried":"Soon married ?",
+  			"footer.subscribefree":"Join us, it's free !",
+  			"footer.mentions":"Disclaimer",
+  			"btn.contact":"Send",
+  			"contact.success":"Thank you, we've received your message !",
+  			"contact.title":"Contact",
+  			"contact.descr":"A question ? A remark ? An issue ? contact us !",
+  			"btn.feedback":"feedback",
+  			"swipe.youlike":"Do you like this one",
+  			"swipe.youhavenot":"It seems that you haven't found any ",
+  			"swipe.favoriteadded":" is added to your favorites",
+  			"swipe.explain":"Swipe left or right...",
+  			"label.selectPostcode":"Select a postcode",
+  			"label.selectRegion":"In which location would you like to search",
+  			"menu.home":"Home",
+  			"menu.providers":"Suppliers",
+  			"menu.agenda":"Agenda",
+  			"menu.todos":"To do's",
+  			"menu.favorites":"Favorites",
+  			"menu.profile":"My profile",
+			"search.from":"Search from ",
+  			"btn.login":"Login",
+  			"btn.logout":"Logout",
+  			"back": "Back",
+  			"login.slogan":"Make it easier !",
+
+  			"edit":"Edit",
+
+  			"required.fill":"Please fill in ",
+
+  			"required.validmail":" Please choose a valid mail address",
+
+  			"address.postcode":"Postal Code",
+
+  			"address.town":"Town",
+
+  			"address.street":"Street",
+
+  			"address.number":"Number",
+
+  			"phone":"Telephone",
+
+  			"restricted.title": "Restricted",
+
+  			"restricted.descr":"This zone is reserved for members.",
+
+  			"restricted.joinustoo":"You also want to organize your wedding? Join us quickly, be welcome !",
+
+  			"restricted.agenda":"Join us quickly and take advantage of your own agenda to add directly your appointment, View the dates of upcoming shows and so much more!",
+
+       		"restricted.todos":"Your verry own To Do list with a lot of tips and trick are waiting for you. Come and join us, be welcome",
+
+  			"hundred.free":"For free",
+
+  			"label.email":"Email address (ex. mymail@mail.com)",
+
+  			"label.vat":"V.A.T",
+
+  			"label.companyname":"Company name",
+
+  			"label.pwd":"Password (ex. X8df!90EO)",
+
+  			"label.connection":"Connexion",
+
+  			"notyetmember":"Not a member yet ?",
+
+  			"joinus":"Join us for free !",
+
+  			"login.failed":"Login/Password not correct!",
+
+  			"btn.subscribe":"Subscribe here, it's free!",
+  			"clock.remains":"Remains ",
+
+  			"clock.months":"Month",
+
+  			"clock.days":"Day",
+
+  			"clock.hours":"Hour",
+
+  			"clock.minutes":"Minutes",
+
+  			"clock.secondes":"Seconds",
+
+  			"clock.beforeEvent":"Before this precious event !",
+
+  			"favorite.providers":"Look at you favorite suppliers ",
+
+  			"agenda.subject":"Topic",
+
+  			"agenda.description":"Description",
+
+  			"agenda.pleasefill":"Please fill in",
+
+  			"agenda.from":"from",
+
+  			"agenda.edit":"Correct",
+
+  			"agenda.to":"to",
+
+  			"agenda.cancel":"Cancel",
+
+  			"agenda.ok":"OK",
+
+  			"agenda.save":"Save",
+
+  			"agenda.promote":"Your precious agenda on Yes Married !",
+  			
+
+  			"todos.found":"Found",
+
+  			"todos.notfound":"Didn’t found yet",
+
+  			"todos.slogan":"Above all, be faithful to yourself and let this moment be your image",
+
+  			"todos.promote":"your very own To Do list on Yes Married !",
+
+  			"todos.fail":"Sorry, your change could not be made",
+
+  			"profile.promote":"Your brand new profile on Yes Married !",
+
+  			"profile.choosePics":"Choose pictures",
+
+  			"profile.choosePic":"Choose a main picture",
+
+  			"profile.swipe":"Drag your files here",
+
+  			"profile.descr":"Your presentation",
+  			
+			"couple.person":"Future Married Ones",
+			"label.weddingdate":"Wedding date",
+			"agenda.edit.date":"Change date",
+			"title.personaldata":"Contact information",
+			"weddingdate.empty":"You have not pick a date yet",
+			"alt.loggedout.favorite":"Your To Do's on Yes Married !",
+			"favorite.removed":" Is removed from your favorites !",
+			"agenda.add.on":"Addition of an event ",
+			"agenda.event.of":"Your event from ",
+			"agenda.public":"Public event? (Visible to all)",
+			"agenda.title":"My agenda",
+			"agenda.add":"Add an event",
+			"dispatcher.warming":"To take advantage of all features, you must create an account (for free).",
+			"agenda.dispo":"Availability"
+
+  		},
+
+  "nl": { 
+ 			"footer.provider":"Bent u een leverancier ?",
+  			"footer.join":"Join us !",
+  			"footer.soonmarried":"Trouwen jullie binnenkort ?",
+  			"footer.subscribefree":"Schrijf je gratis in",
+  			"footer.mentions":"Disclaimer",
+  			"btn.contact":"Verzenden",
+  			"contact.success":"Thanx, wij hebben uw bericht ontvangen!",
+  			"contact.title":"Contact",
+  			"contact.descr":"Een vraag? Een opmerking? Een probleem? Laat het ons weten !",
+  			"btn.feedback":"feedback",
+  			"swipe.youhavenot":"Deze leveranciers heeft u nog nodig",
+  			"swipe.youlike":"Bevalt deze u",
+  			"swipe.favoriteadded":" is toegevoegd aan uw favorieten",
+  			"swipe.explain":"Swipe left or right...",
+  			"label.selectPostcode":"Selecteer een postcode",
+  			"label.selectRegion":"In welke regio wenst u te zoeken",
+  			"menu.home":"Onthaal",
+  			"menu.providers":"Leveranciers",
+  			"menu.agenda":"Agenda",
+  			"menu.todos":"To do's",
+  			"menu.favorites":"Favorieten",
+  			"menu.profile":"Mijn profiel",
+			"search.from":"Zoeken vanaf ",
+  			"btn.login":" Login ",
+  			"btn.logout":"Logout",
+  			"back": "Terug",
+  			"login.slogan":"Maak het uzelf makkelijker !",
+
+  			"edit":"Wijzigen",
+
+  			"required.fill":"Graag invullen",
+
+  			"required.validmail":"Graag een bestaand mailadres kiezen",
+
+  			"address.postcode":"Postcode",
+
+  			"address.town":"Stad",
+
+  			"address.street":"Straat",
+
+  			"address.number":"Nummer",
+
+  			"phone":"Telefoon",
+
+  			"restricted.title": "Uw toegang is beperkt",
+
+  			"restricted.descr":"Deze zone is enkel toegankelijk voor leden .",
+
+  			"restricted.joinustoo":"Willen jullie ook graag jullie huwelijk zelf organiseren? Zeg dan JA, IK WIL! Schrijf u snel in !",
+
+  			"restricted.agenda":"Schrijf u in en geniet ook van uw gepersonaliseerde agenda met berichtje die u van al uw activiteiten op de hoogte houden. Mis zo geen enkele afspraak, U krijgt uiteraard ook alle huwelijksbeurzen te zien!",
+
+       		"restricted.todos":"Een To Do lijstje met allerlei Tips & Tricks",
+
+  			"hundred.free":"100% GRATIS",
+
+  			"label.email":"Email (Vb. mymail@mail.com)",
+
+  			"label.vat":"BTW nr",
+
+  			"label.companyname":"Bedrijfsnaam",
+
+  			"label.pwd":"Wachtwoord (vb. X8df!90EO)",
+
+  			"label.connection":"Verbinden",
+
+  			"notyetmember":"Bent u nog geen lid ?",
+
+  			"joinus":"Kom er gratis bij :) !",
+
+  			"login.failed":"Login/Wachtwoord niet correct!",
+  			"btn.subscribe":"Schrijf u nu in",
+  			
+  			"clock.remains":"Hij blijft ",
+
+  			"clock.months":"Maand",
+
+  			"clock.days":"Dag",
+
+  			"clock.hours":"Uur",
+
+  			"clock.minutes":"Minuten",
+
+  			"clock.secondes":"Seconden",
+
+  			"clock.beforeEvent":"Voor deze prachtige gebeurtenis !",
+
+  			"favorite.providers":"Zie hier uw favoriete leveranciers ",
+
+  			"agenda.subject":"Onderwerp",
+
+  			"agenda.description":"Omschrijving",
+
+  			"agenda.pleasefill":"Graag invullen aub",
+
+  			"agenda.from":"Van",
+
+  			"agenda.edit":"Wijzigen",
+
+  			"agenda.to":"tot",
+
+  			"agenda.cancel":"Annuleren",
+
+  			"agenda.ok":"OK",
+
+  			"agenda.save":"Opslaan",
+
+  			"agenda.promote":"Uw persoonlijke agenda op Yes Married !",
+  			
+
+  			"todos.found":"Gevonden :D",
+
+  			"todos.notfound":"Nog niet gevonden",
+
+  			"todos.slogan":"Stel uw eigen huwelijk samen, maak deze dag onvergetelijk",
+
+  			"todos.promote":"Jullie todo lijst op Yes Married !",
+
+  			"todos.fail":"Sorry uw wijziging is niet gelukt",
+
+  			"profile.promote":"Uw profiel op Yes Married !",
+
+  			"profile.choosePics":"Kies een afbeelding",
+
+  			"profile.choosePic":"Kies een algemene foto",
+
+  			"profile.swipe":"Sleep uw bestanden naar hier",
+
+  			"profile.descr":"Uw voorstelling",
+  			
+  			"couple.person":"Toekomstige Married Ones",
+			"label.weddingdate":"Datum huwelijk",
+			"agenda.edit.date":"Datum aanpassen",
+			"title.personaldata":"Gegevens",
+			"weddingdate.empty":"Jullie hebben nog geen datum gekozen?",
+			"alt.loggedout.favorite":"Jullie To Do-lijst op Yes Married !",
+			"favorite.removed":" is uit jullie favorieten gehaald !",
+			"agenda.add.on":"Een activiteit toevoegen op ",
+			"agenda.event.of":"Jullie activiteit van ",
+			"agenda.public":"Activiteit publiek maken? (zichtbaar voor iedereen)",
+			"agenda.title":"Mijn agenda",
+			"agenda.add":"Een activiteit toevoegen",
+			"dispatcher.warming":"Registreer je nu gratis, volg onze behulpzame checklist en bewaar alles overzichtelijk in je persoonlijke account.",
+			"agenda.dispo":"Beschikbaarheden"
+
+  		},
+
+    "fr": { 
+ 			"footer.provider":"Vous êtes un prestataire",
+  			"footer.join":"Rejoignez la plateforme !",
+  			"footer.soonmarried":"Bientôt mariés ?",
+  			"footer.subscribefree":"Inscrivez-vous gratuitement !",
+  			"footer.mentions":"Mentions légales",
+  			"contact.success":"Merci, nous avons bien reçu votre message !",
+  			"contact.title":"Contact",
+  			"contact.descr":"Une question ? Une remarque ? Un problème ? contactez-nous !",
+  			"btn.feedback":"feedback",
+  			"btn.contact":"Envoyer",
+  			"swipe.youhavenot":"Il semble que vous n'ayez pas encore trouvé de",
+  			"swipe.youlike":"Celui-ci vous plaît-il",
+  			"swipe.favoriteadded":" est ajouté à vos favoris",
+  			"swipe.explain":"Glissez vers la gauche ou vers la droite...",
+  			"label.selectPostcode":"Sélectionnez un code postal",
+  			"label.selectRegion":"Dans quelle région souhaitez-vous chercher",
+  			"menu.home":"Accueil",
+  			"menu.providers":"Prestataires",
+  			"menu.agenda":"Agenda",
+  			"menu.todos":"To do's",
+  			"menu.favorites":"Favoris",
+  			"menu.profile":"Mon profil",
+			"search.from":"Recherche à partir de ",
+  			"btn.login":"Connexion",
+  			"btn.logout":"Déconnexion",
+  			"back": "Retour",
+
+  			"edit":"Modifier",
+
+  			"login.slogan":"Facilitez-vous la vie !",
+  			"required.fill":"Veuillez remplir",
+
+  			"required.validmail":"Veuillez choisir un mail valide",
+
+  			"address.postcode":"Code postal",
+
+  			"address.town":"Ville",
+
+  			"address.street":"Rue",
+
+  			"address.number":"Numéro",
+
+  			"phone":"Téléphone",
+
+  			"restricted.title": "Accès restreint",
+
+  			"restricted.descr":"Cette zone est réservée aux membres.",
+
+  			"restricted.joinustoo":"Vous aussi vous souhaitez organiser votre mariage ? Rejoignez-nous sans tarder !",
+
+  			"restricted.agenda":"Rejoignez-nous vite et profitez de votre propre agenda pour y ajouter directement vos rendez-vous prestataire, visualiser les dates des prochains salons et bien plus !",
+
+       		"restricted.todos":"Une liste de Todo's remplie de conseils vous attendent. Rejoignez-nous sans tarder",
+
+  			"hundred.free":"100% GRATUIT",
+
+  			"label.email":"Email (eg. egmymail@mail.com)",
+
+  			"label.vat":"V.A.T",
+
+  			"label.companyname":"Nom société",
+
+  			"label.pwd":"Mot de passe (eg. X8df!90EO)",
+
+  			"label.connection":"Connexion",
+
+  			"notyetmember":"Pas encore membre ?",
+
+  			"joinus":"Rejoignez-nous gratuitement !",
+
+  			"login.failed":"Login/Mot de passe incorrect!",
+  			"btn.subscribe":"Inscrivez-vous, c'est gratuit!",
+
+  			"clock.remains":"Il reste ",
+
+  			"clock.months":"Mois",
+
+  			"clock.days":"Jours",
+
+  			"clock.hours":"Heures",
+
+  			"clock.minutes":"Minutes",
+
+  			"clock.secondes":"Secondes",
+
+  			"clock.beforeEvent":"Avant l'heureux évènement !",
+
+  			"favorite.providers":"Voici vos prestataires préférés ",
+
+  			"agenda.subject":"Sujet",
+
+  			"agenda.description":"Description",
+
+  			"agenda.pleasefill":"Veuillez remplir",
+
+  			"agenda.from":"du",
+
+  			"agenda.edit":"Modifier",
+
+  			"agenda.to":"au",
+
+  			"agenda.cancel":"Annuler",
+
+  			"agenda.ok":"OK",
+
+  			"agenda.save":"sauvegarder",
+
+  			"agenda.promote":"Votre agenda sur Yes Married !",
+  			
+
+  			"todos.found":"J'ai trouvé",
+
+  			"todos.notfound":"Je n'ai pas trouvé",
+
+  			"todos.slogan":"Surtout soyez fidèle à vous même et que ce moment soit à votre image",
+
+  			"todos.promote":"Votre todo's sur Yes Married !",
+
+  			"todos.fail":"Désolé, votre modification n'a pu être apportée",
+
+  			"profile.promote":"Votre profile sur Yes Married !",
+
+  			"profile.choosePics":"Choose pictures",
+
+  			"profile.choosePic":"Choose a main picture",
+
+  			"profile.swipe":"Glissez vos fichiers ici",
+
+  			"profile.descr":"Your presentation",
+  			"couple.person":"Future Marié(e)s",
+			"label.weddingdate":"Date Mariage",
+			"agenda.edit.date":"Changer la date",
+			"title.personaldata":"Coordonnées",
+			"weddingdate.empty":"Vous n'avez pas défini votre date de mariage",
+			"alt.loggedout.favorite":"Vos todo's sur Yes Married !",
+			"favorite.removed":" est retiré de vos favoris !",
+			"agenda.add.on":"Ajout d'un évènement le ",
+			"agenda.event.of":"Votre évènement du ",
+			"agenda.public":"Evènement publique? (visible à tous)",
+			"agenda.title":"Mon agenda",
+			"agenda.add":"Ajouter un évènement",
+			"dispatcher.warming":"Pour bénéficier de toutes les fonctionalités, vous devez créer un compte (gratuitement).",
+			"agenda.dispo":"Disponibilités"
+  		}
+}
