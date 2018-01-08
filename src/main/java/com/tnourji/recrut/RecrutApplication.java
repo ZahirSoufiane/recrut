@@ -10,10 +10,10 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 @SpringBootApplication
 @EnableAsync
-public class BdTestUmlApplication {
+public class RecrutApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BdTestUmlApplication.class, args);
+		SpringApplication.run(RecrutApplication.class, args);
 	}
 	 @Bean
 	    public Executor asyncExecutor() {
