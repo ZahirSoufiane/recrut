@@ -1,0 +1,491 @@
+<html><head><!-- <link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html"></link> -->
+<!-- <link rel="import" href="ym-home.html"></link> -->
+<!-- <link rel="import" href="ym-subscribe.html"></link> -->
+
+</head><body><div hidden="" by-polymer-bundler=""><!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><!--
+`<opaque-animation>` makes an element `opacity:1` for the duration of the animation. Used to prevent
+webkit/safari from drawing a frame before an animation for elements that animate from display:none.
+-->
+
+<script>Polymer({is:'opaque-animation',behaviors:[Polymer.NeonAnimationBehavior],configure:function(a){var b=a.node;return this._effect=new KeyframeEffect(b,[{opacity:'1'},{opacity:'1'}],this.timingFromConfig(a)),b.style.opacity='0',this._effect},complete:function(a){a.node.style.opacity=''}});</script>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><script>(function(){'use strict';var a={pageX:0,pageY:0},b=null,c=[];Polymer.IronDropdownScrollManager={get currentLockingElement(){return this._lockingElements[this._lockingElements.length-1]},elementIsScrollLocked:function(a){var b=this.currentLockingElement;if(void 0===b)return!1;var c;return!!this._hasCachedLockedElement(a)||!this._hasCachedUnlockedElement(a)&&(c=!!b&&b!==a&&!this._composedTreeContains(b,a),c?this._lockedElementCache.push(a):this._unlockedElementCache.push(a),c)},pushScrollLock:function(a){0<=this._lockingElements.indexOf(a)||(0===this._lockingElements.length&&this._lockScrollInteractions(),this._lockingElements.push(a),this._lockedElementCache=[],this._unlockedElementCache=[])},removeScrollLock:function(a){var b=this._lockingElements.indexOf(a);-1===b||(this._lockingElements.splice(b,1),this._lockedElementCache=[],this._unlockedElementCache=[],0===this._lockingElements.length&&this._unlockScrollInteractions())},_lockingElements:[],_lockedElementCache:null,_unlockedElementCache:null,_hasCachedLockedElement:function(a){return-1<this._lockedElementCache.indexOf(a)},_hasCachedUnlockedElement:function(a){return-1<this._unlockedElementCache.indexOf(a)},_composedTreeContains:function(a,b){var c,d,e,f;if(a.contains(b))return!0;for(c=Polymer.dom(a).querySelectorAll('content'),e=0;e<c.length;++e)for(d=Polymer.dom(c[e]).getDistributedNodes(),f=0;f<d.length;++f)if(this._composedTreeContains(d[f],b))return!0;return!1},_scrollInteractionHandler:function(b){if(b.cancelable&&this._shouldPreventScrolling(b)&&b.preventDefault(),b.targetTouches){var c=b.targetTouches[0];a.pageX=c.pageX,a.pageY=c.pageY}},_lockScrollInteractions:function(){this._boundScrollHandler=this._boundScrollHandler||this._scrollInteractionHandler.bind(this),document.addEventListener('wheel',this._boundScrollHandler,!0),document.addEventListener('mousewheel',this._boundScrollHandler,!0),document.addEventListener('DOMMouseScroll',this._boundScrollHandler,!0),document.addEventListener('touchstart',this._boundScrollHandler,!0),document.addEventListener('touchmove',this._boundScrollHandler,!0)},_unlockScrollInteractions:function(){document.removeEventListener('wheel',this._boundScrollHandler,!0),document.removeEventListener('mousewheel',this._boundScrollHandler,!0),document.removeEventListener('DOMMouseScroll',this._boundScrollHandler,!0),document.removeEventListener('touchstart',this._boundScrollHandler,!0),document.removeEventListener('touchmove',this._boundScrollHandler,!0)},_shouldPreventScrolling:function(a){var d=Polymer.dom(a).rootTarget;if('touchmove'!==a.type&&b!==d&&(b=d,c=this._getScrollableNodes(Polymer.dom(a).path)),!c.length)return!0;if('touchstart'===a.type)return!1;var e=this._getScrollInfo(a);return!this._getScrollingNode(c,e.deltaX,e.deltaY)},_getScrollableNodes:function(a){for(var b=[],c=a.indexOf(this.currentLockingElement),d=0;d<=c;d++)if(a[d].nodeType===Node.ELEMENT_NODE){var e=a[d],f=e.style;'scroll'!==f.overflow&&'auto'!==f.overflow&&(f=window.getComputedStyle(e)),('scroll'===f.overflow||'auto'===f.overflow)&&b.push(e)}return b},_getScrollingNode:function(a,b,c){var d=Math.abs;if(b||c)for(var e=d(c)>=d(b),f=0;f<a.length;f++){var g=a[f],h=!1;if(h=e?0>c?0<g.scrollTop:g.scrollTop<g.scrollHeight-g.clientHeight:0>b?0<g.scrollLeft:g.scrollLeft<g.scrollWidth-g.clientWidth,h)return g}},_getScrollInfo:function(b){var c={deltaX:b.deltaX,deltaY:b.deltaY};if('deltaX'in b);else if('wheelDeltaX'in b)c.deltaX=-b.wheelDeltaX,c.deltaY=-b.wheelDeltaY;else if('axis'in b)c.deltaX=1===b.axis?b.detail:0,c.deltaY=2===b.axis?b.detail:0;else if(b.targetTouches){var d=b.targetTouches[0];c.deltaX=a.pageX-d.pageX,c.deltaY=a.pageY-d.pageY}return c}}})();</script>
+<!--
+`<iron-dropdown>` is a generalized element that is useful when you have
+hidden content (`.dropdown-content`) that is revealed due to some change in
+state that should cause it to do so.
+
+Note that this is a low-level element intended to be used as part of other
+composite elements that cause dropdowns to be revealed.
+
+Examples of elements that might be implemented using an `iron-dropdown`
+include comboboxes, menubuttons, selects. The list goes on.
+
+The `<iron-dropdown>` element exposes attributes that allow the position
+of the `.dropdown-content` relative to the `.dropdown-trigger` to be
+configured.
+
+    <iron-dropdown horizontal-align="right" vertical-align="top">
+      <div class="dropdown-content">Hello!</div>
+    </iron-dropdown>
+
+In the above example, the `<div>` with class `.dropdown-content` will be
+hidden until the dropdown element has `opened` set to true, or when the `open`
+method is called on the element.
+
+@demo demo/index.html
+-->
+
+<dom-module id="iron-dropdown" assetpath="../bower_components/iron-dropdown/">
+  <template>
+    <style>:host{position:fixed;}#contentWrapper ::content > *{overflow:auto;}#contentWrapper.animating ::content > *{overflow:hidden;}</style>
+
+    <div id="contentWrapper">
+      <content id="content" select=".dropdown-content"></content>
+    </div>
+  </template>
+
+  <script>(function(){'use strict';Polymer({is:'iron-dropdown',behaviors:[Polymer.IronControlState,Polymer.IronA11yKeysBehavior,Polymer.IronOverlayBehavior,Polymer.NeonAnimationRunnerBehavior],properties:{horizontalAlign:{type:String,value:'left',reflectToAttribute:!0},verticalAlign:{type:String,value:'top',reflectToAttribute:!0},openAnimationConfig:{type:Object},closeAnimationConfig:{type:Object},focusTarget:{type:Object},noAnimations:{type:Boolean,value:!1},allowOutsideScroll:{type:Boolean,value:!1},_boundOnCaptureScroll:{type:Function,value:function(){return this._onCaptureScroll.bind(this)}}},listeners:{"neon-animation-finish":'_onNeonAnimationFinish'},observers:['_updateOverlayPosition(positionTarget, verticalAlign, horizontalAlign, verticalOffset, horizontalOffset)'],get containedElement(){return Polymer.dom(this.$.content).getDistributedNodes()[0]},get _focusTarget(){return this.focusTarget||this.containedElement},ready:function(){this._scrollTop=0,this._scrollLeft=0,this._refitOnScrollRAF=null},attached:function(){this.sizingTarget&&this.sizingTarget!==this||(this.sizingTarget=this.containedElement||this)},detached:function(){this.cancelAnimation(),document.removeEventListener('scroll',this._boundOnCaptureScroll),Polymer.IronDropdownScrollManager.removeScrollLock(this)},_openedChanged:function(){this.opened&&this.disabled?this.cancel():(this.cancelAnimation(),this._updateAnimationConfig(),this._saveScrollPosition(),this.opened?(document.addEventListener('scroll',this._boundOnCaptureScroll),!this.allowOutsideScroll&&Polymer.IronDropdownScrollManager.pushScrollLock(this)):(document.removeEventListener('scroll',this._boundOnCaptureScroll),Polymer.IronDropdownScrollManager.removeScrollLock(this)),Polymer.IronOverlayBehaviorImpl._openedChanged.apply(this,arguments))},_renderOpened:function(){!this.noAnimations&&this.animationConfig.open?(this.$.contentWrapper.classList.add('animating'),this.playAnimation('open')):Polymer.IronOverlayBehaviorImpl._renderOpened.apply(this,arguments)},_renderClosed:function(){!this.noAnimations&&this.animationConfig.close?(this.$.contentWrapper.classList.add('animating'),this.playAnimation('close')):Polymer.IronOverlayBehaviorImpl._renderClosed.apply(this,arguments)},_onNeonAnimationFinish:function(){this.$.contentWrapper.classList.remove('animating'),this.opened?this._finishRenderOpened():this._finishRenderClosed()},_onCaptureScroll:function(){this.allowOutsideScroll?(this._refitOnScrollRAF&&window.cancelAnimationFrame(this._refitOnScrollRAF),this._refitOnScrollRAF=window.requestAnimationFrame(this.refit.bind(this))):this._restoreScrollPosition()},_saveScrollPosition:function(){var a=Math.max;document.scrollingElement?(this._scrollTop=document.scrollingElement.scrollTop,this._scrollLeft=document.scrollingElement.scrollLeft):(this._scrollTop=a(document.documentElement.scrollTop,document.body.scrollTop),this._scrollLeft=a(document.documentElement.scrollLeft,document.body.scrollLeft))},_restoreScrollPosition:function(){document.scrollingElement?(document.scrollingElement.scrollTop=this._scrollTop,document.scrollingElement.scrollLeft=this._scrollLeft):(document.documentElement.scrollTop=this._scrollTop,document.documentElement.scrollLeft=this._scrollLeft,document.body.scrollTop=this._scrollTop,document.body.scrollLeft=this._scrollLeft)},_updateAnimationConfig:function(){for(var a=this.containedElement,b=[].concat(this.openAnimationConfig||[]).concat(this.closeAnimationConfig||[]),c=0;c<b.length;c++)b[c].node=a;this.animationConfig={open:this.openAnimationConfig,close:this.closeAnimationConfig}},_updateOverlayPosition:function(){this.isAttached&&this.notifyResize()},_applyFocus:function(){var a=this.focusTarget||this.containedElement;a&&this.opened&&!this.noAutoFocus?a.focus():Polymer.IronOverlayBehaviorImpl._applyFocus.apply(this,arguments)}})})();</script>
+</dom-module>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><!--
+`<fade-in-animation>` animates the opacity of an element from 0 to 1.
+
+Configuration:
+```
+{
+  name: 'fade-in-animation',
+  node: <node>
+  timing: <animation-timing>
+}
+```
+-->
+
+<script>Polymer({is:'fade-in-animation',behaviors:[Polymer.NeonAnimationBehavior],configure:function(a){var b=a.node;return this._effect=new KeyframeEffect(b,[{opacity:'0'},{opacity:'1'}],this.timingFromConfig(a)),this._effect}});</script>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><script>Polymer({is:'paper-menu-grow-height-animation',behaviors:[Polymer.NeonAnimationBehavior],configure:function(a){var b=a.node,c=b.getBoundingClientRect(),d=c.height;return this._effect=new KeyframeEffect(b,[{height:d/2+'px'},{height:d+'px'}],this.timingFromConfig(a)),this._effect}}),Polymer({is:'paper-menu-grow-width-animation',behaviors:[Polymer.NeonAnimationBehavior],configure:function(a){var b=a.node,c=b.getBoundingClientRect(),d=c.width;return this._effect=new KeyframeEffect(b,[{width:d/2+'px'},{width:d+'px'}],this.timingFromConfig(a)),this._effect}}),Polymer({is:'paper-menu-shrink-width-animation',behaviors:[Polymer.NeonAnimationBehavior],configure:function(a){var b=a.node,c=b.getBoundingClientRect(),d=c.width;return this._effect=new KeyframeEffect(b,[{width:d+'px'},{width:d-d/20+'px'}],this.timingFromConfig(a)),this._effect}}),Polymer({is:'paper-menu-shrink-height-animation',behaviors:[Polymer.NeonAnimationBehavior],configure:function(a){var b=a.node,c=b.getBoundingClientRect(),d=c.height,e=c.top;return this.setPrefixedProperty(b,'transformOrigin','0 0'),this._effect=new KeyframeEffect(b,[{height:d+'px',transform:'translateY(0)'},{height:d/2+'px',transform:'translateY(-20px)'}],this.timingFromConfig(a)),this._effect}});</script>
+
+
+<!--
+Material design: [Dropdown buttons](https://www.google.com/design/spec/components/buttons.html#buttons-dropdown-buttons)
+
+`paper-menu-button` allows one to compose a designated "trigger" element with
+another element that represents "content", to create a dropdown menu that
+displays the "content" when the "trigger" is clicked.
+
+The child element with the class `dropdown-trigger` will be used as the
+"trigger" element. The child element with the class `dropdown-content` will be
+used as the "content" element.
+
+The `paper-menu-button` is sensitive to its content's `iron-select` events. If
+the "content" element triggers an `iron-select` event, the `paper-menu-button`
+will close automatically.
+
+Example:
+
+    <paper-menu-button>
+      <paper-icon-button icon="menu" class="dropdown-trigger"></paper-icon-button>
+      <paper-menu class="dropdown-content">
+        <paper-item>Share</paper-item>
+        <paper-item>Settings</paper-item>
+        <paper-item>Help</paper-item>
+      </paper-menu>
+    </paper-menu-button>
+
+### Styling
+
+The following custom properties and mixins are also available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--paper-menu-button-dropdown-background` | Background color of the paper-menu-button dropdown | `--primary-background-color`
+`--paper-menu-button` | Mixin applied to the paper-menu-button | `{}`
+`--paper-menu-button-disabled` | Mixin applied to the paper-menu-button when disabled | `{}`
+`--paper-menu-button-dropdown` | Mixin applied to the paper-menu-button dropdown | `{}`
+`--paper-menu-button-content` | Mixin applied to the paper-menu-button content | `{}`
+
+@hero hero.svg
+@demo demo/index.html
+-->
+
+<dom-module id="paper-menu-button" assetpath="../bower_components/paper-menu-button/">
+  <template>
+    <style>:host{display:inline-block;position:relative;padding:8px;outline:none;@apply (--paper-menu-button);}:host([disabled]){cursor:auto;color:var(--disabled-text-color);@apply (--paper-menu-button-disabled);}iron-dropdown{@apply (--paper-menu-button-dropdown);}.dropdown-content{@apply (--shadow-elevation-2dp);position:relative;border-radius:2px;background-color:var(--paper-menu-button-dropdown-background, --primary-background-color);@apply (--paper-menu-button-content);}:host([vertical-align="top"]) .dropdown-content{margin-bottom:20px;margin-top:-10px;top:10px;}:host([vertical-align="bottom"]) .dropdown-content{bottom:10px;margin-bottom:-10px;margin-top:20px;}#trigger{cursor:pointer;}</style>
+
+    <div id="trigger" on-tap="toggle">
+      <content select=".dropdown-trigger"></content>
+    </div>
+
+    <iron-dropdown id="dropdown" opened="{{opened}}" horizontal-align="[[horizontalAlign]]" vertical-align="[[verticalAlign]]" dynamic-align="[[dynamicAlign]]" horizontal-offset="[[horizontalOffset]]" vertical-offset="[[verticalOffset]]" no-overlap="[[noOverlap]]" open-animation-config="[[openAnimationConfig]]" close-animation-config="[[closeAnimationConfig]]" no-animations="[[noAnimations]]" focus-target="[[_dropdownContent]]" allow-outside-scroll="[[allowOutsideScroll]]" restore-focus-on-close="[[restoreFocusOnClose]]" on-iron-overlay-canceled="__onIronOverlayCanceled">
+      <div class="dropdown-content">
+        <content id="content" select=".dropdown-content"></content>
+      </div>
+    </iron-dropdown>
+  </template>
+
+  <script>(function(){'use strict';var a={ANIMATION_CUBIC_BEZIER:'cubic-bezier(.3,.95,.5,1)',MAX_ANIMATION_TIME_MS:400},b=Polymer({is:'paper-menu-button',behaviors:[Polymer.IronA11yKeysBehavior,Polymer.IronControlState],properties:{opened:{type:Boolean,value:!1,notify:!0,observer:'_openedChanged'},horizontalAlign:{type:String,value:'left',reflectToAttribute:!0},verticalAlign:{type:String,value:'top',reflectToAttribute:!0},dynamicAlign:{type:Boolean},horizontalOffset:{type:Number,value:0,notify:!0},verticalOffset:{type:Number,value:0,notify:!0},noOverlap:{type:Boolean},noAnimations:{type:Boolean,value:!1},ignoreSelect:{type:Boolean,value:!1},closeOnActivate:{type:Boolean,value:!1},openAnimationConfig:{type:Object,value:function(){return[{name:'fade-in-animation',timing:{delay:100,duration:200}},{name:'paper-menu-grow-width-animation',timing:{delay:100,duration:150,easing:a.ANIMATION_CUBIC_BEZIER}},{name:'paper-menu-grow-height-animation',timing:{delay:100,duration:275,easing:a.ANIMATION_CUBIC_BEZIER}}]}},closeAnimationConfig:{type:Object,value:function(){return[{name:'fade-out-animation',timing:{duration:150}},{name:'paper-menu-shrink-width-animation',timing:{delay:100,duration:50,easing:a.ANIMATION_CUBIC_BEZIER}},{name:'paper-menu-shrink-height-animation',timing:{duration:200,easing:'ease-in'}}]}},allowOutsideScroll:{type:Boolean,value:!1},restoreFocusOnClose:{type:Boolean,value:!0},_dropdownContent:{type:Object}},hostAttributes:{role:'group',"aria-haspopup":'true'},listeners:{"iron-activate":'_onIronActivate',"iron-select":'_onIronSelect'},get contentElement(){return Polymer.dom(this.$.content).getDistributedNodes()[0]},toggle:function(){this.opened?this.close():this.open()},open:function(){this.disabled||this.$.dropdown.open()},close:function(){this.$.dropdown.close()},_onIronSelect:function(){this.ignoreSelect||this.close()},_onIronActivate:function(){this.closeOnActivate&&this.close()},_openedChanged:function(a,b){a?(this._dropdownContent=this.contentElement,this.fire('paper-dropdown-open')):null!=b&&this.fire('paper-dropdown-close')},_disabledChanged:function(a){Polymer.IronControlState._disabledChanged.apply(this,arguments),a&&this.opened&&this.close()},__onIronOverlayCanceled:function(a){var b=a.detail,c=Polymer.dom(b).rootTarget,d=this.$.trigger,e=Polymer.dom(b).path;-1<e.indexOf(d)&&a.preventDefault()}});Object.keys(a).forEach(function(c){b[c]=a[c]}),Polymer.PaperMenuButton=b})();</script>
+</dom-module>
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><iron-iconset-svg name="paper-dropdown-menu" size="24">
+<svg><defs>
+<g id="arrow-drop-down"><path d="M7 10l5 5 5-5z"></path></g>
+</defs></svg>
+</iron-iconset-svg>
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><dom-module id="paper-dropdown-menu-shared-styles" assetpath="../bower_components/paper-dropdown-menu/">
+  <template>
+    <style>:host{display:inline-block;position:relative;text-align:left;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-tap-highlight-color:transparent;--paper-input-container-input:{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:100%;box-sizing:border-box;cursor:pointer;};@apply (--paper-dropdown-menu);}:host([disabled]){@apply (--paper-dropdown-menu-disabled);}:host([noink]) paper-ripple{display:none;}:host([no-label-float]) paper-ripple{top:8px;}paper-ripple{top:12px;left:0px;bottom:8px;right:0px;@apply (--paper-dropdown-menu-ripple);}paper-menu-button{display:block;padding:0;@apply (--paper-dropdown-menu-button);}paper-input{@apply (--paper-dropdown-menu-input);}iron-icon{color:var(--disabled-text-color);@apply (--paper-dropdown-menu-icon);}</style>
+  </template>
+</dom-module>
+<!--
+Material design: [Dropdown menus](https://www.google.com/design/spec/components/buttons.html#buttons-dropdown-buttons)
+
+`paper-dropdown-menu` is similar to a native browser select element.
+`paper-dropdown-menu` works with selectable content. The currently selected
+item is displayed in the control. If no item is selected, the `label` is
+displayed instead.
+
+Example:
+
+    <paper-dropdown-menu label="Your favourite pastry">
+      <paper-listbox class="dropdown-content">
+        <paper-item>Croissant</paper-item>
+        <paper-item>Donut</paper-item>
+        <paper-item>Financier</paper-item>
+        <paper-item>Madeleine</paper-item>
+      </paper-listbox>
+    </paper-dropdown-menu>
+
+This example renders a dropdown menu with 4 options.
+
+The child element with the class `dropdown-content` is used as the dropdown
+menu. This can be a [`paper-listbox`](paper-listbox), or any other or
+element that acts like an [`iron-selector`](iron-selector).
+
+Specifically, the menu child must fire an
+[`iron-select`](iron-selector#event-iron-select) event when one of its
+children is selected, and an [`iron-deselect`](iron-selector#event-iron-deselect)
+event when a child is deselected. The selected or deselected item must
+be passed as the event's `detail.item` property.
+
+Applications can listen for the `iron-select` and `iron-deselect` events
+to react when options are selected and deselected.
+
+### Styling
+
+The following custom properties and mixins are also available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--paper-dropdown-menu` | A mixin that is applied to the element host | `{}`
+`--paper-dropdown-menu-disabled` | A mixin that is applied to the element host when disabled | `{}`
+`--paper-dropdown-menu-ripple` | A mixin that is applied to the internal ripple | `{}`
+`--paper-dropdown-menu-button` | A mixin that is applied to the internal menu button | `{}`
+`--paper-dropdown-menu-input` | A mixin that is applied to the internal paper input | `{}`
+`--paper-dropdown-menu-icon` | A mixin that is applied to the internal icon | `{}`
+
+You can also use any of the `paper-input-container` and `paper-menu-button`
+style mixins and custom properties to style the internal input and menu button
+respectively.
+
+@group Paper Elements
+@element paper-dropdown-menu
+@hero hero.svg
+@demo demo/index.html
+-->
+
+<dom-module id="paper-dropdown-menu" assetpath="../bower_components/paper-dropdown-menu/">
+  <template>
+    <style include="paper-dropdown-menu-shared-styles"></style>
+
+    <!-- this div fulfills an a11y requirement for combobox, do not remove -->
+    <span role="button"></span>
+    <paper-menu-button id="menuButton" vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]" dynamic-align="[[dynamicAlign]]" vertical-offset="[[_computeMenuVerticalOffset(noLabelFloat)]]" disabled="[[disabled]]" no-animations="[[noAnimations]]" on-iron-select="_onIronSelect" on-iron-deselect="_onIronDeselect" opened="{{opened}}" close-on-activate="" allow-outside-scroll="[[allowOutsideScroll]]" restore-focus-on-close="[[restoreFocusOnClose]]">
+      <div class="dropdown-trigger">
+        <paper-ripple></paper-ripple>
+        <!-- paper-input has type="text" for a11y, do not remove -->
+        <paper-input type="text" invalid="[[invalid]]" readonly="" disabled="[[disabled]]" value="[[selectedItemLabel]]" placeholder="[[placeholder]]" error-message="[[errorMessage]]" always-float-label="[[alwaysFloatLabel]]" no-label-float="[[noLabelFloat]]" label="[[label]]">
+          <iron-icon icon="paper-dropdown-menu:arrow-drop-down" suffix=""></iron-icon>
+        </paper-input>
+      </div>
+      <content id="content" select=".dropdown-content"></content>
+    </paper-menu-button>
+  </template>
+
+  <script>(function(){'use strict';Polymer({is:'paper-dropdown-menu',behaviors:[Polymer.IronButtonState,Polymer.IronControlState,Polymer.IronFormElementBehavior,Polymer.IronValidatableBehavior],properties:{selectedItemLabel:{type:String,notify:!0,readOnly:!0},selectedItem:{type:Object,notify:!0,readOnly:!0},value:{type:String,notify:!0,readOnly:!0},label:{type:String},placeholder:{type:String},errorMessage:{type:String},opened:{type:Boolean,notify:!0,value:!1,observer:'_openedChanged'},allowOutsideScroll:{type:Boolean,value:!1},noLabelFloat:{type:Boolean,value:!1,reflectToAttribute:!0},alwaysFloatLabel:{type:Boolean,value:!1},noAnimations:{type:Boolean,value:!1},horizontalAlign:{type:String,value:'right'},verticalAlign:{type:String,value:'top'},dynamicAlign:{type:Boolean},restoreFocusOnClose:{type:Boolean,value:!0}},listeners:{tap:'_onTap'},keyBindings:{"up down":'open',esc:'close'},hostAttributes:{role:'combobox',"aria-autocomplete":'none',"aria-haspopup":'true'},observers:['_selectedItemChanged(selectedItem)'],attached:function(){var a=this.contentElement;a&&a.selectedItem&&this._setSelectedItem(a.selectedItem)},get contentElement(){return Polymer.dom(this.$.content).getDistributedNodes()[0]},open:function(){this.$.menuButton.open()},close:function(){this.$.menuButton.close()},_onIronSelect:function(a){this._setSelectedItem(a.detail.item)},_onIronDeselect:function(){this._setSelectedItem(null)},_onTap:function(a){Polymer.Gestures.findOriginalTarget(a)===this&&this.open()},_selectedItemChanged:function(a){var b='';b=a?a.label||a.getAttribute('label')||a.textContent.trim():'',this._setValue(b),this._setSelectedItemLabel(b)},_computeMenuVerticalOffset:function(a){return a?-4:8},_getValidity:function(){return this.disabled||!this.required||this.required&&!!this.value},_openedChanged:function(){var a=this.opened?'true':'false',b=this.contentElement;b&&b.setAttribute('aria-expanded',a)}})})();</script>
+</dom-module>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><!--
+Material design: [Menus](https://www.google.com/design/spec/components/menus.html)
+
+`<paper-listbox>` implements an accessible listbox control with Material Design styling. The focused item
+is highlighted, and the selected item has bolded text.
+
+    <paper-listbox>
+      <paper-item>Item 1</paper-item>
+      <paper-item>Item 2</paper-item>
+    </paper-listbox>
+
+An initial selection can be specified with the `selected` attribute.
+
+    <paper-listbox selected="0">
+      <paper-item>Item 1</paper-item>
+      <paper-item>Item 2</paper-item>
+    </paper-listbox>
+
+Make a multi-select listbox with the `multi` attribute. Items in a multi-select listbox can be deselected,
+and multiple item can be selected.
+
+    <paper-listbox multi>
+      <paper-item>Item 1</paper-item>
+      <paper-item>Item 2</paper-item>
+    </paper-listbox>
+
+### Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--paper-listbox-background-color`   | Menu background color                                            | `--primary-background-color`
+`--paper-listbox-color`              | Menu foreground color                                            | `--primary-text-color`
+`--paper-listbox`                    | Mixin applied to the listbox                                        | `{}`
+
+### Accessibility
+
+`<paper-listbox>` has `role="listbox"` by default. A multi-select listbox will also have
+`aria-multiselectable` set. It implements key bindings to navigate through the listbox with the up and
+down arrow keys, esc to exit the listbox, and enter to activate a listbox item. Typing the first letter
+of a listbox item will also focus it.
+
+@group Paper Elements
+@element paper-listbox
+@hero hero.svg
+@demo demo/index.html
+-->
+
+<dom-module id="paper-listbox" assetpath="../bower_components/paper-listbox/">
+  <template>
+    <style>:host{display:block;padding:8px 0;background:var(--paper-listbox-background-color, --primary-background-color);color:var(--paper-listbox-color, --primary-text-color);@apply (--paper-listbox);}</style>
+
+    <content></content>
+  </template>
+
+  <script>(function(){Polymer({is:'paper-listbox',behaviors:[Polymer.IronMenuBehavior],hostAttributes:{role:'listbox'}})})();</script>
+</dom-module>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><!--
+`PaperItemBehavior` is a convenience behavior shared by <paper-item> and
+<paper-icon-item> that manages the shared control states and attributes of
+the items.
+-->
+
+<script>Polymer.PaperItemBehaviorImpl={hostAttributes:{role:'option',tabindex:'0'}},Polymer.PaperItemBehavior=[Polymer.IronButtonState,Polymer.IronControlState,Polymer.PaperItemBehaviorImpl];</script>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><dom-module id="paper-item-shared-styles" assetpath="../bower_components/paper-item/">
+  <template>
+    <style>:host, .paper-item{display:block;position:relative;min-height:var(--paper-item-min-height, 48px);padding:0px 16px;}.paper-item{@apply (--paper-font-subhead);border:none;outline:none;background:white;width:100%;text-align:left;}:host([hidden]), .paper-item[hidden]{display:none !important;}:host(.iron-selected), .paper-item.iron-selected{font-weight:var(--paper-item-selected-weight, bold);@apply (--paper-item-selected);}:host([disabled]), .paper-item[disabled]{color:var(--paper-item-disabled-color, --disabled-text-color);@apply (--paper-item-disabled);}:host(:focus), .paper-item:focus{position:relative;outline:0;@apply (--paper-item-focused);}:host(:focus):before, .paper-item:focus:before{@apply (--layout-fit);background:currentColor;content:'';opacity:var(--dark-divider-opacity);pointer-events:none;@apply (--paper-item-focused-before);}</style>
+  </template>
+</dom-module>
+<!--
+Material design: [Lists](https://www.google.com/design/spec/components/lists.html)
+
+`<paper-item>` is an interactive list item. By default, it is a horizontal flexbox.
+
+    <paper-item>Item</paper-item>
+
+Use this element with `<paper-item-body>` to make Material Design styled two-line and three-line
+items.
+
+    <paper-item>
+      <paper-item-body two-line>
+        <div>Show your status</div>
+        <div secondary>Your status is visible to everyone</div>
+      </paper-item-body>
+      <iron-icon icon="warning"></iron-icon>
+    </paper-item>
+
+To use `paper-item` as a link, wrap it in an anchor tag. Since `paper-item` will
+already receive focus, you may want to prevent the anchor tag from receiving
+focus as well by setting its tabindex to -1.
+
+    <a href="https://www.polymer-project.org/" tabindex="-1">
+      <paper-item raised>Polymer Project</paper-item>
+    </a>
+
+If you are concerned about performance and want to use `paper-item` in a `paper-listbox`
+with many items, you can just use a native `button` with the `paper-item` class
+applied (provided you have correctly included the shared styles):
+
+    <style is="custom-style" include="paper-item-shared-styles"></style>
+
+    <paper-listbox>
+      <button class="paper-item" role="option">Inbox</button>
+      <button class="paper-item" role="option">Starred</button>
+      <button class="paper-item" role="option">Sent mail</button>
+    </paper-listbox>
+
+### Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property               | Description                                  | Default
+------------------------------|----------------------------------------------|----------
+`--paper-item-min-height`     | Minimum height of the item                   | `48px`
+`--paper-item`                | Mixin applied to the item                    | `{}`
+`--paper-item-selected-weight`| The font weight of a selected item           | `bold`
+`--paper-item-selected`       | Mixin applied to selected paper-items        | `{}`
+`--paper-item-disabled-color` | The color for disabled paper-items           | `--disabled-text-color`
+`--paper-item-disabled`       | Mixin applied to disabled paper-items        | `{}`
+`--paper-item-focused`        | Mixin applied to focused paper-items         | `{}`
+`--paper-item-focused-before` | Mixin applied to :before focused paper-items | `{}`
+
+### Accessibility
+
+This element has `role="listitem"` by default. Depending on usage, it may be more appropriate to set
+`role="menuitem"`, `role="menuitemcheckbox"` or `role="menuitemradio"`.
+
+    <paper-item role="menuitemcheckbox">
+      <paper-item-body>
+        Show your status
+      </paper-item-body>
+      <paper-checkbox></paper-checkbox>
+    </paper-item>
+
+@group Paper Elements
+@element paper-item
+@demo demo/index.html
+-->
+
+<dom-module id="paper-item" assetpath="../bower_components/paper-item/">
+  <template>
+    <style include="paper-item-shared-styles"></style>
+    <style>:host{@apply (--layout-horizontal);@apply (--layout-center);@apply (--paper-font-subhead);@apply (--paper-item);}</style>
+
+    <content></content>
+  </template>
+
+  <script>Polymer({is:'paper-item',behaviors:[Polymer.PaperItemBehavior]});</script>
+</dom-module>
+</div><dom-module id="ym-home-dispatcher" attributes="csrfHeader"> <template>
+<style is="custom-style" include="iron-flex iron-flex-alignment">:host , neon-animated-pages, iron-pages{height:99%;font:16px/1.5 Garamond,'Open Sans',"Helvetica",Arial;font-family:Garamond,'Open Sans',"Helvetica",Arial;}paper-dropdown-menu{margin-right:20px;max-width:70px;--paper-input-container-label:{color:white;font-style:italic;text-align:center;font-weight:bold;};--paper-input-container-input:{color:white;font-style:normal;font-family:serif;text-transform:uppercase;padding-left:15px;};--paper-input-container-underline:{display:none;};}paper-dropdown-menu iron-icon{color:#e6a8a8;}#langBar{position:absolute;width:95%;z-index:10;}#langBar paper-item{cursor:pointer;}</style>
+<app-location route="{{route}}"></app-location>
+
+<app-route route="{{route}}" pattern="/:view" data="{{routeData}}" tail="{{subroute}}"></app-route>
+ <div id="langBar" class="layout horizontal end-justified">
+<paper-dropdown-menu label="">
+  <paper-listbox slot="dropdown-content" class="dropdown-content" selected="{{language}}" attr-for-selected="value">
+    <paper-item value="en">EN</paper-item>
+    <paper-item value="fr">FR</paper-item>
+    <paper-item value="nl">NL</paper-item>
+  </paper-listbox>
+</paper-dropdown-menu>
+</div>
+ <neon-animated-pages fallback-selection="home" animateinitialselection="true" selected="[[routeData.view]]" attr-for-selected="name" entryanimation="slide-from-left-animation" exit-animation="fade-out-animation">
+  <ym-home language="{{language}}" token="{{token}}" name="home" route="{{subroute}}" csrfheader="{{csrfHeader}}"></ym-home>
+  <ym-subscribe language="{{language}}" token="{{token}}" name="subscribe" index="0" route="{{subroute}}"></ym-subscribe>
+  <ym-joinus language="{{language}}" token="{{token}}" name="joinus" route="{{subroute}}"></ym-joinus>
+</neon-animated-pages>
+
+</template> <script>Polymer({is:'ym-home-dispatcher',observers:['_routePageChanged(routeData.view)'],properties:{token:{type:String,notify:!0,value:''},csrfHeader:{type:String},language:{value:function(){var a=sessionStorage.getItem('ym-lang');return null==a&&(a=navigator.language.split('-')[0]),'fr'===a||'nl'===a?(sessionStorage.setItem('ym-lang',a),a):(sessionStorage.setItem('ym-lang','en'),'en')},type:String,notify:!0,observer:'_languageChanged'}},listeners:{logout:'_logout'},_languageChanged:function(){sessionStorage.setItem('ym-lang',this.language)},_logout:function(){this._deleteCookie('AUTH-TOKEN'),this._deleteCookie('x-auth-usertype'),this.token=''},ready:function(){this.removeAttribute('unresolved'),'serviceWorker'in navigator},getCookie:function(a){var b='; '+document.cookie,c=b.split('; '+a+'=');if(2==c.length)return c.pop().split(';').shift()},_routePageChanged:function(a){ga('set','page',a),ga('send','pageview'),(''==a||null==a||'welcome'==a||'subscribed'==a||'prepareForgottenPasswordReset'==a||'subscribeConfirmed'==a)&&(a='home'),this.importHref(this.resolveUrl('ym-'+a+'.html'),function(){},function(){},!0)}});</script> </dom-module>
+
+
+
+
+</body></html>

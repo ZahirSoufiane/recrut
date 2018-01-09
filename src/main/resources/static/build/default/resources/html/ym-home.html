@@ -1,0 +1,501 @@
+<html><head></head><body><div hidden="" by-polymer-bundler=""><!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><script>Polymer.PaperDialogBehaviorImpl={hostAttributes:{role:'dialog',tabindex:'-1'},properties:{modal:{type:Boolean,value:!1}},observers:['_modalChanged(modal, _readied)'],listeners:{tap:'_onDialogClick'},ready:function(){this.__prevNoCancelOnOutsideClick=this.noCancelOnOutsideClick,this.__prevNoCancelOnEscKey=this.noCancelOnEscKey,this.__prevWithBackdrop=this.withBackdrop},_modalChanged:function(a,b){b&&(a?(this.__prevNoCancelOnOutsideClick=this.noCancelOnOutsideClick,this.__prevNoCancelOnEscKey=this.noCancelOnEscKey,this.__prevWithBackdrop=this.withBackdrop,this.noCancelOnOutsideClick=!0,this.noCancelOnEscKey=!0,this.withBackdrop=!0):(this.noCancelOnOutsideClick=this.noCancelOnOutsideClick&&this.__prevNoCancelOnOutsideClick,this.noCancelOnEscKey=this.noCancelOnEscKey&&this.__prevNoCancelOnEscKey,this.withBackdrop=this.withBackdrop&&this.__prevWithBackdrop))},_updateClosingReasonConfirmed:function(a){this.closingReason=this.closingReason||{},this.closingReason.confirmed=a},_onDialogClick:function(a){for(var b,c=Polymer.dom(a).path,d=0;d<c.indexOf(this);d++)if(b=c[d],b.hasAttribute&&(b.hasAttribute('dialog-dismiss')||b.hasAttribute('dialog-confirm'))){this._updateClosingReasonConfirmed(b.hasAttribute('dialog-confirm')),this.close(),a.stopPropagation();break}}},Polymer.PaperDialogBehavior=[Polymer.IronOverlayBehavior,Polymer.PaperDialogBehaviorImpl];</script>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><!--
+### Styling
+
+The following custom properties and mixins are available for styling.
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--paper-dialog-background-color` | Dialog background color                     | `--primary-background-color`
+`--paper-dialog-color`            | Dialog foreground color                     | `--primary-text-color`
+`--paper-dialog`                  | Mixin applied to the dialog                 | `{}`
+`--paper-dialog-title`            | Mixin applied to the title (`<h2>`) element | `{}`
+`--paper-dialog-button-color`     | Button area foreground color                | `--default-primary-color`
+-->
+
+<dom-module id="paper-dialog-shared-styles" assetpath="../bower_components/paper-dialog-behavior/">
+  <template>
+    <style>:host{display:block;margin:24px 40px;background:var(--paper-dialog-background-color, --primary-background-color);color:var(--paper-dialog-color, --primary-text-color);@apply (--paper-font-body1);@apply (--shadow-elevation-16dp);@apply (--paper-dialog);}:host > ::content > *{margin-top:20px;padding:0 24px;}:host > ::content > .no-padding{padding:0;}:host > ::content > *:first-child{margin-top:24px;}:host > ::content > *:last-child{margin-bottom:24px;}:host > ::content h2{position:relative;margin:0;@apply (--paper-font-title);@apply (--paper-dialog-title);}:host > ::content .buttons{position:relative;padding:8px 8px 8px 24px;margin:0;color:var(--paper-dialog-button-color, --primary-color);@apply (--layout-horizontal);@apply (--layout-end-justified);}</style>
+  </template>
+</dom-module>
+<!--
+Material design: [Dialogs](https://www.google.com/design/spec/components/dialogs.html)
+
+`<paper-dialog>` is a dialog with Material Design styling and optional animations when it is
+opened or closed. It provides styles for a header, content area, and an action area for buttons.
+You can use the `<paper-dialog-scrollable>` element (in its own repository) if you need a scrolling
+content area. To autofocus a specific child element after opening the dialog, give it the `autofocus`
+attribute. See `Polymer.PaperDialogBehavior` and `Polymer.IronOverlayBehavior` for specifics.
+
+For example, the following code implements a dialog with a header, scrolling content area and
+buttons. Focus will be given to the `dialog-confirm` button when the dialog is opened.
+
+    <paper-dialog>
+      <h2>Header</h2>
+      <paper-dialog-scrollable>
+        Lorem ipsum...
+      </paper-dialog-scrollable>
+      <div class="buttons">
+        <paper-button dialog-dismiss>Cancel</paper-button>
+        <paper-button dialog-confirm autofocus>Accept</paper-button>
+      </div>
+    </paper-dialog>
+
+### Styling
+
+See the docs for `Polymer.PaperDialogBehavior` for the custom properties available for styling
+this element.
+
+### Animations
+
+Set the `entry-animation` and/or `exit-animation` attributes to add an animation when the dialog
+is opened or closed. See the documentation in
+[PolymerElements/neon-animation](https://github.com/PolymerElements/neon-animation) for more info.
+
+For example:
+
+    <link rel="import" href="components/neon-animation/animations/scale-up-animation.html">
+    <link rel="import" href="components/neon-animation/animations/fade-out-animation.html">
+
+    <paper-dialog entry-animation="scale-up-animation"
+                  exit-animation="fade-out-animation">
+      <h2>Header</h2>
+      <div>Dialog body</div>
+    </paper-dialog>
+
+### Accessibility
+
+See the docs for `Polymer.PaperDialogBehavior` for accessibility features implemented by this
+element.
+
+@group Paper Elements
+@element paper-dialog
+@hero hero.svg
+@demo demo/index.html
+-->
+
+<dom-module id="paper-dialog" assetpath="../bower_components/paper-dialog/">
+  <template>
+    <style include="paper-dialog-shared-styles"></style>
+    <content></content>
+  </template>
+</dom-module>
+
+<script>(function(){Polymer({is:'paper-dialog',behaviors:[Polymer.PaperDialogBehavior,Polymer.NeonAnimationRunnerBehavior],listeners:{"neon-animation-finish":'_onNeonAnimationFinish'},_renderOpened:function(){this.cancelAnimation(),this.playAnimation('entry')},_renderClosed:function(){this.cancelAnimation(),this.playAnimation('exit')},_onNeonAnimationFinish:function(){this.opened?this._finishRenderOpened():this._finishRenderClosed()}})})();</script>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><!--
+`iron-autogrow-textarea` is an element containing a textarea that grows in height as more
+lines of input are entered. Unless an explicit height or the `maxRows` property is set, it will
+never scroll.
+
+Example:
+
+    <iron-autogrow-textarea></iron-autogrow-textarea>
+
+### Styling
+
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--iron-autogrow-textarea` | Mixin applied to the textarea | `{}`
+`--iron-autogrow-textarea-placeholder` | Mixin applied to the textarea placeholder | `{}`
+
+@group Iron Elements
+@hero hero.svg
+@demo demo/index.html
+-->
+
+<dom-module id="iron-autogrow-textarea" assetpath="../bower_components/iron-autogrow-textarea/">
+  <template>
+    <style>:host{display:inline-block;position:relative;width:400px;border:1px solid;padding:2px;-moz-appearance:textarea;-webkit-appearance:textarea;overflow:hidden;}.mirror-text{visibility:hidden;word-wrap:break-word;}.fit{@apply (--layout-fit);}textarea{position:relative;outline:none;border:none;resize:none;background:inherit;color:inherit;width:100%;height:100%;font-size:inherit;font-family:inherit;line-height:inherit;text-align:inherit;@apply (--iron-autogrow-textarea);}::content textarea:invalid{box-shadow:none;}textarea::-webkit-input-placeholder{@apply (--iron-autogrow-textarea-placeholder);}textarea:-moz-placeholder{@apply (--iron-autogrow-textarea-placeholder);}textarea::-moz-placeholder{@apply (--iron-autogrow-textarea-placeholder);}textarea:-ms-input-placeholder{@apply (--iron-autogrow-textarea-placeholder);}</style>
+
+    <!-- the mirror sizes the input/textarea so it grows with typing -->
+    <!-- use &#160; instead &nbsp; of to allow this element to be used in XHTML -->
+    <div id="mirror" class="mirror-text" aria-hidden="true">&nbsp;</div>
+
+    <!-- size the input/textarea with a div, because the textarea has intrinsic size in ff -->
+    <div class="textarea-container fit">
+      <textarea id="textarea" name$="[[name]]" autocomplete$="[[autocomplete]]" autofocus$="[[autofocus]]" inputmode$="[[inputmode]]" placeholder$="[[placeholder]]" readonly$="[[readonly]]" required$="[[required]]" disabled$="[[disabled]]" rows$="[[rows]]" minlength$="[[minlength]]" maxlength$="[[maxlength]]"></textarea>
+    </div>
+  </template>
+</dom-module>
+
+<script>Polymer({is:'iron-autogrow-textarea',behaviors:[Polymer.IronFormElementBehavior,Polymer.IronValidatableBehavior,Polymer.IronControlState],properties:{bindValue:{observer:'_bindValueChanged',type:String},rows:{type:Number,value:1,observer:'_updateCached'},maxRows:{type:Number,value:0,observer:'_updateCached'},autocomplete:{type:String,value:'off'},autofocus:{type:Boolean,value:!1},inputmode:{type:String},placeholder:{type:String},readonly:{type:String},required:{type:Boolean},minlength:{type:Number},maxlength:{type:Number}},listeners:{input:'_onInput'},observers:['_onValueChanged(value)'],get textarea(){return this.$.textarea},get selectionStart(){return this.$.textarea.selectionStart},get selectionEnd(){return this.$.textarea.selectionEnd},set selectionStart(a){this.$.textarea.selectionStart=a},set selectionEnd(a){this.$.textarea.selectionEnd=a},validate:function(){if(!this.required&&''==this.value)return this.invalid=!1,!0;var a;return this.hasValidator()?a=Polymer.IronValidatableBehavior.validate.call(this,this.value):(a=this.$.textarea.validity.valid,this.invalid=!a),this.fire('iron-input-validate'),a},_bindValueChanged:function(){var a=this.textarea;a&&(a.value!==this.bindValue&&(a.value=this.bindValue||0===this.bindValue?this.bindValue:''),this.value=this.bindValue,this.$.mirror.innerHTML=this._valueForMirror(),this.fire('bind-value-changed',{value:this.bindValue}))},_onInput:function(a){this.bindValue=a.path?a.path[0].value:a.target.value},_constrain:function(a){var b;for(a=a||[''],b=0<this.maxRows&&a.length>this.maxRows?a.slice(0,this.maxRows):a.slice(0);0<this.rows&&b.length<this.rows;)b.push('');return b.join('<br/>')+'&#160;'},_valueForMirror:function(){var a=this.textarea;if(a)return this.tokens=a&&a.value?a.value.replace(/&/gm,'&amp;').replace(/"/gm,'&quot;').replace(/'/gm,'&#39;').replace(/</gm,'&lt;').replace(/>/gm,'&gt;').split('\n'):[''],this._constrain(this.tokens)},_updateCached:function(){this.$.mirror.innerHTML=this._constrain(this.tokens)},_onValueChanged:function(){this.bindValue=this.value}});</script>
+<!--
+`<paper-textarea>` is a multi-line text field with Material Design styling.
+
+    <paper-textarea label="Textarea label"></paper-textarea>
+
+See `Polymer.PaperInputBehavior` for more API docs.
+
+### Validation
+
+Currently only `required` and `maxlength` validation is supported.
+
+### Styling
+
+See `Polymer.PaperInputContainer` for a list of custom properties used to
+style this element.
+-->
+
+<dom-module id="paper-textarea" assetpath="../bower_components/paper-input/">
+  <template>
+    <style>:host{display:block;}:host([hidden]){display:none !important;}label{pointer-events:none;}</style>
+
+    <paper-input-container no-label-float$="[[noLabelFloat]]" always-float-label="[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]]" auto-validate$="[[autoValidate]]" disabled$="[[disabled]]" invalid="[[invalid]]">
+
+      <label hidden$="[[!label]]" aria-hidden="true">[[label]]</label>
+
+      <iron-autogrow-textarea id="input" class="paper-input-input" bind-value="{{value}}" invalid="{{invalid}}" disabled$="[[disabled]]" autocomplete$="[[autocomplete]]" autofocus$="[[autofocus]]" inputmode$="[[inputmode]]" name$="[[name]]" placeholder$="[[placeholder]]" readonly$="[[readonly]]" required$="[[required]]" minlength$="[[minlength]]" maxlength$="[[maxlength]]" autocapitalize$="[[autocapitalize]]" rows$="[[rows]]" max-rows$="[[maxRows]]" on-change="_onChange"></iron-autogrow-textarea>
+
+      <template is="dom-if" if="[[errorMessage]]">
+        <paper-input-error>[[errorMessage]]</paper-input-error>
+      </template>
+
+      <template is="dom-if" if="[[charCounter]]">
+        <paper-input-char-counter></paper-input-char-counter>
+      </template>
+
+    </paper-input-container>
+  </template>
+</dom-module>
+
+<script>Polymer({is:'paper-textarea',behaviors:[Polymer.PaperInputBehavior,Polymer.IronFormElementBehavior],properties:{_ariaLabelledBy:{observer:'_ariaLabelledByChanged',type:String},_ariaDescribedBy:{observer:'_ariaDescribedByChanged',type:String},rows:{type:Number,value:1},maxRows:{type:Number,value:0}},_ariaLabelledByChanged:function(a){this.$.input.textarea.setAttribute('aria-labelledby',a)},_ariaDescribedByChanged:function(a){this.$.input.textarea.setAttribute('aria-describedby',a)},get _focusableElement(){return this.$.input.textarea}});</script>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><!--
+Element access to Web Storage API (window.localStorage).
+
+Keeps `value` property in sync with localStorage.
+
+Value is saved as json by default.
+
+### Usage:
+
+`ls-sample` will automatically save changes to its value.
+
+    <dom-module id="ls-sample">
+      <iron-localstorage name="my-app-storage"
+        value="{{cartoon}}"
+        on-iron-localstorage-load-empty="initializeDefaultCartoon"
+      ></iron-localstorage>
+    </dom-module>
+
+    <script>
+      Polymer({
+        is: 'ls-sample',
+        properties: {
+          cartoon: {
+            type: Object
+          }
+        },
+        // initializes default if nothing has been stored
+        initializeDefaultCartoon: function() {
+          this.cartoon = {
+            name: "Mickey",
+            hasEars: true
+          }
+        },
+        // use path set api to propagate changes to localstorage
+        makeModifications: function() {
+          this.set('cartoon.name', "Minions");
+          this.set('cartoon.hasEars', false);
+        }
+      });
+    </script>
+
+### Tech notes:
+
+* * `value.*` is observed, and saved on modifications. You must use
+    path change notification methods such as `set()` to modify value
+    for changes to be observed.
+
+* * Set `auto-save-disabled` to prevent automatic saving.
+
+* * Value is saved as JSON by default.
+
+* * To delete a key, set value to null
+
+* Element listens to StorageAPI `storage` event, and will reload upon receiving it.
+
+* **Warning**: do not bind value to sub-properties until Polymer
+[bug 1550](https://github.com/Polymer/polymer/issues/1550)
+is resolved. Local storage will be blown away.
+`<iron-localstorage value="{{foo.bar}}"` will cause **data loss**.
+
+@demo demo/index.html
+@hero hero.svg
+-->
+<dom-module id="iron-localstorage" assetpath="../bower_components/iron-localstorage/"></dom-module>
+<script>Polymer({is:'iron-localstorage',properties:{name:{type:String,value:''},value:{type:Object,notify:!0},useRaw:{type:Boolean,value:!1},autoSaveDisabled:{type:Boolean,value:!1},errorMessage:{type:String,notify:!0},_loaded:{type:Boolean,value:!1}},observers:['_debounceReload(name,useRaw)','_trySaveValue(autoSaveDisabled)','_trySaveValue(value.*)'],ready:function(){this._boundHandleStorage=this._handleStorage.bind(this)},attached:function(){window.addEventListener('storage',this._boundHandleStorage)},detached:function(){window.removeEventListener('storage',this._boundHandleStorage)},_handleStorage:function(a){a.key==this.name&&this._load(!0)},_trySaveValue:function(){this._doNotSave||this._loaded&&!this.autoSaveDisabled&&this.debounce('save',this.save)},_debounceReload:function(){this.debounce('reload',this.reload)},reload:function(){this._loaded=!1,this._load()},_load:function(a){try{var b=window.localStorage.getItem(this.name)}catch(a){this.errorMessage=a.message,this._error('Could not save to localStorage.  Try enabling cookies for this page.',a)}if(null===b)this._loaded=!0,this._doNotSave=!0,this.value=null,this._doNotSave=!1,this.fire('iron-localstorage-load-empty',{externalChange:a});else{if(!this.useRaw)try{b=JSON.parse(b)}catch(a){this.errorMessage='Could not parse local storage value',Polymer.Base._error('could not parse local storage value',b),b=null}this._loaded=!0,this._doNotSave=!0,this.value=b,this._doNotSave=!1,this.fire('iron-localstorage-load',{externalChange:a})}},save:function(){var a=this.useRaw?this.value:JSON.stringify(this.value);try{null===this.value||this.value===void 0?window.localStorage.removeItem(this.name):window.localStorage.setItem(this.name,a)}catch(a){this.errorMessage=a.message,Polymer.Base._error('Could not save to localStorage. Incognito mode may be blocking this action',a)}}});</script>
+<!-- <link rel="import" href="../bower_components/iron-a11y-keys/iron-a11y-keys.html"> -->
+<dom-module id="ym-login" attributes="csrfHeader"> <template>
+<style is="custom-style">*{box-sizing:border-box;}host:{font:16px/1.5 Garamond,'Open Sans',"Helvetica",Arial;};body{font-family:'Roboto',Garamond,'Open Sans',"Helvetica",Arial;background:#eee;-webkit-font-smoothing:antialiased;}hgroup{text-align:center;}h1, h3{font-weight:300;font-family:Garamond,'Open Sans',"Helvetica",Arial;}h1{color:#636363;}h3{color:#4a89dc;}form{padding:3em 2em 1em 2em;background:#fafafa;border:1px solid #ebebeb;box-shadow:rgba(0,0,0,0.14902) 0px 1px 1px 0px,rgba(0,0,0,0.09804) 0px 1px 2px 0px;}@media (min-width: 468px){form{width:380px;}}.group{position:relative;margin-bottom:20px;}input{font-size:18px;padding:10px 10px 10px 5px;-webkit-appearance:none;display:block;background:#fafafa;color:#636363;width:100%;border:none;border-radius:0;border-bottom:1px solid #757575;}input:focus{outline:none;}label{color:#999;font-size:18px;font-weight:normal;position:absolute;pointer-events:none;left:5px;top:10px;transition:all 0.2s ease;}input:focus ~ label, input.used ~ label{top:-20px;transform:scale(.75);left:-2px;color:#4a89dc;}.bar{position:relative;display:block;width:100%;}.bar:before, .bar:after{content:'';height:2px;width:0;bottom:1px;position:absolute;background:#4a89dc;transition:all 0.2s ease;}.bar:before{left:50%;}.bar:after{right:50%;}input:focus ~ .bar:before, input:focus ~ .bar:after{width:50%;}.highlight{position:absolute;height:60%;width:100px;top:25%;left:0;pointer-events:none;opacity:0.5;}input:focus ~ .highlight{animation:inputHighlighter 0.3s ease;}@keyframes inputHighlighter{from{background:#4a89dc;}to{width:0;background:transparent;}}.button{position:relative;display:inline-block;padding:12px 24px;margin:.3em 0 0 0;width:100%;vertical-align:middle;color:#fff;font-size:16px;line-height:20px;-webkit-font-smoothing:antialiased;text-align:center;letter-spacing:1px;background:transparent;border:0;border-bottom:2px solid #3160B6;cursor:pointer;transition:all 0.15s ease;}.button:focus{outline:0;}.buttonBlue{background:#4a89dc;text-shadow:1px 1px 0 rgba(39, 110, 204, .5);}.buttonBlue:hover{background:#357bd8;}.ripples{position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;background:transparent;}.ripplesCircle{position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);opacity:0;width:0;height:0;border-radius:50%;background:rgba(255, 255, 255, 0.25);}.ripples.is-active .ripplesCircle{animation:ripples .4s ease-in;}@keyframes ripples{0%{opacity:0;}25%{opacity:1;}100%{width:200%;padding-bottom:200%;opacity:0;}}footer{text-align:center;}footer p{color:#888;font-size:13px;letter-spacing:.4px;}footer a{color:#4a89dc;text-decoration:none;transition:all .2s ease;}footer a:hover{color:#666;text-decoration:underline;}footer img{width:80px;transition:all .2s ease;}footer img:hover{opacity:.83;}footer img:focus , footer a:focus{outline:none;}#closeBtnZone{position:absolute;right:0;top:0;}#errorToast{--paper-toast-background-color:red;}#fgtPwdSentToast{--paper-toast-background-color:green;}#errorToast, #fgtPwdSentToast{--paper-toast-color:white;width:100%;text-align:center;font-weight:bold;}.fbButton{max-width:35px;vertical-align:middle;margin-right:15px;margin-top:10px;}.hidden{display:none;}#pwdfgtForm p{text-align:center;}</style>
+<token-ajax autogo="false" content-type="application/x-www-form-urlencoded" contenttype="application/x-www-form-urlencoded" id="fbLoginRequest" method="post" url="/auth/facebook" on-response="fbLoginResponse" on-error="fbLoginError" token="{{token}}"></token-ajax>
+	
+<app-location route="{{route}}"></app-location>
+
+<app-route route="{{route}}" pattern="/:view" data="{{routeData}}" tail="{{subroute}}"></app-route>
+<div id="ym-loginzone" class="">
+	<div id="closeBtnZone" layout="" horizontal="">
+		<paper-button id="cancelbtn" dialog-dismiss="">X</paper-button>
+		<paper-toast id="errorToast" text="Login error!"></paper-toast>
+		<paper-toast id="fgtPwdSentToast" text="{{localize('toast.pwdLinkSent')}}"></paper-toast>
+	</div>
+	<hgroup>
+		<h1>{{localize('btn.login.short')}}</h1>
+		<h3>{{localize('login.title')}}</h3>
+	</hgroup>
+<!-- 	<iron-a11y-keys keys="enter" on-keys-pressed="login"></iron-a11y-keys> -->
+	
+<!-- 
+	<form is="iron-form" id="credFb" method="POST" action="/auth/facebook">
+			<input type="hidden" name="scope" value="email,public_profile,user_birthday" />
+			<input type="hidden" name="redirect_uri" value="/dashboard" />
+			<paper-button raised class="button buttonBlue" on-click="loginFacebook">Sign in with Facebook</paper-button>
+	        <button hidden="true"></button>
+	</form>
+-->
+	<div id="credZone">
+		<form action="/auth/facebook" method="POST" id="fbForm">
+			<paper-button raised="" class="button buttonBlue " on-click="loginFacebook">
+				{{localize('btn.login.facebook')}}
+				<img class="fbButton" src="/resources/images/facebook_circle-128.png" alt="{{localize('alt.login.facebook')}}">
+			</paper-button>
+			<input type="hidden" name="scope" value="email,public_profile,user_birthday">
+			<input type="hidden" name="redirect_uri" value="/dashboard">
+		</form>
+<!-- 	<h3>Connect to Facebook</h3> -->
+<!-- 		<a href="/auth/facebook"><button>Login with Facebook</button></a> -->
+<!-- 		<form action="/connect/facebook" method="POST"> -->
+<!-- 			<input type="hidden" name="scope" value="user_posts,email" /> -->
+<!-- 			<div class="formInfo"> -->
+<!-- 				<p>You aren't connected to Facebook yet. Click the button to connect this application with your Facebook account.</p> -->
+<!-- 			</div> -->
+<!-- 			<p><button type="submit">Connect to Facebook</button></p> -->
+<!-- 		</form> -->
+
+		<form is="iron-form" id="cred" method="post" action="/auth/login">
+			<div class="group">
+				<paper-input label="{{localize('label.email')}}" value="{{username}}" name="username"></paper-input>
+			</div>
+			<div class="group">
+				<paper-input label="{{localize('label.pwd')}}" type="password" value="{{password}}" name="password"></paper-input>
+			</div>
+			<paper-button raised="" class="button buttonBlue" on-click="login">{{localize('btn.login.short')}}</paper-button>
+		        <button hidden="true"></button>
+		
+		</form>
+	</div>
+	<form is="iron-form" class="hidden" id="pwdfgtForm" method="post" action="/forgottenPwd">
+		<div>
+			<p>{{localize('txt.forgotPwd')}}</p>
+		</div>
+		<div class="group">
+			<paper-input label="{{localize('label.email')}}" value="{{username}}" name="username"></paper-input>
+		</div>
+		<paper-button raised="" class="button buttonBlue" on-click="sendFgtInvite">{{localize('btn.resetPwd')}}</paper-button>
+	        <button hidden="true"></button>
+	
+	</form>
+	<footer>
+		<h3>{{localize('login.noaccount')}} <a href="#" onclick="goSubscribe()">{{localize('login.subscribe')}}</a></h3>
+		<h3 id="pwdForgottenZone">{{localize('login.forgotpwd')}} <a href="#" on-tap="goForgottenPwd">{{localize('login.forgotpwdclick')}}</a></h3>
+		<h3 id="alreadyMemberZone" class="hidden">{{localize('login.alreadymember')}} <a href="#" on-tap="goAlreadyMember">{{localize('login.forgotpwdclick')}}</a></h3>
+		<img src="/resources/images/logo_yesmarried.png" alt="{{localize('alt.logo')}}">
+		<p>
+			{{localize('login.slogan')}}
+		</p>
+	</footer>
+</div>
+
+</template> <script>function goSubscribe(){document.location.href='/subscribe'}Polymer({is:'ym-login',attached:function(){this.loadResources(this.resolveUrl('../data/locales_home.json?v=1.2'))},behaviors:[Polymer.NeonAnimatableBehavior,Polymer.AppLocalizeBehavior],properties:{username:String,password:String,csrfHeader:String,route:{type:String,notify:!0},token:{type:String,notify:!0}},listeners:{"iron-form-response":'_handleLoginSuccess',"iron-form-error":'_handleLoginError'},created:function(){},login:function(){this.$.cred.submit()},sendFgtInvite:function(){this.$.pwdfgtForm.submit()},loginFacebook:function(){this.$$('#fbForm').submit()},goForgottenPwd:function(){this.$$('#alreadyMemberZone').classList.remove('hidden'),this.$$('#pwdfgtForm').classList.remove('hidden'),this.$$('#pwdForgottenZone').classList.contains('hidden')||this.$$('#pwdForgottenZone').classList.add('hidden'),this.$$('#credZone').classList.contains('hidden')||this.$$('#credZone').classList.add('hidden')},goAlreadyMember:function(){this.$$('#pwdForgottenZone').classList.remove('hidden'),this.$$('#credZone').classList.remove('hidden'),this.$$('#alreadyMemberZone').classList.contains('hidden')||this.$$('#alreadyMemberZone').classList.add('hidden'),this.$$('#pwdfgtForm').classList.contains('hidden')||this.$$('#pwdfgtForm').classList.add('hidden')},_handleLoginSuccess:function(a){if('/forgottenPwd'==a.detail.url)this.$.fgtPwdSentToast.show(),this.goAlreadyMember();else{this.token=a.detail.xhr.getResponseHeader('x-auth-token');var b=a.detail.xhr.getResponseHeader('x-auth-usertype');'SUPERADMIN'==b?document.location.href='/admin':'MARRIED'==b?document.location.href='/dashboard':'USER'==b?document.location.href='/company':'SALES'==b&&(document.location.href='/adminSales')}},_handleLoginError:function(a){this.$.errorToast.text='/forgottenPwd'==a.detail.url?this.localize('error.wrong.email'):this.localize('error.wrong.password'),this.$.errorToast.show()}});</script> </dom-module>
+
+
+
+
+<!--
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><!--
+`iron-media-query` can be used to data bind to a CSS media query.
+The `query` property is a bare CSS media query.
+The `query-matches` property is a boolean representing whether the page matches that media query.
+
+Example:
+
+    <iron-media-query query="(min-width: 600px)" query-matches="{{queryMatches}}"></iron-media-query>
+
+@group Iron Elements
+@demo demo/index.html
+@hero hero.svg
+@element iron-media-query
+-->
+
+<script>Polymer({is:'iron-media-query',properties:{queryMatches:{type:Boolean,value:!1,readOnly:!0,notify:!0},query:{type:String,observer:'queryChanged'},full:{type:Boolean,value:!1},_boundMQHandler:{value:function(){return this.queryHandler.bind(this)}},_mq:{value:null}},attached:function(){this.style.display='none',this.queryChanged()},detached:function(){this._remove()},_add:function(){this._mq&&this._mq.addListener(this._boundMQHandler)},_remove:function(){this._mq&&this._mq.removeListener(this._boundMQHandler),this._mq=null},queryChanged:function(){this._remove();var a=this.query;a&&(!this.full&&'('!==a[0]&&(a='('+a+')'),this._mq=window.matchMedia(a),this._add(),this.queryHandler(this._mq))},queryHandler:function(a){this._setQueryMatches(a.matches)}});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script> 
+<!--<script src="../../../bower_components/jquery/dist/jquery.min.js"></script>-->
+
+<dom-module id="sticky-button" attributes="csrfHeader" assetpath="lib/sticky-button/"> <template>
+<style is="custom-style" include="iron-flex iron-flex-alignment">font-family:Garamond,'Open Sans',"Helvetica",Arial;.go-top{position:fixed;top:10em;right:10px;text-decoration:none;color:white;background-color:rgba(0, 0, 0, 0.3);font-size:16px;padding:1em;-webkit-transform:rotate(270deg);-moz-transform:rotate(270deg);-ms-transform:rotate(270deg);-o-transform:rotate(270deg);transform:rotate(270deg);}.go-top:hover{background-color:rgba(0, 0, 0, 0.6);}</style>
+<app-location route="{{route}}"></app-location>
+
+<app-route route="{{route}}" pattern="/:view" data="{{routeData}}" tail="{{subroute}}"></app-route>
+
+	<a href="#" class="go-top" on-tap="_showBox">Contact</a>
+	
+	<paper-dialog id="contactBox" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+		 <content></content>
+	</paper-dialog>
+</template> <script>Polymer({is:'sticky-button',behaviors:[Polymer.AppLocalizeBehavior],properties:{language:{value:function(){var a=sessionStorage.getItem('ym-lang');return null==a&&(a=navigator.language.split('-')[0]),'fr'===a||'nl'===a?(sessionStorage.setItem('ym-lang',a),a):(sessionStorage.setItem('ym-lang','en'),'en')},type:String,notify:!0}},ready:function(){var a=Polymer.dom(this.root).querySelector('.go-top'),b=Polymer.dom(this.root).querySelector('html, body');$(a).click(function(a){a.preventDefault(),$(b).animate({scrollTop:0},300)})},_showBox:function(){this.$.contactBox.open()},_closeBox:function(){this.$.contactBox.close()}});</script> </dom-module></div><dom-module id="ym-home" attributes="csrfHeader"> <template>
+<style is="custom-style" include="iron-flex iron-flex-alignment">:host{height:99%;}body, html{height:99%;}section.home{height:19%;}.video-text{min-height:80%;margin:0 auto;text-align:center;}paper-button.green{background-color:rgba(228, 162, 162, 0.67);color:white;margin-top:5px;}paper-button.custom{--paper-button-ink-color:var(--paper-pink-a200);--paper-button-flat-keyboard-focus:{background-color:var(--paper-pink-a200);color:white !important;};--paper-button-raised-keyboard-focus:{background-color:#aa3e3e !important;color:white !important;};}paper-button.custom:hover{background-color:#aa3e3e;}header{height:20%;}.container-fluid{padding-top:30px;}.red{text-align:center;color:red;font-size:24px;font-family:'Roboto', 'Noto', sans-serif;}video#bgvid{position:fixed;top:50%;left:50%;min-height:100%;z-index:-100;-ms-transform:translateX(-50%) translateY(-50%);-moz-transform:translateX(-50%) translateY(-50%);-webkit-transform:translateX(-50%) translateY(-50%);transform:translateX(-50%) translateY(-50%);background:url(../images/yesmarried_video.png) no-repeat;background-size:cover;}.video-text{@apply (--layout-vertical);@apply (--layout-end-justified);}paper-button a{text-decoration:none;color:white;}#subscribeBox{background-color:white;padding:20px;}paper-toast{--paper-toast-color:white;width:100%;text-align:center;font-weight:bold;}#pwdResetErrorToast{--paper-toast-background-color:red;}#pwdResetSuccessToast{--paper-toast-background-color:green;}#forgotPwdBox{margin:0 auto;}#closeBtnZone{position:absolute;right:0;top:0;}hgroup{text-align:center;}h1, h3{font-weight:300;font-family:Garamond,'Open Sans',"Helvetica",Arial;}h1{color:#636363;}h3{color:#4a89dc;}form{padding:3em 2em 1em 2em;background:#fafafa;}footer{margin-top:30px;text-align:center;}#credZone paper-button{margin-top:15px;}.semiButton{width:50%;}</style>
+
+<token-ajax autogo="false" id="pwdAjax" method="post" url="/resetPwd" on-response="_pwdResetResponse" on-error="_pwdResetError" token="{{token}}"></token-ajax>
+<token-ajax id="contactAjax" token="{{token}}" url="/api/contact?lang={{language}}" method="POST" handle-as="json" autogo="false" on-response="contactResponse" on-error="contactError" contenttype="application/json" headers="{&quot;content-type&quot;:&quot;application/json;charset=utf-8&quot;}" debounce-duration="300">
+</token-ajax>
+<paper-toast id="contactSuccessToast" text="{{localize('contact.success')}}"></paper-toast>
+<paper-toast id="pwdResetErrorToast" text="{{localize('resetPwd.nomatch')}}"></paper-toast>
+<paper-toast id="pwdResetSuccessToast" text="{{localize('resetPwd.success')}}"></paper-toast>
+
+<app-location route="{{currRoute}}"></app-location>
+
+ <iron-media-query query="max-width: 512px" query-matches="{{smallScreen}}"></iron-media-query>
+
+		<!-- 	<header> -->
+		<section class="home"> 
+			<video poster="" id="bgvid" autoplay="" muted="" loop="" width="100%">
+				<source id="videoSrc" src="" type="video/mp4">
+			</video>
+		
+			<div class="container-fluid">
+				<div class="logo">
+					<img src="/resources/images/logo_yesmarried.png">
+				</div>
+		
+			</div>
+		</section>
+	<!-- 	</header>  -->
+		
+	<paper-dialog id="loginBox" entry-animation="scale-up-animation" exit-animation="fade-out-animation" modal="true">
+	  <ym-login language="{{language}}" token="{{token}}" csrfheader="{{csrfHeader}}"></ym-login>
+	</paper-dialog>
+	<paper-dialog id="forgotPwdBox" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+	 <h2>{{localize('forgotPwd.title')}}</h2>
+  		<div>
+  			<form is="iron-form" id="resetPwdForm" method="post" action="/resetPwd">
+				<paper-input label="{{localize('label.pwd')}}" type="password" value="" name="newPwd" id="newPwd"></paper-input>
+				<paper-input label="{{localize('label.confpwd')}}" type="password" value="" name="repeatNewPwd" id="repeatNewPwd"></paper-input>
+	  		</form>
+			<paper-button raised="" class="button buttonBlue" on-click="_resetPwd">{{localize('btn.resetPwd')}}</paper-button>
+  		</div>
+	</paper-dialog>
+	<paper-dialog id="subscribeBox" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+	 <h2>{{localize('subscribed.welcome')}}</h2>
+  		<p>{{localize('subscribed.congratz')}}</p>
+	</paper-dialog>
+	<paper-dialog id="subscribeConfBox" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+	 <h2>{{localize('subscribed.welcome')}}</h2>
+  		<p>{{localize('activated.congratz')}}</p>
+	</paper-dialog>
+	<!-- 	<footer> -->
+			<div class="video-text">
+				<p class="red">{{localize('footer.title')}}</p>
+				<div class="layout horizontal">
+					<paper-button on-tap="_moveToPlatform" raised="" class="green custom semiButton"> 
+						<iron-icon icon="file-download"></iron-icon>{{localize('btn.platform')}}
+					</paper-button>
+					<paper-button on-tap="_moveToCompany" raised="" class="green custom semiButton"> 
+						<iron-icon icon="file-download"></iron-icon>{{localize('btn.company')}}
+					</paper-button>
+				</div>
+				<paper-button raised="" class="green custom"> 
+					<a href="/subscribe"><iron-icon icon="file-download"></iron-icon>{{localize('btn.subscribe')}}</a>
+				</paper-button>
+				<paper-button raised="" class="green custom" on-tap="_showLogin"> <iron-icon icon="file-download"></iron-icon>{{localize('btn.login')}}</paper-button>
+			</div>
+    <iron-localstorage name="token" value="{{token}}"></iron-localstorage>
+    
+    <sticky-button id="stickyContact">
+    	<div id="ym-loginzone" class="">
+		<div id="closeBtnZone" layout="" horizontal="">
+			<paper-button id="cancelbtn" dialog-dismiss="">X</paper-button>
+			<paper-toast id="errorToast" text="Login error!"></paper-toast>
+			<paper-toast id="fgtPwdSentToast" text="{{localize('toast.pwdLinkSent')}}"></paper-toast>
+		</div>
+		<hgroup>
+			<h1>{{localize('contact.title')}}</h1>
+			<h3>{{localize('contact.descr')}}</h3>
+		</hgroup>
+<!-- 		<iron-a11y-keys keys="enter" on-keys-pressed="login"></iron-a11y-keys> -->
+		
+		<div id="credZone">
+			<form is="iron-form" id="contactForm">
+				<div class="group">
+				<paper-input label="{{localize('label.email')}}" value="" name="mail"></paper-input>
+
+				<paper-textarea label="Message" id="message" value="" name="message"></paper-textarea>
+				</div>
+				<paper-button raised="" class="button buttonBlue" on-click="_sendContact">{{localize('btn.contact')}}</paper-button>
+			        <button hidden="true"></button>
+			
+			</form>
+		</div>
+		<footer>
+			<img src="/resources/images/logo_yesmarried.png" alt="{{localize('alt.logo')}}">
+			<p>
+				{{localize('login.slogan')}}
+			</p>
+		</footer>
+	</div>
+    </sticky-button>
+</template> <script>Polymer({is:'ym-home',properties:{csrfHeader:{type:String},currRoute:String,token:{type:String,notify:!0,value:''},language:{type:String,notify:!0,reflectToAttribute:!0,observer:'_languageUpdated'},shouldShowVideo:{computed:'_computeShouldShowVideo(smallScreen)',observer:'_screenSizedChanged'}},attached:function(){this.loadResources(this.resolveUrl('../data/locales_home.json?v=1.2'))},behaviors:[Polymer.NeonAnimatableBehavior,Polymer.AppLocalizeBehavior],ready:function(){this.currRoute!=void 0&&'/login'==this.currRoute.path&&this.$.loginBox.open(),this.currRoute!=void 0&&'/subscribed'==this.currRoute.path&&this.$.subscribeBox.open(),this.currRoute!=void 0&&'/subscribeConfirmed'==this.currRoute.path&&this.$.subscribeConfBox.open(),this.currRoute!=void 0&&'/prepareForgottenPasswordReset'==this.currRoute.path&&this.$.forgotPwdBox.open()},_moveToPlatform:function(){document.location.href='/partners'},_showLogin:function(){this.$.loginBox.open()},_languageUpdated:function(a){null!=this.shouldShowVideo&&this.shouldShowVideo&&this.async(function(){this.$.videoSrc.src='/video/yesmarried_presentation_'+a+'.mp4',this.$.bgvid.load()})},_computeShouldShowVideo:function(a){return!a},_screenSizedChanged:function(){this._languageUpdated(this.language)},_resetPwd:function(){if(this.$$('#repeatNewPwd').value==this.$$('#newPwd').value){var a=this.$.resetPwdForm.serialize();this.$.pwdAjax.body=JSON.stringify(a),this.$.pwdAjax.go()}else this.$.pwdResetErrorToast.text=this.localize('resetPwd.nomatch'),this.$.pwdResetErrorToast.show()},_pwdResetResponse:function(){this.$.pwdResetSuccessToast.show(),this.$.forgotPwdBox.close(),this.$.loginBox.open()},_pwdResetError:function(){this.$.pwdResetErrorToast.text=this.localize('resetPwd.error'),this.$.pwdResetErrorToast.show()},_sendContact:function(){var a=this.$.contactForm.serialize();this.$.contactAjax.body=JSON.stringify(a),this.$.contactAjax.go(),this.$.stickyContact._closeBox()},contactResponse:function(){this.$.contactSuccessToast.show(),this.$.stickyContact._closeBox()},contactError:function(a){this.$.errorToast.text=this.localize(a.detail.request.xhr.response),this.$.pwdResetErrorToast.show(),this.$.stickyContact._closeBox()},_moveToCompany:function(){this.set('currRoute.path','/joinus')}});</script> </dom-module></body></html>

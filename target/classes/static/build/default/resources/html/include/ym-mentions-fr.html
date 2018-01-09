@@ -1,0 +1,288 @@
+<html><head><link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/app-localize-behavior/app-localize-behavior.html">
+
+<link rel="import" href="ym-footer.html">
+</head><body><dom-module id="ym-mentions-fr" attributes="csrfHeader"> <template>
+<style is="custom-style">host:{font:16px/1.5 Garamond, 'Open Sans', "Helvetica", Arial;};body{font-family:'Roboto', Garamond, 'Open Sans', "Helvetica", Arial;background:#eee;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;display:block;font-size:18px;font-weight:400;line-height:1.2em;color:#222222;}div{text-align:center;}@import url('https://themes.googleusercontent.com/fonts/css?kit=fpjTOVmNbO4Lz34iLyptLUXza5VhXqVC6o75Eld_V98');ul.lst-kix_64e1v7m3hsdf-5{list-style-type:none;}.lst-kix_ddc3lqf4p6j3-2>li:before{content:"\0025a0  ";}ul.lst-kix_64e1v7m3hsdf-6{list-style-type:none;}ul.lst-kix_64e1v7m3hsdf-3{list-style-type:none;}.lst-kix_ddc3lqf4p6j3-1>li:before{content:"\0025cb  ";}.lst-kix_ddc3lqf4p6j3-3>li:before{content:"\0025cf  ";}ul.lst-kix_64e1v7m3hsdf-4{list-style-type:none;}ul.lst-kix_64e1v7m3hsdf-7{list-style-type:none;}ul.lst-kix_64e1v7m3hsdf-8{list-style-type:none;}.lst-kix_ddc3lqf4p6j3-6>li:before{content:"\0025cf  ";}.lst-kix_ddc3lqf4p6j3-5>li:before{content:"\0025a0  ";}.lst-kix_ddc3lqf4p6j3-7>li:before{content:"\0025cb  ";}.lst-kix_ddc3lqf4p6j3-4>li:before{content:"\0025cb  ";}.lst-kix_ddc3lqf4p6j3-8>li:before{content:"\0025a0  ";}.lst-kix_qdnf015c6ev9-3>li:before{content:"\0025cf  ";}.lst-kix_qdnf015c6ev9-2>li:before{content:"\0025a0  ";}.lst-kix_qdnf015c6ev9-0>li:before{content:"\0025cf  ";}.lst-kix_qdnf015c6ev9-1>li:before{content:"\0025cb  ";}ul.lst-kix_ddc3lqf4p6j3-8{list-style-type:none;}ul.lst-kix_ddc3lqf4p6j3-7{list-style-type:none;}ul.lst-kix_ddc3lqf4p6j3-0{list-style-type:none;width:70%;margin:auto;text-align:center;}ul.lst-kix_ddc3lqf4p6j3-2{list-style-type:none;}ul.lst-kix_ddc3lqf4p6j3-1{list-style-type:none;}ul.lst-kix_ddc3lqf4p6j3-4{list-style-type:none;}ul.lst-kix_ddc3lqf4p6j3-3{list-style-type:none;}ul.lst-kix_ddc3lqf4p6j3-6{list-style-type:none;}ul.lst-kix_ddc3lqf4p6j3-5{list-style-type:none;}ul.lst-kix_qdnf015c6ev9-7{list-style-type:none;}ul.lst-kix_qdnf015c6ev9-8{list-style-type:none;}ul.lst-kix_qdnf015c6ev9-5{list-style-type:none;}.lst-kix_64e1v7m3hsdf-2>li:before{content:"\0025a0  ";}ul.lst-kix_qdnf015c6ev9-6{list-style-type:none;}.lst-kix_64e1v7m3hsdf-3>li:before{content:"\0025cf  ";}ul.lst-kix_qdnf015c6ev9-0{list-style-type:none;}ul.lst-kix_qdnf015c6ev9-3{list-style-type:none;}ul.lst-kix_qdnf015c6ev9-4{list-style-type:none;}ul.lst-kix_qdnf015c6ev9-1{list-style-type:none;}ul.lst-kix_qdnf015c6ev9-2{list-style-type:none;}.lst-kix_64e1v7m3hsdf-1>li:before{content:"\0025cb  ";}.lst-kix_64e1v7m3hsdf-0>li:before{content:"\0025cf  ";}.lst-kix_qdnf015c6ev9-4>li:before{content:"\0025cb  ";}.lst-kix_qdnf015c6ev9-5>li:before{content:"\0025a0  ";}.lst-kix_qdnf015c6ev9-6>li:before{content:"\0025cf  ";}.lst-kix_qdnf015c6ev9-7>li:before{content:"\0025cb  ";}.lst-kix_64e1v7m3hsdf-5>li:before{content:"\0025a0  ";}.lst-kix_64e1v7m3hsdf-4>li:before{content:"\0025cb  ";}.lst-kix_64e1v7m3hsdf-6>li:before{content:"\0025cf  ";}.lst-kix_qdnf015c6ev9-8>li:before{content:"\0025a0  ";}ul.lst-kix_64e1v7m3hsdf-1{list-style-type:none;}ul.lst-kix_64e1v7m3hsdf-2{list-style-type:none;}ul.lst-kix_64e1v7m3hsdf-0{list-style-type:none;}.lst-kix_64e1v7m3hsdf-8>li:before{content:"\0025a0  ";}.lst-kix_64e1v7m3hsdf-7>li:before{content:"\0025cb  ";}ol{margin:0;padding:0;}table td,table th{padding:0;}.c5{margin-left:36pt;padding-top:0pt;padding-left:0pt;padding-bottom:17pt;line-height:1.7045454545454546;orphans:2;widows:2;}.c0{margin-left:55pt;padding-top:0pt;padding-left:0pt;padding-bottom:6pt;line-height:1.15;orphans:2;widows:2;text-align:centerify;}.c11{padding-top:0pt;padding-bottom:0pt;line-height:1.15;orphans:2;widows:2;text-align:right;height:11pt;}.c21{padding-top:0pt;padding-bottom:0pt;line-height:1.15;orphans:2;widows:2;text-align:left;height:11pt;}.c7{padding-top:0pt;padding-bottom:17pt;line-height:1.7045454545454546;orphans:2;widows:2;text-align:center;}.c6{padding-top:0pt;padding-bottom:0pt;line-height:1.7045454545454546;orphans:2;widows:2;text-align:center;}.c10{color:#e1087b;text-decoration:underline;vertical-align:baseline;font-style:normal;}.c8{font-size:17pt;font-family:"Calibri";color:#454446;font-weight:700;}.c19{padding-top:0pt;padding-bottom:0pt;line-height:1.0;text-align:left;}.c13{padding-top:0pt;padding-bottom:9pt;line-height:1.15;text-align:center;}.c20{color:#222222;font-weight:400;font-size:9.5pt;font-family:"Arial";}.c2{color:#000000;text-decoration:none;vertical-align:baseline;font-style:normal;}.c12{font-weight:400;font-size:11.5pt;font-family:"Calibri";}.c17{font-weight:400;font-size:11pt;font-family:"Arial";}.c14{text-decoration:none;vertical-align:baseline;font-style:normal;}.c1{font-size:12pt;font-family:"Calibri";font-weight:400;}.c4{color:inherit;text-decoration:inherit;}.c15{padding:0;margin:0;}.c16{border:1px solid black;margin:5px;}.c3{color:#1155cc;text-decoration:underline;}.c24{max-width:451.4pt;padding:72pt 72pt 72pt 72pt;}.c23{color:#222222;}.c25{height:11pt;}.c18{color:#e1087b;}.c22{color:#454446;}.c9{background-color:#ffffff;}.title{padding-top:0pt;color:#000000;font-size:26pt;padding-bottom:3pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left;}.subtitle{padding-top:0pt;color:#666666;font-size:15pt;padding-bottom:16pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left;}li{color:#000000;font-size:11pt;font-family:"Arial";}p{margin:0;color:#000000;font-size:11pt;font-family:"Arial";}h1{padding-top:20pt;color:#000000;font-size:20pt;padding-bottom:6pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left;}h2{padding-top:18pt;color:#000000;font-size:16pt;padding-bottom:6pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left;}h3{padding-top:16pt;color:#434343;font-size:14pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left;}h4{padding-top:14pt;color:#666666;font-size:12pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left;}h5{padding-top:12pt;color:#666666;font-size:11pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;orphans:2;widows:2;text-align:left;}h6{padding-top:12pt;color:#666666;font-size:11pt;padding-bottom:4pt;font-family:"Arial";line-height:1.15;page-break-after:avoid;font-style:italic;orphans:2;widows:2;text-align:left;}</style>
+<hr>
+      <template is="dom-if" if="[[_isFrench(language)]]">
+<h2 class="c13" id="h.i1ic5vqizsyi">
+				<span class="c8">Mentions légales Yes Married</span>
+			</h2>
+			<h2 class="c13" id="h.5prppjjmjgwb">
+				<span class="c8">Société INNOVA IT SPRL</span>
+			</h2><p class="c21">
+				<span class="c2 c17">
+			</span></p>
+			<ul class="c15 lst-kix_ddc3lqf4p6j3-0 start">
+				<li class="c5">
+					<span class="c1">Siège social: </span>
+					<span class="c1 c23">Rue des Cayats 37, 6001 Marcinelle </span>
+				</li>
+				<li class="c5">
+					<span class="c1 c22">Email</span>
+					<span class="c1">&nbsp;: </span>
+					<span class="c1 c3">
+						<a class="c4" href="mailto:info@yesmarried.com">info@yesmarried.com</a>
+					</span>
+				</li>
+				<li class="c5">
+					<span class="c1 c22">Site Internet</span>
+					<span class="c1">&nbsp;: </span>
+					<span class="c1 c3">
+						<a class="c4" href="https://www.google.com/url?q=https://www.yesmarried.com/&amp;sa=D&amp;ust=1503180087712000&amp;usg=AFQjCNH8UOAxYH3pJbreeA9-kPnnky8b2g">https://www.yesmarried.com/</a>
+					</span>
+					<span class="c2 c1">&nbsp;</span>
+				</li>
+				<li class="c5">
+					<span class="c1">Numéro d'entreprise: BE</span>
+					<span class="c1 c9 c23">0677.932.208</span>
+				</li>
+				<li class="c5">
+					<span class="c2 c1">Banque : ING</span>
+				</li>
+				<li class="c5">
+					<span class="c1">Numéro de compte IBAN: </span>
+					<span class="c1 c23">BE08 3630 6182 5113</span>
+				</li>
+			</ul><p class="c7">
+				<span class="c1">Le site web </span>
+				<span class="c1 c3">
+					<a class="c4" href="https://www.google.com/url?q=https://www.yesmarried.com&amp;sa=D&amp;ust=1503180087713000&amp;usg=AFQjCNGxg_jFABDijuAsCMH58uio-CPr0w">https://www.yesmarried.com</a>
+				</span>
+				<span class="c1">&nbsp;est exploité et géré par la société </span>
+				<span class="c1 c9">INNOVA IT SPRL</span>
+				<span class="c1">, dont le siège social est situé à Marcinelle, inscrite à la BCE sous le numéro BE</span>
+				<span class="c1 c23 c9">0677.932.208</span>
+				<span class="c1">.</span>
+			</p><p class="c7">
+				<span class="c1">L'utilisateur déclare avoir reçu de Yes Married toutes les informations et tous les conseils nécessaires pour utiliser correctement le site web accessible à l'adresse </span>
+				<span class="c1 c3">
+					<a class="c4" href="https://www.google.com/url?q=https://www.yesmarried.com/&amp;sa=D&amp;ust=1503180087714000&amp;usg=AFQjCNGwUubd3O6IHDeeLqZ2z51nhv-H-w">https://www.yesmarried.com/</a>
+				</span>
+				<span class="c2 c1">&nbsp; (ci-après dénommé « Yes Married » ou “la plateforme”).</span>
+			</p><p class="c7">
+				<span class="c1">Les présentes conditions sont disponibles en permanence sur</span>
+				<span class="c1">&nbsp;</span>
+				<span class="c1 c3">
+					<a class="c4" href="https://www.google.com/url?q=http://www.yesmarried.com&amp;sa=D&amp;ust=1503180087714000&amp;usg=AFQjCNGZgd93aHslnBLTD5UbduuE24R7Aw">www.yesmarried.com</a>
+				</span>
+				<span class="c1">. </span>
+			</p>
+			<h2 class="c13" id="h.ysn6s64ojz69">
+				<span class="c8 c14">Respect de la vie privée</span>
+			</h2><p class="c7">
+				<span class="c2 c1">Les données à caractère personnel que vous nous transmettez sont enregistrées dans les fichiers de INNOVA IT .</span>
+			</p><p class="c7">
+				<span class="c1">Ces données seront traitées et utilisées par INNOVA IT </span>
+				<span class="c1">pour la personnalisation de la publicité sur leurs sites, dans le cadre d'études de marchés et dans le but de mener des campagnes d'informations personnalisées et de promotions concernant des produits et/ou services provenant des partenaires commerciaux</span>
+				<span class="c2 c1">.</span>
+			</p><p class="c7">
+				<span class="c2 c1">INNOVA IT est l’unique propriétaire du fichier et reconnaît l'application de la loi belge du 8 décembre 1992 relative à la protection de la vie privée, telle que modifiée par la loi du 11 décembre 1998 à l'égard du traitement des données personnelles et collectes de données réalisées en Belgique via la plateforme.</span>
+			</p><p class="c7">
+				<span class="c2 c1">Conformément à la loi, vous disposez d'un droit d'accès et de rectification (consulter, supprimer , modifier ou corriger) de vos données sur ce site.</span>
+			</p><p class="c7">
+				<span class="c1">Si vous souhaitez recevoir de telles informations, vous pouvez nous le signaler par e-mail à </span>
+				<span class="c1 c3">
+					<a class="c4" href="mailto:info@yesmarried.com">info@yesmarried.com</a>
+				</span>
+				<span class="c2 c1">. </span>
+			</p><p class="c7">
+				<span class="c2 c1">Yes Married peut mettre fin au service sans préavis, ni droit à une indemnité.</span>
+			</p><p class="c7">
+				<span class="c2 c1">En aucun cas, Yes Married et/ou INNOVA IT ne peuvent être tenu pour responsables de tout dommage direct, indirect ou accidentel résultant d'une utilisation fautive ou abusive des données personnelles par leurs sites.</span>
+			</p><p class="c7">
+				<span class="c1">Yes Married et </span>
+				<span class="c1">INNOVA IT</span>
+				<span class="c2 c1">&nbsp;n’assument aucune responsabilité concernant la politique en matière de vie privée des sites internet vers lesquels notre site établit des hyperliens.</span>
+			</p><p class="c7">
+				<span class="c2 c12">Renseignements: www.privacy.fgov.be</span>
+			</p>
+			<h2 class="c13" id="h.dwyc1pkxdj58">
+				<span class="c8">Conditions d'utilisation</span>
+			</h2><p class="c6">
+				<span class="c1">INNOVA IT</span>
+				<span class="c2 c1">&nbsp;se réserve le droit de modifier à tout moment et sans préavis les conditions d'utilisation de Yes Married. </span>
+			</p><p class="c6">
+				<span class="c1">Afin de bénéficier de toutes les fonctionnalités proposées dans son espace personnel, l'utilisateur devra s'identifier et choisir un nom d'utilisateur (login) et un mot de passe. L'utilisateur reste responsable de la confidentialité de son mot de passe et de toute utilisation qui pourrait survenir à son insu. En cas de doute sur le caractère confidentiel du mot de passe, il appartient à l'utilisateur de le changer et d'en aviser immédiatement, et par écrit, </span>
+				<span class="c1">INNOVA IT</span>
+				<span class="c1">&nbsp;à l'adresse e-mail </span>
+				<span class="c1 c3">
+					<a class="c4" href="mailto:info@uesmarried.com">info@yesmarried.com</a>
+				</span>
+				<span class="c2 c1">. </span>
+			</p><p class="c6">
+				<span class="c2 c1">Il appartient également à l'utilisateur de se doter des moyens humains et informatiques nécessaires afin d'assurer sa connectivité avec le site web. Ainsi, l'utilisateur reste seul responsable des moyens informatiques et humains qu'il jugera utile de mettre en œuvre.</span>
+			</p><p class="c6">
+				<span class="c1">L'accès au site web n'est permis que sous réserve de l'acceptation des présentes conditions générales d'utilisation que </span>
+				<span class="c1">INNOVA IT</span>
+				<span class="c1">&nbsp;ou Yes Married </span>
+				<span class="c2 c1">sera toutefois libre de modifier à tout moment et sans en avertir les utilisateurs.</span>
+			</p><p class="c6">
+				<span class="c1">&nbsp;</span>
+			</p><p class="c6">
+				<span class="c1">En accédant au site web, l'utilisateur accepte de fournir des informations exactes, à jour et complètes et en assurer la mise à jour régulière. Dans le cas contraire, Yes Married ou </span>
+				<span class="c1">INNOVA IT </span>
+				<span class="c2 c1">sera en droit de suspendre ou de résilier le compte, ou de refuser l'accès à tout ou partie du site web.</span>
+			</p><p class="c6">
+				<span class="c2 c1">Dans le cadre de l'utilisation du site web, l'utilisateur s'interdit expressément de :</span>
+			</p>
+			<ul class="c15 lst-kix_qdnf015c6ev9-0 start">
+				<li class="c0">
+					<span class="c2 c1">afficher, télécharger, envoyer, transmettre par e-mail ou de toute autre manière tout contenu qui soit illégal, nuisible, menaçant, abusif, constitutif de harcèlement, diffamatoire, vulgaire, obscène, menaçant pour la vie privée d'autrui, haineux, raciste, ou autrement répréhensible ;</span>
+				</li>
+				<li class="c0">
+					<span class="c2 c1">consulter, afficher, télécharger, envoyer, transmettre, tout contenu qui serait contraire aux lois nationales et internationales en vigueur ;</span>
+				</li>
+				<li class="c0">
+					<span class="c2 c1">tenter d'induire en erreur d'autres utilisateurs en usurpant le nom ou la dénomination sociale d'autres personnes ;</span>
+				</li>
+				<li class="c0">
+					<span class="c2 c1">télécharger, afficher, envoyer, transmettre par e-mail ou de toute autre manière tout contenu violant, tout brevet, marque déposée, secret de fabrication, droit de propriété intellectuelle ou tout autre droit de propriété appartenant à autrui ;</span>
+				</li>
+				<li class="c0">
+					<span class="c2 c1">télécharger, afficher, envoyer, transmettre par e-mail ou de toute autre manière toute publicité ou tout matériel promotionnel non sollicités ou non autorisés (notamment se livrer à du « spam », à la transmission de « junk mail », de chaîne de lettres ou toute autre forme de sollicitation) ;</span>
+				</li>
+				<li class="c0">
+					<span class="c2 c1">télécharger, afficher, transmettre par e-mail ou de toute autre manière tout contenu comprenant des virus informatiques ou tout autre code, dossier ou programme conçus pour interrompre, détruire ou limiter la fonctionnalité de tout logiciel, ordinateur, ou outil de télécommunication sans que cette énumération ne soit limitative ;</span>
+				</li>
+				<li class="c0">
+					<span class="c2 c1">commettre toute action ayant un effet perturbateur entravant la capacité des autres utilisateurs d'accéder au site web ;</span>
+				</li>
+				<li class="c0">
+					<span class="c2 c1">entraver ou perturber le service, les serveurs, les réseaux connectés au service, ou refuser de se conformer aux conditions requises, aux procédures, aux règles générales ou aux dispositions réglementaires applicables aux réseaux connectés au site web ;</span>
+				</li>
+				<li class="c0">
+					<span class="c2 c1">harceler de quelque manière que ce soit un autre ou plusieurs autres utilisateurs ;</span>
+				</li>
+				<li class="c0">
+					<span class="c2 c1">collecter et stocker des données personnelles afférentes aux autres utilisateurs.</span>
+				</li>
+			</ul><p class="c6 c25">
+				<span class="c2 c1">
+			</span></p><p class="c6">
+				<span class="c1">INNOVA IT</span>
+				<span class="c1">&nbsp;garantit que les éléments, services et fonctionnalités mis à la disposition de l'utilisateur, s'ils sont utilisés conformément aux indications données, sont substantiellement conformes aux standards généralement admis et que les logiciels et tous les éléments créés par </span>
+				<span class="c1">INNOVA IT</span>
+				<span class="c2 c1">&nbsp;et mis à la disposition de l'utilisateur respectent les droits des tiers, et de façon générale, ne sont pas illicites.</span>
+			</p><p class="c6">
+				<span class="c1">INNOVA IT</span>
+				<span class="c1">&nbsp;est tenue, de manière générale, à une obligation de moyen. INNOVA IT ne sera en aucun cas tenu responsable des éventuels dommages directs ou indirects encourus par l'utilisateur dans le cadre de l'utilisation du site web et/ou de son contenu mis à sa disposition. </span>
+				<span class="c2 c1 c9">De même, INNOVA IT n'est tenue que de son dol ou sa faute lourde.</span>
+			</p><p class="c6">
+				<span class="c1">L'utilisateur tiendra également </span>
+				<span class="c1">INNOVA IT</span>
+				<span class="c2 c1">&nbsp;indemne de toute réclamation, dans l'un ou l'autre des cas suivants :</span>
+			</p>
+			<ul class="c15 lst-kix_64e1v7m3hsdf-0 start">
+				<li class="c0">
+					<span class="c2 c1">perte d'occasions ou de revenus d'affaires reliés au fonctionnement ou à l'absence de fonctionnement, ou à l'utilisation ou à l'absence d'utilisation de la plateforme, ou du contenu s'y trouvant ou devant s'y trouver ;</span>
+				</li>
+				<li class="c0">
+					<span class="c1">intrusion illégale ou non autorisée de tout tiers dans le serveur Web ou la plateforme de </span>
+					<span class="c1">INNOVA IT</span>
+					<span class="c2 c1">&nbsp;;</span>
+				</li>
+				<li class="c0">
+					<span class="c2 c1">introduction d'un virus informatique dans le serveur Web ou sur la plateforme de INNOVA IT ;</span>
+				</li>
+				<li class="c0">
+					<span class="c2 c1">encombrement temporaire de la bande passante ;</span>
+				</li>
+				<li class="c0">
+					<span class="c1">interruption du service de connexion Internet pour une cause hors du contrôle de </span>
+					<span class="c1">INNOVA IT</span>
+					<span class="c2 c1">.</span>
+				</li>
+			</ul><p class="c7">
+				<span class="c2 c1">L'utilisateur accepte que les fonctionnalités proposées sur la plateforme sont susceptibles d'évoluer. Ainsi, certaines fonctionnalités peuvent être supprimées et d'autres ajoutées, sans que l'utilisateur ne puisse considérer que l'accès à une fonctionnalité particulière ne constitue un droit acquis.</span>
+			</p>
+			<h2 class="c13" id="h.qcwdo3ft1xqj">
+				<span class="c8 c14">Propriété intellectuelle</span>
+			</h2><p class="c7">
+				<span class="c1">La plateforme Yes Married</span>
+				<span class="c2 c1">&nbsp;est une appellation et création protégée par les droits d'auteur. La base de données dont est constituée Yes Married et tous les éléments contenus dans la plateforme sont - sauf mention contraire explicite et marques appartenant à des tiers – protégés par les droits d'auteur. Les informations, les textes, dessins, photos, films, graphiques, routines et sous-routines et ainsi que tous les autres éléments accessibles au travers de la plateforme sont protégés par le droit de la propriété intellectuelle et/ou industrielle.</span>
+			</p><p class="c7">
+				<span class="c1">Ces droits ne sont d'aucune manière donnés en licence ni cédés à des tiers. Toute copie, adaptation, traduction, arrangement, communication au public, location et autre exploitation, modification de tout ou partie de ce site sous quelque forme et par quel que moyen que ce soit, électronique, mécanique ou autre, est strictement interdit sauf accord préalable et écrit de </span>
+				<span class="c1">INNOVA IT</span>
+				<span class="c2 c1">.</span>
+			</p><p class="c7">
+				<span class="c2 c1">Le contenu de la base de données est protégé par un droit sui generis qui autorise le producteur à interdire toute extraction et/ou réutilisation de tout ou partie de ce contenu. Toute infraction à ces droits peut entraîner des poursuites civiles ou pénales conformément au droit belge.</span>
+			</p><p class="c7">
+				<span class="c1 c2">L'utilisateur bénéficie d'une licence d'utilisation du site web et de son contenu, incessible et exclusivement limitée à une utilisation à des fins personnelles.</span>
+			</p><p class="c7">
+				<span class="c1">Sauf expressément autorisé à cet effet par </span>
+				<span class="c1">INNOVA IT</span>
+				<span class="c2 c1">&nbsp;et/ou le tiers concerné, l'utilisateur n'est pas autorisé à modifier, reproduire, louer, emprunter, vendre, distribuer ou créer d'œuvres dérivées basées en tout ou partie sur les éléments présents sur Yes Married.</span>
+			</p><p class="c7">
+				<span class="c2 c1">Il est par conséquent interdit (et l'utilisateur ne peut accorder à autrui l'autorisation) de copier, modifier, créer une œuvre dérivée, inverser la conception ou l'assemblage ou de toute autre manière tenter de trouver le code source, vendre, attribuer, sous-licencier ou transférer de quelque manière que ce soit tout droit afférent au site web et à son contenu</span>
+			</p>
+			<h2 class="c13" id="h.bmpnxyb63bj0">
+				<span class="c8 c14">Liens vers d'autres sites</span>
+			</h2><p class="c7">
+				<span class="c1">Yes Married</span>
+				<span class="c2 c1">&nbsp;met à votre disposition des liens vers des sites qui ne sont pas exploités par Yes Married. Lorsque vous pénétrez sur ces sites, veuillez en lire attentivement les informations légales particulières. Ces liens et sources d'information sont mis à votre disposition à titre indicatif uniquement, Yes Married ne pourra en aucun cas être tenu responsable de la politique ou des pratiques du propriétaire ou de l'opérateur de ces sites.</span>
+			</p>
+			<h2 class="c13" id="h.ntx21882cg1h">
+				<span class="c8 c14">Responsabilité quant aux informations</span>
+			</h2><p class="c7">
+				<span class="c1">En aucun cas, </span>
+				<span class="c1">INNOVA IT</span>
+				<span class="c1">&nbsp;ne pourra être tenue responsable pour le contenu de son site ou l'utilisation directe ou indirecte qui pourrait en être fa</span>
+				<span class="c1">ite. </span>
+				<span class="c1">INNOVA IT</span>
+				<span class="c2 c1">&nbsp;décline toute responsabilité et n'offre aucune garantie pour les produits et les services mis à disposition via sa plateforme Yes Married.</span>
+			</p><p class="c7">
+				<span class="c2 c1">Les informations contenues sur la plateforme sont données à titre indicatif uniquement sans aucune garantie quant à leur exactitude, mise à jour ou exhaustivité. La responsabilité de Yes Married ne pourra donc pas être recherchée sur ce point.</span>
+			</p><p class="c7">
+				<span class="c2 c1">Il est rappelé que Yes Married peut être amené à tout moment à ajouter, supprimer ou modifier tout ou en partie des services inclus dans la plateforme, sans que cela ne mette en jeu sa responsabilité.</span>
+			</p><p class="c7">
+				<span class="c1">Les articles parus et à paraître sur Yes Married sont à usage privé. Ils ne peuvent en aucun cas être reproduits, diffusés, modifiés, envoyés, publiés, cédés sous licence ou vendus sous quelque forme que ce soit sans l'autorisation écrite de la direction de </span>
+				<span class="c1">INNOVA IT</span>
+				<span class="c2 c1">.</span>
+			</p><p class="c7">
+				<span class="c1">De même, </span>
+				<span class="c1">INNOVA IT</span>
+				<span class="c2 c1">&nbsp;décidera seule de l'opportunité d'inclure/supprimer tout contenu présenté sur la plateforme.</span>
+			</p><p class="c7">
+				<span class="c1">INNOVA IT</span>
+				<span class="c2 c1">&nbsp;se réserve le droit, à tout moment et pour quelque motif que ce soit, de modifier ou interrompre temporairement ou de manière permanente tout ou une partie de l'accès à la plateforme et ce sans devoir en informer préalablement l'utilisateur.</span>
+			</p><p class="c7">
+				<span class="c1">Il en sera ainsi par exemple en cas de maintenance du site web ou de modification importante des produits et services et / ou fonctionnalités proposées. </span>
+				<span class="c1">INNOVA IT</span>
+				<span class="c2 c1">&nbsp;ne pourra être tenue responsable pour tout dommage direct ou indirect lié à une modification, suspension ou interruption de l'accès à la plateforme, pour quelque motif que ce soit.</span>
+			</p>
+			<h2 class="c13" id="h.fft9o5tfaid9">
+				<span class="c8 c14">Disponibilité du site web</span>
+			</h2><p class="c7">
+				<span class="c2 c1">Le site peut se trouver temporairement indisponible en raison d'événements indépendants de la volonté de Yes Married, sans que la responsabilité de cette dernière ne puisse être recherchée.</span>
+			</p><p class="c7">
+				<span class="c2 c1">En outre, Yes Married pourra à tout moment modifier ou interrompre, temporairement ou de façon permanente, tout ou une partie de la plateforme pour effectuer des opérations de maintenance ou des modifications profitables à l'internaute, sans que cela ne mette en jeu sa responsabilité.</span>
+			</p>
+			<h2 class="c13" id="h.ona3pux46lj6">
+				<span class="c8 c14">Les cookies</span>
+			</h2><p class="c7">
+				<span class="c1">Les cookies sont des fichiers informatiques inscrits par nos serveurs et placés sur le </span>
+				<span class="c1">disque dur de votre ordinateur</span>
+				<span class="c2 c1">. Ces cookies contiennent de l'information qui peut être déchiffrée par Yes Married et seulement lorsque l’utilisateur visite la plateforme Yes Married.</span>
+			</p><p class="c7">
+				<span class="c2 c1">L’utilisateur évite ainsi par exemple de devoir chaque fois s’identifier sur la plateforme Yes Married.</span>
+			</p><p class="c7">
+				<span class="c2 c1">Ces cookies ne contiennent aucune donnée personnelle susceptibles de pouvoir être récupérées à des fins de marketing direct.</span>
+			</p><p class="c7">
+				<span class="c2 c1">L’utilisateur de Yes Married est libre de refuser l’installation des cookies en modifiant les options de sa navigation sur le web. </span>
+			</p>
+			<h2 class="c13" id="h.tkp9vx4wk7vo">
+				<span class="c8 c14">Loi applicable et Juridiction</span>
+			</h2><p class="c7">
+				<span class="c2 c1 c9">Si l'une des conditions de la présente devait être déclarée nulle ou inapplicable, les autres conditions des présentes demeurent pleinement en vigueur. En cas de litige, seul le texte en français des conditions d'utilisation sera pris en considération. La présente est régie, interprétée et exécutée conformément au droit belge ; les tribunaux de Bruxelles auront compétence exclusive eu égard à tout litige.</span>
+			</p>
+			<div>
+				<p class="c11">
+					<span class="c2 c17">
+				</span></p>
+			</div>
+		</template>
+ <ym-footer></ym-footer>
+</template> <script>Polymer({is:'ym-mentions-fr',attached:function(){this.loadResources(this.resolveUrl('../../data/locales.json?v=1.2'))},behaviors:[Polymer.AppLocalizeBehavior],properties:{route:{type:String,notify:!0},token:{type:String,notify:!0},language:{type:String,notify:!0,reflectToAttribute:!0}},created:function(){},_isDutch:function(){return'nl'==this.language},_isFrench:function(){return'fr'==this.language}});</script> </dom-module></body></html>

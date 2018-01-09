@@ -4,7 +4,7 @@
   "authors": [
     "Michael <michael.tnourji@gmail.com>"
   ],
-  "description": "Yes married",
+  "description": "Recrut",
   "main": "",
   "license": "MIT",
   "ignore": [
@@ -15,7 +15,7 @@
     "tests"
   ],
   "dependencies": {
-    
+    "polymer": "Polymer/polymer#^2.3.1",
     "app-layout": "PolymerElements/app-layout#^0.10.6",
     "app-route": "PolymerElements/app-route#^0.9.3",
     "iron-selector": "PolymerElements/iron-selector#^1.5.2",

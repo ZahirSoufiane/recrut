@@ -115,4 +115,13 @@ public class QuestionResource {
         questionService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    @GetMapping("/test")
+    public List<Question> subscribe() {
+      //  return new ModelAndView("entrypoint.html");
+    	  log.debug("REST request to get all Questions");
+          return questionService.findAll();
+          }
+    	
+    
+
 }
