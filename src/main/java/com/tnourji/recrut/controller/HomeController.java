@@ -27,7 +27,7 @@ public class HomeController extends BaseController {
 
 	@GetMapping(value={"/welcome","/home",""})
 	public ModelAndView subscribe() {
-		return new ModelAndView("index.html");
+		return new ModelAndView("entrypoint.html");
 		
 	}
 	

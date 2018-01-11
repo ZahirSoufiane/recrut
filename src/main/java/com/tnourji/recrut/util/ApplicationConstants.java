@@ -13,6 +13,7 @@ import java.util.List;
 public final class ApplicationConstants {
     
     public static final List<String> SUPPORTED_LANGUAGES = Arrays.asList("fr", "nl", "en");
+    public static final String PROFIL_PICTURE="profil_picture";
     
     /**
      * private constructor

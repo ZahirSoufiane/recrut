@@ -1,23 +1,16 @@
-<!--
-@license
-Copyright (c) 2016 The Polymer Project"C:/My Web Sites/Assan templ/bootstraplovers.com/assan-v3.6/classic-template/html/header-light-top-bar.html" Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-
 <link rel="import" href="../bower_components/polymer/polymer-element.html">
 <link rel="import" href="shared-styles.html">
-<link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html"></link>	
+<link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html"></link>
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">	
 
 <link rel="import" href="../resources/template/my-footer.html">
 <link rel="import" href="../resources/template/my-navbar.html">
 <link rel="import" href="../resources/template/my-navlogo.html">
 
 <link rel="lazy-import" href="my-login.html">
-<link rel="lazy-import" href="my-singin.html">
+<link rel="lazy-import" href="my-singup.html">
 <link rel="lazy-import" href="my-view404.html">
 <link rel="lazy-import" href="../resources/template/my-navbar.html">
 <link rel="lazy-import" href="../resources/template/my-navlogo.html">
@@ -28,53 +21,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <link href="../resources/css/plugins/plugins.css" rel="stylesheet">
     <link href="../resources/css/style.css" rel="stylesheet">
     
-     <app-location
-        route="{{route}}"
-        url-space-regex="^[[rootPath]]">
-    </app-location>
+<!--      <app-location -->
+<!--         route="{{route}}" -->
+<!--         url-space-regex="^[[rootPath]]"> -->
+<!--     </app-location> -->
 
-    <app-route
-        route="{{route}}"
-        pattern="[[rootPath]]:page"
-        data="{{routeData}}"
-        tail="{{subroute}}">
-    </app-route>
+<!--     <app-route -->
+<!--         route="{{route}}" -->
+<!--         pattern="[[rootPath]]:page" -->
+<!--         data="{{routeData}}" -->
+<!--         tail="{{subroute}}"> -->
+<!--     </app-route> -->
     
     
-	<!--     content -->
-<!--     <my-navbar></my-navbar> -->
-<!--     <my-navlogo></my-navlogo> -->
-    
-    
-<!--      <div class="bg-parallax fullscreen mb70" data-jarallax='{"speed": 0.2}' style='background-image: url("../resources/images/bg11.jpg")'> -->
-<!--             <div class="d-flex align-items-center"> -->
-<!--                 <div class="container"> -->
-<!--                     <div class=" row"> -->
-<!--                         <div class="col-md-10 ml-auto mr-auto text-center"> -->
-<!--                             <div class="hero-text-style1"> -->
-<!--                                 <div class="h1  text-uppercase mb20"> -->
-<!--                                    Bienvenu -->
-<!--                                 </div>/.tlt -->
-<!--                                 <p class="lead"> -->
-<!--                                     Recrut -->
-<!--                                 </p> -->
-<!--                                 <a href="#more" data-scroll class="btn btn-rounded btn-primary">Decouvrir</a> -->
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-<!--         </div>hero -->
- 	<iron-pages selected="[[page]]"
-            attr-for-selected="name"
-            fallback-selection="view404"
-            role="main">
+<!-- 	<!--     content  --> -->
+<!-- <!-- 	<my-navbar> </my-navbar>  --> -->
+<!-- <!-- 	<my-navlogo> </my-navlogo>        --> -->
+
+<!--  	<iron-pages selected="[[page]]" -->
+<!--             attr-for-selected="name" -->
+<!--             fallback-selection="view404" -->
+<!--             role="main"> -->
             
-<!--  	<my-singin name="singin"></my-singin> -->
- 	<my-login name="login"></my-login>
- 	<my-view404 name="view404"></my-view404>
- 	</iron-pages>
-<!--  	<my-footer></my-footer> -->
+<!--  	<my-singup name="singup"></my-singup> -->
+<!--  	<my-login name="login"></my-login> -->
+<!--  	<my-view404 name="view404"></my-view404> -->
+<!--  	</iron-pages> -->
+<!-- <!--  	<my-footer></my-footer> --> -->
  	
   </template>
 

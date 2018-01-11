@@ -50,6 +50,9 @@ public abstract class BaseController {
     @Value("${photos.partners.dir}")
     protected String photosPartnerDir;
     
+    @Value("${profile.picture.dir}")
+    protected String photoDir;
+    
     /**
      * get navigation lang
      * 
@@ -85,16 +88,11 @@ public abstract class BaseController {
      * 
      * @return user
      */
-  /*  protected User getUserFromSecurityContext() {
-        InnovaSpringUser user;
-        try {
-            user = ((UserAuthentication) SecurityContextHolder.getContext().getAuthentication())
-                    .getDetails();
-        } catch (Exception e) {
-            return null;
-        }
-        return user.getUser();
-    }*/
+    /*
+     * protected User getUserFromSecurityContext() { InnovaSpringUser user; try { user = ((UserAuthentication)
+     * SecurityContextHolder.getContext().getAuthentication()) .getDetails(); } catch (Exception e) { return null; }
+     * return user.getUser(); }
+     */
     
     /**
      * update user from security context
@@ -104,10 +102,10 @@ public abstract class BaseController {
      */
     protected void updateUserFromSecurityContext(User wUser) {
         try {
-            //UserAuthentication auth = ((UserAuthentication) SecurityContextHolder.getContext().getAuthentication());
-            //InnovaSpringUser user = auth.getDetails();
-            //user.setUser(wUser);
-            //SecurityContextHolder.getContext().setAuthentication(auth);
+            // UserAuthentication auth = ((UserAuthentication) SecurityContextHolder.getContext().getAuthentication());
+            // InnovaSpringUser user = auth.getDetails();
+            // user.setUser(wUser);
+            // SecurityContextHolder.getContext().setAuthentication(auth);
         } catch (Exception e) {
             LOGGER.error("no user found " + e.getMessage(), e);
         }
@@ -118,25 +116,19 @@ public abstract class BaseController {
      * 
      * @return website
      */
-   /* protected Website getCurrentUserSite() {
-        return ((User) getUserFromSecurityContext()).getWebsite();
-    }*/
-    
+    /*
+     * protected Website getCurrentUserSite() { return ((User) getUserFromSecurityContext()).getWebsite(); }
+     */
     
     /**
      * get current user login
      * 
      * @return login
      */
-    /*protected String getCurrentUserLogin() {
-        String login = null;
-        User user = getUserFromSecurityContext();
-        if (null != user) {
-            login = user.getEmail();
-        }
-        return login;
-    }*/
-    
+    /*
+     * protected String getCurrentUserLogin() { String login = null; User user = getUserFromSecurityContext(); if (null
+     * != user) { login = user.getEmail(); } return login; }
+     */
     
     /***
      * upload
@@ -204,8 +196,8 @@ public abstract class BaseController {
      *            image
      */
     protected void moveFile(String image) {
-        Path pathFrom = Paths.get(photosPartnerDir, "temp", image);
-        Path pathTo = Paths.get(photosPartnerDir, image);
+        Path pathFrom = Paths.get(photoDir, "temp", image);
+        Path pathTo = Paths.get(photoDir, image);
         try {
             Files.move(pathFrom, pathTo);
         } catch (IOException e) {

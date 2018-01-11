@@ -58,6 +58,10 @@ Example:
       @apply(--file-upload-button);
     }
 
+    paper-button#button:hover {
+      @apply(--file-upload-button-hover);
+    }
+
     .file {
       padding: 10px 0px;
       @apply(--file-upload-file);
@@ -101,15 +105,6 @@ Example:
     paper-progress[error] {
       --paper-progress-active-color: var(--error-color);
     }
-    #picZone{
-		  @apply(--layout-horizontal);
-    	  @apply(--layout-center-justified);
-    }
-    .mypic{
-    	max-width:150px;
-    	max-height:150px;
-    	display:none;
-    }
   </style>
 
   <template>
@@ -140,11 +135,6 @@ Example:
     <input type="file" id="fileInput" on-change="_fileChange" hidden multiple="{{multi}}" accept="{{accept}}">
     <!--<paper-toast id="toastSuccess" text="File uploaded successfully!"></paper-toast>
     <paper-toast id="toastFail" text="Error uploading file!"></paper-toast>-->
-    <div id="picZone">
-    	<img id="mypic0" class="mypic" src="data:image/png;base64,{{showPicture0}}" alt="Your photo"/>
-    	<img id="mypic1" class="mypic" src="data:image/png;base64,{{showPicture1}}" alt="Your photo"/>
-    	<img id="mypic2" class="mypic" src="data:image/png;base64,{{showPicture2}}" alt="Your photo"/>
-    </div>
   </template>
 
 </dom-module>
@@ -182,10 +172,7 @@ Example:
         type: String,
         value: ''
       },
-	  nbPics: {
-		  type: Number,
-		  value:0
-	  },
+
       /**
        * `accept` is the set of comma separated file extensions or mime types
        * to filter as accepted.
@@ -225,25 +212,7 @@ Example:
        */
       dropText: {
         type: String,
-        value: 'Drop Files Here (max 2MB)'
-      },
-      showPicture0: {
-    	  type: String,
-    	  value: "test",
-          notify: true,
-          reflectToAttribute: true,
-      },
-      showPicture1: {
-    	  type: String,
-    	  value: "test",
-          notify: true,
-          reflectToAttribute: true,
-      },
-      showPicture2: {
-    	  type: String,
-    	  value: "test",
-          notify: true,
-          reflectToAttribute: true,
+        value: 'Drop Files Here'
       },
 
       /**
@@ -592,40 +561,18 @@ Example:
           xhr.setRequestHeader(key, this.headers[key]);
         }
       }
-      var polyvar = this;
       xhr.onload = function(e) {
         if (xhr.status >= 200 && xhr.status < 300) {
-          self.fire('success', {xhr: xhr});
+          self.fire('success', {filename: file.name, xhr: xhr});
           self.set(prefix + '.complete', true);
-          if(!polyvar.multi || polyvar.nbPics == 0){
-              polyvar.showPicture0 = xhr.responseText;
-              polyvar.$.mypic0.style.display="block";
-          } else if(polyvar.nbPics == 1){
-              polyvar.showPicture1 = xhr.responseText;
-              polyvar.$.mypic1.style.display="block";
-          } else if(polyvar.nbPics == 2){
-              polyvar.showPicture2 = xhr.responseText;
-              polyvar.$.mypic2.style.display="block";
-          }
-          polyvar.nbPics = polyvar.nbPics + 1;
-//           polyvar.$.mypic.src="data:image/png;base64,"+ this.showPicture;
         } else {
           self.set(prefix + '.error', true);
           self.set(prefix + '.complete', false);
           self.set(prefix + '.progress', 100);
           self.updateStyles();
-          self.fire('error', {xhr: xhr});
+          self.fire('error', {filename: file.name, xhr: xhr});
         }
       };
-      xhr.onreadystatechange = function (oEvent) {  
-    	    if (xhr.readyState === 4) {  
-    	        if (xhr.status === 200) {  
-    	          console.log(xhr.responseText)  
-    	        } else {  
-    	           console.log("Error", xhr.statusText);  
-    	        }  
-    	    }  
-    	}; 
       xhr.send(formData);
     }
   });

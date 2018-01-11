@@ -69,8 +69,6 @@ public class UserResource {
             throw new BadRequestAlertException("A new User cannot already have an ID", ENTITY_NAME, "idexists");
         }
         
-        
-        
         User result = userservice.save(user);
         return ResponseEntity.created(new URI("/api/users/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))

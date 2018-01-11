@@ -73,13 +73,13 @@ public class CondidateResource {
         cd.setPassword(condidate.getPassword());
         cd.setPhone(condidate.getPhone());
         
-        // ad.setCity(condidate.getCity());
-        // ad.setCountry(condidate.getCountry());
-        // ad.setPostcode(condidate.getPostcode());
-        // ad.setAddress1(condidate.getAddress1());
-        // ad.setAddress2(condidate.getAddress2());
-        //
-        // cd.setAddress(ad);
+        ad.setCity(condidate.getCity());
+        ad.setCountry(condidate.getCountry());
+        ad.setPostcode(condidate.getPostcode());
+        ad.setAddress1(condidate.getAddress1());
+        ad.setAddress2(condidate.getAddress2());
+        
+        cd.setAddress(ad);
         
         addressService.save(ad);
         result = CondidateService.save(cd);

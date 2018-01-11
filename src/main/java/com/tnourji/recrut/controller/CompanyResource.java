@@ -4,6 +4,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.codahale.metrics.annotation.Timed;
 import com.tnourji.recrut.bean.CompanyBean;
@@ -23,6 +28,7 @@ import com.tnourji.recrut.model.Address;
 import com.tnourji.recrut.model.Company;
 import com.tnourji.recrut.service.AddressService;
 import com.tnourji.recrut.service.CompanyService;
+import com.tnourji.recrut.util.ApplicationConstants;
 import com.tnourji.recrut.util.HeaderUtil;
 
 /**
@@ -30,7 +36,7 @@ import com.tnourji.recrut.util.HeaderUtil;
  */
 @RestController
 @RequestMapping("/api")
-public class CompanyResource {
+public class CompanyResource extends BaseController {
     
     private final Logger log = LoggerFactory.getLogger(CompanyResource.class);
     
@@ -57,7 +63,8 @@ public class CompanyResource {
      */
     @PostMapping("/companies")
     @Timed
-    public ResponseEntity<Company> createCompany(@RequestBody CompanyBean company) throws URISyntaxException {
+    public ResponseEntity<Company> createCompany(@RequestBody CompanyBean company, HttpServletRequest request)
+        throws URISyntaxException {
         log.debug("REST request to save Company : {}", company);
         if (company.getId() != null) {
             throw new BadRequestAlertException("A new company cannot already have an ID", ENTITY_NAME, "idexists");
@@ -80,11 +87,15 @@ public class CompanyResource {
         ad.setAddress1(company.getAddress1());
         ad.setAddress2(company.getAddress2());
         
+        String image = (String) request.getSession().getAttribute(ApplicationConstants.PROFIL_PICTURE);
+        if (image != null) {
+            cp.setImageUrl(image);
+        }
         
         addressService.save(ad);
         cp.setAddress(ad);
         result = companyService.save(cp);
-        
+        request.getSession().setAttribute(ApplicationConstants.PROFIL_PICTURE, null);
         return ResponseEntity.created(new URI("/api/companies/" + result.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
                 .body(result);
@@ -156,4 +167,22 @@ public class CompanyResource {
         companyService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
+    /**
+     * GET /companies/:id : get the "id" company.
+     *
+     * @param id
+     *            the id of the company to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the company, or with status 404 (Not Found)
+     */
+    @GetMapping("/image")
+    public @ResponseBody String uploadCompanyPhotos(
+            @RequestParam(name = "filename", required = false) String filename,
+            @RequestParam(name = "file", required = false) MultipartFile file,
+            HttpServletRequest request) {
+        
+        return super.uploadAndGet(filename, file, request, photoDir,
+                ApplicationConstants.PROFIL_PICTURE, false);
+    }
+    
 }
