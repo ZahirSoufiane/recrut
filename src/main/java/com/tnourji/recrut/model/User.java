@@ -18,12 +18,11 @@ import java.util.Objects;
 
 
 @JsonTypeInfo(use = com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME,
-include = JsonTypeInfo.As.PROPERTY,
-property = "type")
+include = JsonTypeInfo.As.PROPERTY)
 @JsonSubTypes({
 @Type(value = Admin.class),
 @Type(value = Company.class),
-@Type(value = Condidat.class),
+@Type(value = Condidate.class),
 })
 @Entity
 @Table(name = "user")

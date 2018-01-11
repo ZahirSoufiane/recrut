@@ -53,6 +53,8 @@ public class AdResource {
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+    
+    
 
     /**
      * PUT  /ads : Updates an existing ad.

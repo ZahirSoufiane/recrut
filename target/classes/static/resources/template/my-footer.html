@@ -1,0 +1,65 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+
+<dom-module id="my-footer">
+  <template>
+  <link href="../resources/css/plugins/plugins.css" rel="stylesheet">
+  <link href="../resources/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
+  
+   
+                     <div class="footer-bottomAlt">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="clearfix">
+                            <a href="#" class="social-icon-sm si-dark si-facebook si-dark-round">
+                                <i class="fa fa-facebook"></i>
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a href="#" class="social-icon-sm si-dark si-twitter si-dark-round">
+                                <i class="fa fa-twitter"></i>
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon-sm si-dark si-g-plus si-dark-round">
+                                <i class="fa fa-google-plus"></i>
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                            <a href="#" class="social-icon-sm si-dark si-skype si-dark-round">
+                                <i class="fa fa-skype"></i>
+                                <i class="fa fa-skype"></i>
+                            </a>
+                            <a href="#" class="social-icon-sm si-dark si-linkedin si-dark-round">
+                                <i class="fa fa-linkedin"></i>
+                                <i class="fa fa-linkedin"></i>
+                            </a>  
+                        </div>
+                    </div>
+                    <div class="col-md-5" style="color:white">
+                        <span>&copy; Copyright 2018. Recrut By Z.Soufiane</span>
+                    </div>
+                </div>
+            </div>
+        </div><!--/footer bottom-->
+                              
+  </template>
+
+  <script>
+    class MyFooter extends Polymer.Element {
+      static get is() { return 'my-footer'; }
+    }
+
+    window.customElements.define(MyFooter.is, MyFooter);
+  </script>
+</dom-module>

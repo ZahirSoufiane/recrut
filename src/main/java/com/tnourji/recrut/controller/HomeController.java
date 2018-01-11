@@ -25,9 +25,17 @@ public class HomeController extends BaseController {
 	@Autowired
 	private UserService userService;
 
-	@GetMapping("/welcome")
+	@GetMapping(value={"/welcome","/home",""})
 	public ModelAndView subscribe() {
-		return new ModelAndView("entrypoint.html");
+		return new ModelAndView("index.html");
 		
 	}
+	
+	@GetMapping(value={"/inscrir"})
+	public ModelAndView register() {
+		return new ModelAndView("inscrir.html");
+		
+	}
+	
+	
 }

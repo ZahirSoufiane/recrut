@@ -2,7 +2,7 @@ package com.tnourji.recrut.repository;
 
 import org.springframework.stereotype.Repository;
 
-import com.tnourji.recrut.model.Condidat;
+import com.tnourji.recrut.model.Condidate;
 
 import org.springframework.data.jpa.repository.*;
 
@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.*;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface CondidatRepository extends JpaRepository<Condidat, Long> {
+public interface CondidatRepository extends JpaRepository<Condidate, Long> {
 
 }

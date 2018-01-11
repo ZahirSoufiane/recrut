@@ -1,0 +1,155 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import"
+	href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<link rel="import" href="../bower_components/neon-animation/animations/slide-from-left-animation.html"></link>
+<link rel="import" href="../bower_components/neon-animation/animations/fade-out-animation.html"></link>
+<link rel="import" href="../bower_components/neon-animation/neon-animated-pages.html"></link>
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html"></link>
+<link rel="import" href="../bower_components/app-route/app-route.html"></link>
+<link rel="import" href="../bower_components/app-route/app-location.html"></link>
+<!-- <link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html"></link> -->
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html"></link>
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html"></link>
+<link rel="import" href="../bower_components/paper-item/paper-item.html"></link>
+	
+<!-- <link rel="import" href="ym-home.html"></link> -->
+<!-- <link rel="import" href="ym-subscribe.html"></link> -->
+
+<dom-module id="ym-home-dispatcher" attributes="csrfHeader"> <template>
+<style is="custom-style" include="iron-flex iron-flex-alignment">
+	:host , neon-animated-pages, iron-pages{
+		height:99%;
+		font:16px/1.5 Garamond,'Open Sans',"Helvetica",Arial;
+		font-family:Garamond,'Open Sans',"Helvetica",Arial;
+	}
+	paper-dropdown-menu {
+		margin-right:20px;
+		max-width:70px;
+    --paper-input-container-label: {
+      color: white;
+      font-style: italic;
+      text-align: center;
+      font-weight: bold;
+    };
+    --paper-input-container-input: {
+      color: white;
+      font-style: normal;
+      font-family: serif;
+      text-transform: uppercase;
+      padding-left:15px;
+    }
+    /* no underline */
+    --paper-input-container-underline: {
+      display: none;
+    };
+  }
+  paper-dropdown-menu iron-icon{
+  	color:#e6a8a8;
+  }
+  #langBar{
+  	position:absolute;
+  	width:95%;
+  	z-index:10;
+  }
+  #langBar paper-item{
+  	cursor:pointer;
+  }
+
+</style>
+<app-location route="{{route}}"></app-location>
+
+<app-route
+    route="{{route}}"
+    pattern="/:view"
+    data="{{routeData}}"
+    tail="{{subroute}}"></app-route>
+ <div id="langBar" class="layout horizontal end-justified">
+<paper-dropdown-menu label="" >
+  <paper-listbox slot="dropdown-content" class="dropdown-content" selected="{{language}}" attr-for-selected="value">
+    <paper-item value="en">EN</paper-item>
+    <paper-item value="fr">FR</paper-item>
+    <paper-item value="nl">NL</paper-item>
+  </paper-listbox>
+</paper-dropdown-menu>
+</div>
+ <neon-animated-pages fallback-selection="home" animateInitialSelection="true" selected="[[routeData.view]]" 
+ 	attr-for-selected="name" entryAnimation="slide-from-left-animation" exit-animation="fade-out-animation">
+  <my-home language="{{language}}" token="{{token}}" name="home" route="{{subroute}}" csrfHeader="{{csrfHeader}}"></my-home>>
+  <my-inscription language="{{language}}" token="{{token}}" name="inscription" index="0" route="{{subroute}}"></my-inscription>>
+  
+</neon-animated-pages>
+
+</template> <script>
+	Polymer({
+		is : 'ym-home-dispatcher',
+	   observers: [
+          '_routePageChanged(routeData.view)'
+        ],
+
+		  properties: {
+		      /**
+		       * The URL of an image.
+		       *
+		       * @attribute src
+		       * @type string
+		       * @default ''
+		       */
+		       token: {
+		           type: String,
+		           notify: true,
+		           value: ''
+		         },
+		      csrfHeader:{
+		    	  type: String
+		      },
+
+		       
+		  },
+	      
+	   ready : function() {
+	        // Custom elements polyfill safe way to indicate an element has been upgraded.
+	        this.removeAttribute('unresolved');
+		   /*
+		   if(null != this.getCookie('AUTH-TOKEN')){
+			   var userType = this.getCookie('x-auth-usertype');
+			   if( userType == "SUPERADMIN"){
+					document.location.href="/admin";
+				} else if(userType=="MARRIED"){
+					document.location.href="/dashboard";
+				} else if(userType == "USER"){
+					document.location.href="/company";
+				}
+		   }
+		   */
+		    // Load pre-caching Service Worker
+           if ('serviceWorker' in navigator) {
+//              navigator.serviceWorker.register('service-worker.js', {scope: '/'});
+           }
+//            this.importHref(
+// 	                this.resolveUrl('ym-home.html'), function(e) {}, function(e) {}, true);
+
+	   },
+
+	   getCookie : function(name) {
+		   var value = "; " + document.cookie;
+		   var parts = value.split("; " + name + "=");
+		   if (parts.length == 2) return parts.pop().split(";").shift();
+		 },
+		 _routePageChanged : function(page){
+		    ga('set', 'page', page);
+		    ga('send', 'pageview');
+		    if(page == "" || page == null || page == "welcome" || page == "inscription"
+		    		){
+		    	page = "home";
+		    }
+			 this.importHref(
+	                this.resolveUrl('ym-'+ page +'.html'), function(e) {}, function(e) {}, true);
+		    
+		 }
+	});
+</script> </dom-module>
+
+
+
+

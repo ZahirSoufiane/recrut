@@ -1,0 +1,255 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
+<link rel="import"
+	href="../bower_components/polymer/polymer-element.html">
+<link rel="import"
+	href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import"
+	href="../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import"
+	href="../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../token-ajax.html">
+<link rel="import"
+	href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="../resources/template/my-footer.html">
+<link rel="import" href="../resources/template/my-navbar.html">
+<link rel="import" href="../resources/template/my-navlogo.html">
+
+<dom-module id="my-singup"> <template>
+<link href="../resources/css/plugins/plugins.css" rel="stylesheet">
+<link href="../resources/css/style.css" rel="stylesheet">
+<style>
+#radiobuttons {
+	margin-bottom: 5px;
+}
+
+#elmentCD {
+	display: block;
+}
+
+#elmentCP {
+	display: none;
+}
+
+iron-input {
+	width: 100%;
+}
+</style>
+
+<iron-ajax id="InscrirAjax" url="" method="POST" handle-as="json"
+	autogo="false" on-response="formResponse" on-error="formError"
+	contentType="application/json"
+	headers='{"content-type":"application/json;charset=utf-8"}'
+	debounce-duration="300"> </iron-ajax>
+
+<my-navbar></my-navbar>
+<my-navlogo></my-navlogo>
+ <div class="container mb40">
+            <div class="row">
+                <div class="col-md-12 mb40">
+                
+                <iron-form id="inscrirForm">
+				<form is="iron-form" method="post">
+				<div id="radiobuttons" class="card">
+						<h4 class="card-header">Type de Compte</h4>
+						<div class="card-body">
+							<fieldset class="form-group">
+								<div class="form-check">
+									<paper-radio-group selected="radiolist"> <paper-radio-button
+										name="UserType" id="CPRadio" on-tap="showCondidate" value="CD"
+										checked>Condidate</paper-radio-button> <paper-radio-button
+										name="UserType2" id="CDRadio" on-tap="showCompany" value="CP">Company</paper-radio-button>
+									</paper-radio-group>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+					 <div class="fancy-title mb30">
+                        <h4>Information</h4>
+                        <div class="fancy-title-sep gray-sep"></div>
+                    </div><!--title-->
+					<div id="elmentCD">
+					  <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Votre Nom :</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" name="firstName" placeholder="Nome" >
+                        </div>
+                      </div>
+                       <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Votre Prenom :</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" name="firstPrenom" placeholder="Prenom" >
+                        </div>
+                      </div>
+					</div>
+					<div id="elmentCP">
+					 <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Nom  de la societe :</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" name="name" placeholder="societe" >
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">localite de la societe :</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" name="locality" placeholder="localite" >
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="example-number-input" class="col-2 col-form-label">Nombre d'Employee</label>
+                        <div class="col-10">
+                            <input class="form-control" type="number" name="nbEmployee" value="1" id="example-number-input">
+                        </div>
+                     </div>
+                     <div class="form-group row">
+                        <label for="example-number-input" class="col-2 col-form-label">Taxe sur la valeur ajoutee</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" name="vatNumber"  id="example-number-input">
+                        </div>
+                     </div>
+                      
+					</div>
+					<div id="elmentCommon">
+					<div class="form-group row">
+                        <label for="example-email-input" class="col-2 col-form-label">Email</label>
+                        <div class="col-10">
+                            <input class="form-control" type="email" name="email" placeholder="example@example.com" id="example-email-input">
+                        </div>
+                    </div>                   
+                    <div class="form-group row">
+                        <label for="example-tel-input" class="col-2 col-form-label">Telephone</label>
+                        <div class="col-10">
+                            <input class="form-control" type="tel" name="phone" placeholder="1-(555)-555-5555" id="example-tel-input">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label for="exampleTextarea">1er Adresse : </label>
+                            <textarea class="form-control"  name="address1" id="exampleTextarea" rows="3"></textarea>
+                     </div>
+                    <div class="form-group">
+                            <label for="exampleTextarea">2eme Adresse : </label>
+                            <textarea class="form-control" name="address2" id="exampleTextarea" rows="3"></textarea>
+                     </div>
+                     <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Ville:</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" name="city" placeholder="Brussel" >
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Pays:</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" name="country" placeholder="belgique" >
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Code Postale:</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" name="postcode" placeholder="1000" >
+                        </div>
+                      </div>
+                    
+                    <div class="form-group row">
+                        <label for="example-password-input" class="col-2 col-form-label">Mot de Pass :</label>
+                        <div class="col-10">
+                            <input class="form-control" type="password"  name="password" placeholder="" id="example-password-input">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="example-comPassword-input" class="col-2 col-form-label">Confirmer Mot de Pass :</label>
+                        <div class="col-10">
+                            <input class="form-control" type="password"  name="confirmPassword" placeholder="" id="example-comPassword-input">
+                        </div>
+                    </div>
+					</div>
+				
+                   
+                  
+                    
+                    <div class="form-group">
+						<paper-button on-tap="singupUser"
+							class="btn btn-rounded btn-primary btn-block">Inscrir</paper-button>
+					</div>
+					<div class="text-center text-white-gray">Vous avez
+						d&eacute;j&agrave; un compte? Connexion</div>
+					<hr>
+					<div>
+						<paper-button type="submit"
+							class="btn btn-white-outline btn-block">Connexion</paper-button>
+
+					</div>
+				</form></iron-form>
+                </div>
+            </div>
+ </div>
+<my-footer></my-footer>
+
+</template> <script>
+    class MySingUp extends Polymer.Element {
+      static get is() { return 'my-singup'; }
+      
+      static get properties(){
+    	  return {
+    		  isCompany:{
+    			  type:String
+    		  },
+    		  isType:{
+    			  type:String,
+    			  value:"Condidate",
+    		  }
+    	  };
+    	  
+      }
+      showCondidate() {
+    	  this.$.InscrirAjax.url="/api/condidates";
+    	  this.$.elmentCP.style.display='none';
+          this.$.elmentCD.style.display='block';
+          this.isType="CD";
+          
+          };
+      showCompany(){
+    	  this.$.InscrirAjax.url="/api/users";
+        	  this.$.elmentCP.style.display='block';
+              this.$.elmentCD.style.display='none';
+              this.$.CPRadio.checked=false;
+              this.isCompany=true;
+              this.isType="CP";
+          };
+      getTypeAccount(){
+    	  this.isTtype="Company";
+    	  
+      };
+            
+      singupUser(){
+    	  var dataForm=this.$.inscrirForm.serializeForm();
+    	  dataForm["company"]=this.company;
+    	  dataForm["istype"]=this.isType;
+    	  
+    	  
+    	  this.$.InscrirAjax.body=JSON.stringify(dataForm);
+    	  this.$.InscrirAjax.generateRequest();
+      };
+    	  formResponse(){
+    	  this.$.inscrirForm.reset();
+      };
+      formError(){
+    	  
+      };
+      
+    }
+    
+
+    window.customElements.define(MySingUp.is, MySingUp);
+  </script> </dom-module>

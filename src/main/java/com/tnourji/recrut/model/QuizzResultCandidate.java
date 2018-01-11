@@ -29,7 +29,7 @@ public class QuizzResultCandidate implements Serializable {
     private Quizz quizz;
 
     @ManyToOne
-    private Condidat condidat;
+    private Condidate condidat;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -66,16 +66,16 @@ public class QuizzResultCandidate implements Serializable {
         this.quizz = quizz;
     }
 
-    public Condidat getCondidat() {
+    public Condidate getCondidat() {
         return condidat;
     }
 
-    public QuizzResultCandidate condidat(Condidat condidat) {
+    public QuizzResultCandidate condidat(Condidate condidat) {
         this.condidat = condidat;
         return this;
     }
 
-    public void setCondidat(Condidat condidat) {
+    public void setCondidat(Condidate condidat) {
         this.condidat = condidat;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove

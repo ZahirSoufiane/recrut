@@ -1,0 +1,146 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+ 	<link rel="import" href="../../src/my-singin.html">
+    <link rel="import" href="../../src/my-login.html">
+    <link rel="import" href="../../src/my-home.html">
+
+<dom-module id="my-navbar">
+  <template>
+  <link href="../resources/css/plugins/plugins.css" rel="stylesheet">
+  <link href="../resources/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="../resources/css/font-awesome.min.css">
+  <app-location route="{{route}}"></app-location>
+  <app-route
+        route="{{route}}"
+        pattern="[[rootPath]]:page"
+        data="{{routeData}}"
+        tail="{{subroute}}">
+    </app-route>
+  
+   <div class="site-overlay"></div>
+        <!--top bar-->
+        <div class="top-bar clearfix light">
+            <div class="container">
+                <div class="float-sm-right">
+                    <ul class="list-inline mb0">
+                        <li class="list-inline-item">
+                            <a href="#" class="social-icon-sm si-gray si-gray-round si-facebook">
+                                <i class="fa fa-facebook"></i>
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+
+                        <li class="list-inline-item">
+                            <a href="#" class="social-icon-sm si-gray si-gray-round si-twitter">
+                                <i class="fa fa-twitter"></i>
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="social-icon-sm si-gray si-gray-round si-instagram">
+                                <i class="fa fa-instagram"></i>
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#" class="social-icon-sm si-gray si-gray-round si-g-plus">
+                                <i class="fa fa-google-plus"></i>
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="float-sm-left">
+                    <ul class="list-inline mb0 links">
+                        
+                        <li class="list-inline-item"><a name="connexion" href="[[rootPath]]connexion">Connexion</a></li>
+                        <li class="list-inline-item"><a name="inscription" href="[[rootPath]]inscription">Inscrir</a></li>
+                        <li class="list-inline-item dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Lang</a>
+                            <ul class="dropdown-menu lang-dropdown">
+                                <li><a href="#" class="dropdown-item">English</a></li>
+                                <li><a href="#" class="dropdown-item">French</a></li>
+                                <li><a href="#" class="dropdown-item">Nl</a></li>
+                                
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div><!--/top bar--> 
+        
+        
+        
+<!--         <iron-pages -->
+<!--             selected="[[page]]" -->
+<!--             attr-for-selected="name" -->
+<!--             fallback-selection="view404" -->
+<!--             role="main"> -->
+<!--           <my-connexion name="connexion"></my-connexion> -->
+<!--           <my-inscription name="inscription"></my-inscription> -->
+<!--           <my-view404 name="view404"></my-view404> -->
+<!--           </iron-pages> -->
+  </template>
+
+  <script>
+    class MyNavBar extends Polymer.Element {
+      static get is() { return 'my-navbar'; }
+      static get properties() {
+          return {
+            page: {
+              type: String,
+              reflectToAttribute: true,
+              observer: '_pageChanged',
+            },
+            routeData: Object,
+            subroute: String,
+            // This shouldn't be neccessary, but the Analyzer isn't picking up
+            // Polymer.Element#rootPath
+            rootPath: String,
+          };
+        }
+
+        static get observers() {
+          return [
+            '_routePageChanged(routeData.page)',
+          ];
+        }
+
+        _routePageChanged(page) {
+          // If no page was found in the route data, page will be an empty string.
+          // Default to 'view1' in that case.
+          this.page = page || 'home';
+
+          // Close a non-persistent drawer when the page & route are changed.
+          if (!this.$.drawer.persistent) {
+            this.$.drawer.close();
+          }
+        }
+
+        _pageChanged(page) {
+          // Load page import on demand. Show 404 page if fails
+          var resolvedPageUrl = this.resolveUrl('my-' + page + '.html');
+          Polymer.importHref(
+              resolvedPageUrl,
+              null,
+              this._showPage404.bind(this),
+              true);
+        }
+
+        _showPage404() {
+          this.page = 'view404';
+        }
+    
+    }
+    window.customElements.define(MyNavBar.is, MyNavBar);
+  </script>
+</dom-module>

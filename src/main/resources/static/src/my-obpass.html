@@ -1,0 +1,59 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-obpass">
+  <template>
+    <link href="../resources/css/plugins/plugins.css" rel="stylesheet">
+  <link href="../resources/css/style.css" rel="stylesheet">
+    
+    <div class="fullscreen bg-parallax  accounts-page" data-jarallax='{"speed": 0.2}' style='background-image: url("../resources/images/bg11.jpg")'>
+            <div class="d-flex align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6  ml-auto mr-auto col-md-8 col-sm-10">
+                            <div class="text-center mb30">
+                                <a href="index.html">
+                                <img src="images/logo.png" alt="">
+                            </a>
+                            </div>
+                             <h3 class="text-center text-uppercase">R&eacute;cup&eacute;rer votre Mot de Pass</h3>
+                             <p class="lead text-center">Entrez votre adresse email pour obtenir le lien de restoration</p>
+                             <form>
+                                <div class="row mb30">
+                                    <div class="col-sm-12 mb10">
+                                        <input type="email" placeholder="Votre Email" class="form-control">
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <button class="btn btn-primary btn-rounded btn-block" type="submit">Envoyer</button>
+                                    </div>
+                                </div>
+                                <!--end of row-->
+                            </form>
+                             <div class="account-links">Nous vous enverrons un lien de r&eacute;initialisation de mot de passe &agrave;	votre boite e-mail
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </template>
+
+  <script>
+    class MyObPass extends Polymer.Element {
+      static get is() { return 'my-obpass'; }
+    }
+
+    window.customElements.define(MyObPass.is, MyObPass);
+  </script>
+</dom-module>

@@ -1,124 +1,144 @@
 package com.tnourji.recrut.controller;
 
-import com.codahale.metrics.annotation.Timed;
-import com.tnourji.recrut.util.HeaderUtil;
-import com.tnourji.recrut.exception.BadRequestAlertException;
-import com.tnourji.recrut.model.User;
-import com.tnourji.recrut.repository.UserRepository;
-import com.tnourji.recrut.service.UserService;
-
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import java.util.List;
-import java.util.Optional;
+import com.codahale.metrics.annotation.Timed;
+import com.tnourji.recrut.exception.BadRequestAlertException;
+import com.tnourji.recrut.model.Company;
+import com.tnourji.recrut.model.User;
+import com.tnourji.recrut.repository.UserRepository;
+import com.tnourji.recrut.service.CompanyService;
+import com.tnourji.recrut.service.CondidateService;
+import com.tnourji.recrut.service.UserService;
+import com.tnourji.recrut.util.HeaderUtil;
 
 /**
- * REST controller for managing Utilisateur.
+ * REST controller for managing User.
  */
 @RestController
 @RequestMapping("/api")
 public class UserResource {
-
+    
     private final Logger log = LoggerFactory.getLogger(UserResource.class);
-
-    private static final String ENTITY_NAME = "utilisateur";
-
-    private final UserService utilisateurService;
-    private  UserRepository userRepository;
-
-    public UserResource(UserService utilisateurService) {
-        this.utilisateurService = utilisateurService;
+    
+    private static final String ENTITY_NAME = "User";
+    
+    private final UserService userservice;
+    
+    private final CompanyService companyService;
+    
+    private final CondidateService condidateService;
+    
+    private UserRepository userRepository;
+    
+    public UserResource(UserService userservice, CompanyService companyService, CondidateService condidateService) {
+        this.userservice = userservice;
+        this.companyService = companyService;
+        this.condidateService = condidateService;
     }
-
+    
     /**
-     * POST  /utilisateurs : Create a new utilisateur.
+     * POST /users : Create a new User.
      *
-     * @param utilisateur the utilisateur to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new utilisateur, or with status 400 (Bad Request) if the utilisateur has already an ID
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * @param User
+     *            the User to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new User, or with status 400 (Bad Request)
+     *         if the User has already an ID
+     * @throws URISyntaxException
+     *             if the Location URI syntax is incorrect
      */
-    @PostMapping("/utilisateurs")
+    @PostMapping("/users")
     @Timed
-    public ResponseEntity<User> createUtilisateur(@RequestBody User utilisateur) throws URISyntaxException {
-        log.debug("REST request to save Utilisateur : {}", utilisateur);
-        if (utilisateur.getId() != null) {
-            throw new BadRequestAlertException("A new utilisateur cannot already have an ID", ENTITY_NAME, "idexists");
+    public ResponseEntity<User> createUser(@RequestBody User user) throws URISyntaxException {
+        log.debug("REST request to save User : {}", user);
+        if (user.getId() != null) {
+            throw new BadRequestAlertException("A new User cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        User result = utilisateurService.save(utilisateur);
-        return ResponseEntity.created(new URI("/api/utilisateurs/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        
+        
+        
+        User result = userservice.save(user);
+        return ResponseEntity.created(new URI("/api/users/" + result.getId()))
+                .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
-
+    
     /**
-     * PUT  /utilisateurs : Updates an existing utilisateur.
+     * PUT /users : Updates an existing User.
      *
-     * @param utilisateur the utilisateur to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated utilisateur,
-     * or with status 400 (Bad Request) if the utilisateur is not valid,
-     * or with status 500 (Internal Server Error) if the utilisateur couldn't be updated
-     * @throws URISyntaxException if the Location URI syntax is incorrect
+     * @param User
+     *            the User to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated User, or with status 400 (Bad Request)
+     *         if the User is not valid, or with status 500 (Internal Server Error) if the User couldn't be updated
+     * @throws URISyntaxException
+     *             if the Location URI syntax is incorrect
      */
-    @PutMapping("/utilisateurs")
+    @PutMapping("/users")
     @Timed
-    public ResponseEntity<User> updateUtilisateur(@RequestBody User utilisateur) throws URISyntaxException {
-        log.debug("REST request to update Utilisateur : {}", utilisateur);
-        if (utilisateur.getId() == null) {
-            return createUtilisateur(utilisateur);
+    public ResponseEntity<User> updateUser(@RequestBody User User) throws URISyntaxException {
+        log.debug("REST request to update User : {}", User);
+        if (User.getId() == null) {
+            // return createUser(User);
         }
-        User result = utilisateurService.save(utilisateur);
+        User result = userservice.save(User);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, utilisateur.getId().toString()))
-            .body(result);
-    }
-
-    /**
-     * GET  /utilisateurs : get all the utilisateurs.
-     *
-     * @return the ResponseEntity with status 200 (OK) and the list of utilisateurs in body
-     */
-    @GetMapping("/utilisateurs")
-    @Timed
-    public List<User> getAllUtilisateurs() {
-        log.debug("REST request to get all Utilisateurs");
-        return utilisateurService.findAll();
-        }
-
-    /**
-     * GET  /utilisateurs/:id : get the "id" utilisateur.
-     *
-     * @param id the id of the utilisateur to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the utilisateur, or with status 404 (Not Found)
-     */
-    @GetMapping("/utilisateurs/{id}")
-    @Timed
-    public ResponseEntity<User> getUtilisateur(@PathVariable Long id) {
-        log.debug("REST request to get Utilisateur : {}", id);
-        User utilisateur = utilisateurService.findOne(id);
-        return null;//ResponseUtil.wrapOrNotFound(Optional.ofNullable(utilisateur));
+                .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, User.getId().toString()))
+                .body(result);
     }
     
-    
-    
-
     /**
-     * DELETE  /utilisateurs/:id : delete the "id" utilisateur.
+     * GET /users : get all the users.
      *
-     * @param id the id of the utilisateur to delete
+     * @return the ResponseEntity with status 200 (OK) and the list of users in body
+     */
+    @GetMapping("/users")
+    @Timed
+    public List<User> getAllusers() {
+        log.debug("REST request to get all users");
+        return userservice.findAll();
+    }
+    
+    /**
+     * GET /users/:id : get the "id" User.
+     *
+     * @param id
+     *            the id of the User to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the User, or with status 404 (Not Found)
+     */
+    @GetMapping("/users/{id}")
+    @Timed
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
+        log.debug("REST request to get User : {}", id);
+        User User = userservice.findOne(id);
+        return null;// ResponseUtil.wrapOrNotFound(Optional.ofNullable(User));
+    }
+    
+    /**
+     * DELETE /users/:id : delete the "id" User.
+     *
+     * @param id
+     *            the id of the User to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @DeleteMapping("/utilisateurs/{id}")
+    @DeleteMapping("/users/{id}")
     @Timed
-    public ResponseEntity<Void> deleteUtilisateur(@PathVariable Long id) {
-        log.debug("REST request to delete Utilisateur : {}", id);
-        utilisateurService.delete(id);
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        log.debug("REST request to delete User : {}", id);
+        userservice.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

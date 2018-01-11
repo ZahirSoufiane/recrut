@@ -1,0 +1,44 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import"
+	href="bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<link rel="import" href="bower_components/neon-animation/animations/slide-from-left-animation.html"></link>
+<link rel="import" href="bower_components/neon-animation/animations/fade-out-animation.html"></link>
+<link rel="import" href="bower_components/neon-animation/neon-animated-pages.html"></link>
+<link rel="import" href="bower_components/iron-pages/iron-pages.html"></link>
+<link rel="import" href="bower_components/app-route/app-route.html"></link>
+<link rel="import" href="bower_components/app-route/app-location.html"></link>
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="shared-styles.html">
+<link rel="lazy-import" href="ym-inscription-dispatcher.html">
+<link rel="lazy-import" href="ym-home-dispatcher.html">
+
+<dom-module id="my-main-dispatcher" attributes="csrfHeader"> <template>
+ <!--
+      app-location and app-route elements provide the state of the URL for the app.
+    -->
+    <app-location route="{{route}}"></app-location>
+    <app-route
+        route="{{route}}"
+        pattern="/:page"
+        data="{{routeData}}"
+        tail="{{subroute}}"></app-route>
+
+ <neon-animated-pages fallback-selection="home" animateInitialSelection="true" selected="[[neonPage]]" 
+ 	attr-for-selected="name" entryAnimation="slide-from-left-animation" exit-animation="fade-out-animation">
+  <ym-home-dispatcher name="home" csrfHeader="{{csrfHeader}}"></ym-home-dispatcher>
+  <ym-inscription-dispatcher name="inscription" csrfHeader="{{csrfHeader}}"></ym-inscription-dispatcher>
+ 
+</neon-animated-pages>
+
+
+</template>
+
+ <script>
+  class MyView22 extends Polymer.Element {
+      static get is() { return 'my-main-dispatcher'; }
+    }
+
+    window.customElements.define(MyView22.is, MyView22);
+  </script>
+</dom-module>

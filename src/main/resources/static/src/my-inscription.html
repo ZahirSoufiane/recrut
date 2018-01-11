@@ -1,0 +1,224 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
+<link rel="import"
+	href="../bower_components/polymer/polymer-element.html">
+<link rel="import"
+	href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import"
+	href="../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import"
+	href="../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../bower_components/iron-input/iron-input.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/iron-form/iron-form.html">
+<link rel="import" href="../token-ajax.html">
+<link rel="import"
+	href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="my-inscription"> <template>
+<link href="../resources/css/plugins/plugins.css" rel="stylesheet">
+<link href="../resources/css/style.css" rel="stylesheet">
+<style>
+#radiobuttons {
+	margin-bottom: 5px;
+}
+
+#elmentCD {
+	display: block;
+}
+
+#elmentCP {
+	display: none;
+}
+
+iron-input {
+	width: 100%;
+}
+</style>
+
+<iron-ajax id="InscrirAjax" url="" method="POST" handle-as="json"
+	autogo="false" on-response="contactResponse" on-error="contactError"
+	contentType="application/json"
+	headers='{"content-type":"application/json;charset=utf-8"}'
+	debounce-duration="300"> </iron-ajax>
+
+
+<div class="bg-parallax parallax-overlay accounts-page"
+	data-jarallax='{"speed": 0.2}'
+	style='background-image: url("../resources/images/bg11.jpg")'>
+	<div class="container ">
+		<div class="row pb30 align-items-end">
+			<div class="col-lg-4 ml-md-auto col-md-6 col-sm-6 mb20">
+				<h3 class="text-white text-left mb30">Rejoignez nous.</h3>
+
+				<!--Form d'inscription  -->
+				<iron-form id="inscrirForm">
+				<form is="iron-form" method="post">
+					<div id="radiobuttons" class="card">
+						<h4 class="card-header">Type de Compte</h4>
+						<div class="card-body">
+							<fieldset class="form-group">
+								<div class="form-check">
+									<paper-radio-group selected="radiolist"> <paper-radio-button
+										name="UserType" id="CPRadio" on-tap="showCondidate" value="CD"
+										checked>Condidate</paper-radio-button> <paper-radio-button
+										name="UserType2" id="CDRadio" on-tap="showCompany" value="CP">Company</paper-radio-button>
+									</paper-radio-group>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+					<div id="elmentCD">
+						<div class="form-group">
+							<input class="form-control" name="firstName"
+								placeholder="Votre Nome">
+						</div>
+						<div class="form-group">
+							<input class="form-control" name="lastName"
+								placeholder="Votre Prenom">
+						</div>
+					</div>
+					<!--end element CD -->
+					
+					<!--end element Condidate -->
+					<div id="elmentCP">
+						<div class="form-group">
+							<input class="form-control" name="name"
+								placeholder="Nome de la compagnie">
+						</div>
+						<div class="form-group">
+							<input class="form-control" name="locality"
+								placeholder="Locality">
+						</div>
+						<div class="form-group">
+							<input class="form-control" name="nbEmployee"
+								placeholder="Nombre d'Employees">
+						</div>
+
+						<div class="form-group">
+							<input class="form-control" name="vatNumber"
+								placeholder="Vat Numbre">
+						</div>
+
+					</div>
+				    <!--end elment Company -->
+					
+					<!-- element Commone between Condiate and Company all ways display -->
+					<div id="elmentcommon">
+						<div class="form-group">
+							<input class="form-control" name="email" type="email"
+								placeholder="Email">
+						</div>
+						<div class="form-group">
+							<input class="form-control" name="phone" placeholder="Tel">
+						</div>
+						<div class="form-group">
+							<input class="form-control" name="password" type="password"
+								type="password" placeholder="Mot de Pass">
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="password"
+								placeholder="Confirmer Mot de Pass">
+						</div>
+					</div>
+					<!--end element CP -->
+
+
+					<div class="form-group">
+						<paper-button on-tap="inscrir"
+							class="btn btn-rounded btn-primary btn-block">Inscrir</paper-button>
+					</div>
+					<div class="text-center text-white-gray">Vous avez
+						d&eacute;j&agrave; un compte? Connexion</div>
+					<hr>
+					<div>
+						<paper-button type="submit"
+							class="btn btn-white-outline btn-block">Connexion</paper-button>
+
+					</div>
+
+				</form>
+				</iron-form>
+			</div>
+			<div id="socialdiv" class="col-lg-4 col-md-6 col-sm-6 mb20">
+				<h3 class="text-white text-left mb30">Inscrivez-vous avec
+					social</h3>
+				<div class="clearfix">
+					<a href="#" class="social-icon-lg si-dark si-colored-facebook">
+						<i class="fa fa-facebook"></i> <i class="fa fa-facebook"></i>
+					</a> <a href="#" class="social-icon-lg  si-dark si-colored-twitter">
+						<i class="fa fa-twitter"></i> <i class="fa fa-twitter"></i>
+					</a> <a href="#" class="social-icon-lg si-dark si-colored-google-plus">
+						<i class="fa fa-google-plus"></i> <i class="fa fa-google-plus"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</template> <script>
+    class MyInsription extends Polymer.Element {
+      static get is() { return 'my-singIn'; }
+      
+      static get properties(){
+    	  return {
+    		  isCompany:{
+    			  type:String
+    		  },
+    		  isType:{
+    			  type:String,
+    			  value:"Condidate",
+    		  }
+    	  };
+    	  
+      }
+      showCondidate() {
+    	  this.$.InscrirAjax.url="/api/Condidates";
+    	  this.$.elmentCP.style.display='none';
+          this.$.elmentCD.style.display='block';
+          this.isType="CD";
+          
+          };
+      showCompany(){
+    	  this.$.InscrirAjax.url="/api/companies";
+        	  this.$.elmentCP.style.display='block';
+              this.$.elmentCD.style.display='none';
+              this.$.CPRadio.checked=false;
+              this.isCompany=true;
+              this.isType="CP";
+          };
+      getTypeAccount(){
+    	  this.isTtype="Company";
+    	  
+      };
+            
+      inscrir(){
+    	  var dataForm=this.$.inscrirForm.serializeForm();
+    	  dataForm["company"]=this.company;
+    	  dataForm["istype"]=this.isType;
+    	  
+    	  
+    	  this.$.InscrirAjax.body=JSON.stringify(dataForm);
+    	  this.$.InscrirAjax.generateRequest();
+      };
+    	  contactResponse(){
+    	  this.$.inscrirForm.reset();
+      };
+      contactError(){
+    	  
+      };
+      
+    }
+    
+
+    window.customElements.define(MyInsription.is, MyInsription);
+  </script> </dom-module>
